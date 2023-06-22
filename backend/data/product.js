@@ -79,3 +79,5 @@ const products = [
     threeValue: 6,
   },
 ];
+
+export default products;
