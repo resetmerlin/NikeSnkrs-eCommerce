@@ -31,13 +31,20 @@ const exportWholeDataFile = async () => {
 };
 
 //products 데이터만 DB에 넣음
+// npm run data:export-product
+
 const exportProductDataFile = async () => {
   try {
+    await User.deleteMany();
     await productModel.deleteMany();
+
+    const createdUsers = await User.insertMany(user);
+    const admin = createdUsers[0]._id;
 
     const sampleProducts = products.map((productModel) => {
       return {
         ...productModel,
+        user: admin,
       };
     });
     await productModel.insertMany(sampleProducts);
@@ -50,6 +57,7 @@ const exportProductDataFile = async () => {
 };
 
 //user 데이터만 DB에 넣음
+// npm run data:export-user
 const exportUserDataFile = async () => {
   try {
     await User.deleteMany();
