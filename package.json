@@ -7,7 +7,11 @@
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "data:export": "node backend/seeder",
+    "data:export-user": "node backend/seeder -user",
+
+    "data:export-product": "node backend/seeder -product"
   },
   "repository": {
     "type": "git",
