@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import connectDatabase from "./config/database.js";
 import products from "./data/product.js";
 import productModel from "./models/productModel.js";
+import User from "./models/userModel.js";
+import user from "./data/user.js";
 
 dotenv.config();
 
@@ -47,8 +49,27 @@ const exportProductDataFile = async () => {
   }
 };
 
+//user 데이터만 DB에 넣음
+const exportUserDataFile = async () => {
+  try {
+    await User.deleteMany();
+    await productModel.deleteMany();
+
+    const createdUsers = await User.insertMany(user);
+    const admin = createdUsers[0]._id;
+
+    console.log(`Data imported`.green.inverse);
+    process.exit();
+  } catch (error) {
+    console.error(`${error}`.red.inverse);
+    process.exit(1);
+  }
+};
+
 if (process.argv[2] === "-product") {
   exportProductDataFile();
+} else if (process.argv[2] === "-user") {
+  exportUserDataFile();
 } else {
   exportWholeDataFile();
 }
