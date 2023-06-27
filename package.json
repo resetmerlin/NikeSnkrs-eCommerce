@@ -10,7 +10,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "data:export": "node backend/seeder",
     "data:export-user": "node backend/seeder -user",
-
     "data:export-product": "node backend/seeder -product"
   },
   "repository": {
@@ -29,6 +28,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1"
   },
   "devDependencies": {
