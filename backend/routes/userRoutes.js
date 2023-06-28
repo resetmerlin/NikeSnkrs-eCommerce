@@ -8,5 +8,6 @@ import {
 } from "../controllers/userController.js";
 
 router.route("/login").post(authenticationUser);
+router.route("/profile").get(getClientProfile).put(updateClientProfile);
 
 export default router;
