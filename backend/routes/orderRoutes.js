@@ -11,3 +11,5 @@ router.route("/").post(addOrderItems);
 router.route("/:id").get(getOrderById);
 router.route("/:id/pay").put(updateOrderToPaid);
 router.route("/myorders").get(getMyOrders);
+
+export default router;
