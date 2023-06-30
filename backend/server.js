@@ -5,7 +5,7 @@ import connectDatabase from "./config/database";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
-import { notFound } from "./middleware/errorMiddleware.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
@@ -27,6 +27,8 @@ app.get("/api/config/paypal", (req, res) => {
 
 //not found handler
 app.use(notFound);
+//error middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
