@@ -9,8 +9,11 @@ import {
   updateClientProfile,
 } from "../controllers/userController.js";
 
-router.route("/login").post(authenticationUser);
-router.route("/profile").get(getClientProfile).put(updateClientProfile);
+router.route("/login").post(protection, authenticationUser);
+router
+  .route("/profile")
+  .get(protection, getClientProfile)
+  .put(protection, updateClientProfile);
 router.route("/register").post(registerUser);
 
 export default router;
