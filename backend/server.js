@@ -5,6 +5,7 @@ import connectDatabase from "./config/database";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import { notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.use("/api/orders", orderRoutes);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
+//not found handler
+app.use(notFound);
 
 const PORT = process.env.PORT;
 
