@@ -1,5 +1,7 @@
 import express from "express";
 const router = express.Router();
+import { protection } from "../middleware/authMiddleware.js";
+
 import {
   authenticationUser,
   getClientProfile,
@@ -9,5 +11,6 @@ import {
 
 router.route("/login").post(authenticationUser);
 router.route("/profile").get(getClientProfile).put(updateClientProfile);
+router.route("/register").post(registerUser);
 
 export default router;
