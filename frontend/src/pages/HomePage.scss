@@ -1,0 +1,119 @@
+.homePage {
+  &__wrap {
+    display: flex;
+    position: relative;
+    top: 38%;
+    width: 160rem;
+    height: 67rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__background {
+    width: 171rem;
+    height: 68rem;
+    position: fixed;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 70rem;
+    color: #e5e5e5;
+    z-index: 0;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    &__logo {
+      font-size: 47rem;
+      color: #e5e5e5;
+      letter-spacing: -1px;
+    }
+  }
+
+  &__left {
+    position: absolute;
+    top: 7%;
+    left: 11%;
+    width: 36rem;
+    height: 62rem;
+    z-index: 13;
+
+    &__big-text {
+      font-family: "Goldman", cursive;
+      display: block;
+      font-weight: 600;
+      color: $font-color-default;
+      font-size: 12rem;
+    }
+    &__small-text {
+      display: block;
+      font-weight: 600;
+      color: rgba($font-color-default, 0.633);
+      font-size: 1.5rem;
+    }
+  }
+
+  &__center {
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    width: 80rem;
+    height: 61rem;
+    transform: translate(-50%, -50%);
+  }
+
+  &__right {
+    position: absolute;
+    bottom: 8%;
+    right: 10%;
+    width: 33rem;
+    height: 28rem;
+    display: block;
+    font-family: "Oswald", sans-serif;
+    z-index: 13;
+
+    @include respond(big-desktop) {
+      bottom: 14%;
+      right: 10%;
+      width: 35rem;
+      height: 23rem;
+    }
+    &__product-name {
+      color: $font-primary-2;
+      font-size: 5rem;
+      display: block;
+      @include respond(big-desktop) {
+        font-size: 4rem;
+      }
+    }
+    &__product-price {
+      font-size: 10rem;
+      display: block;
+      color: rgb(37, 37, 37);
+      font-weight: 600;
+      @include respond(big-desktop) {
+        font-size: 8rem;
+      }
+    }
+    &__product-description {
+      font-size: 2.2rem;
+      display: block;
+      color: $font-color-default;
+    }
+  }
+  &__down {
+    width: 102rem;
+    height: 22rem;
+    position: fixed;
+    bottom: 0;
+    right: 126px;
+    text-transform: uppercase;
+    font-family: Oswald, sans-serif;
+    display: flex;
+    align-items: center;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
