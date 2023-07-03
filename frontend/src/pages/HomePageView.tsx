@@ -12,6 +12,7 @@ const HomePageWrapView = () => {
       <HomePageLeftView />
       <HomePageCenterView />
       <HomePageRightView />
+      <HomePageDownView />
     </div>
   );
 };
@@ -33,6 +34,10 @@ const HomePageLeftView = () => {
 };
 const HomePageCenterView = () => {
   return <div className="homePage__center"></div>;
+};
+
+const HomePageDownView = () => {
+  return <div className="homePage__down"></div>;
 };
 const HomePageRightView = () => {
   return (
