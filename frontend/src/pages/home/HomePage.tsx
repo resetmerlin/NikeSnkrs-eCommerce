@@ -1,4 +1,4 @@
-import HomePageView from "./HomePageView";
+import HomePageView from "../HomePageView";
 import "./HomePage.scss";
 const HomePage = () => {
   return <HomePageView />;
