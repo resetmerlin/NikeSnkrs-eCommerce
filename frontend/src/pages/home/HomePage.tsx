@@ -1,5 +1,5 @@
-import HomePageView from "../HomePageView";
 import "./HomePage.scss";
+import HomePageView from "./HomePageView";
 const HomePage = () => {
   return <HomePageView />;
 };
