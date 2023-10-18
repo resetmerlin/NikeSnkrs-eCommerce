@@ -1,16 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 type IPrpos = {
-  size: number;
-  color: string;
+  size?: string;
+  color?: string;
 };
 
-function SvgStar({ size = 24, color = 'black' }: IPrpos) {
+function SvgStar({ size = '1rem', color = 'black' }: IPrpos) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
+      viewBox="0 0 24 24"
       style={{
         fill: color,
       }}
