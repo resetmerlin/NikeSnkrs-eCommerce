@@ -1,0 +1,17 @@
+.intro-left {
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-family: 'Goldman', cursive;
+  }
+}
+
+.intro-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro-middle {
+  position: relative;
+  z-index: -10000;
+}

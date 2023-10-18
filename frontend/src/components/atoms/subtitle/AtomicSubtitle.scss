@@ -1,6 +1,7 @@
 .subtitle {
   font-weight: 700;
   font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .subtitle-s {
@@ -15,6 +16,13 @@
   font-size: 2rem;
 }
 
-.subtitle-l {
+.subtitle-xl {
   font-size: 3rem;
+}
+
+.subtitle-primary {
+  color: black;
+}
+.subtitle-secondary {
+  color: rgba(0, 0, 0, 0.633);
 }

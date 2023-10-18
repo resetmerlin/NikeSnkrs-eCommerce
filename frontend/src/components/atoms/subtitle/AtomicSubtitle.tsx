@@ -1,29 +1,30 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { TNormalElementProps } from '../../../types';
+import './AtomicSubtitle.scss';
 
 interface IProps extends TNormalElementProps<HTMLSpanElement> {
-  size?: 's' | 'm' | 'l' | 'max';
-  font?: 'goldman' | 'oswald' | 'archivo';
+  size?: 's' | 'm' | 'l' | 'xl';
+  color?: 'primary' | 'secondary';
 }
 
-export default function Title({
+export default function AtomicSubtitle({
   children,
   className = '',
   size,
-  font,
+  color,
   ...props
 }: IProps) {
   return (
     <span
       {...props}
-      className={`${className}  title-${size} title-${font} title`}
+      className={`${className}  subtitle-${size}  subtitle-${color}`}
     >
       {children}
     </span>
   );
 }
 
-Title.defaultProps = {
+AtomicSubtitle.defaultProps = {
   size: 'm',
-  font: 'Oswald',
+  color: 'primary',
 };
