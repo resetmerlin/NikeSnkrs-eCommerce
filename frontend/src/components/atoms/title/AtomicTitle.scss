@@ -18,7 +18,10 @@
 }
 
 .title-max {
-  font-size: 60rem;
+  font-size: 45rem;
+  display: inline-block;
+  -webkit-transform: scaleX(1.2);
+  transform: scaleX(1.2);
 }
 
 .title-400 {
