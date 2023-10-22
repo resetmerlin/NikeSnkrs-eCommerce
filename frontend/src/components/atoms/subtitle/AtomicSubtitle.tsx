@@ -5,6 +5,7 @@ import './AtomicSubtitle.scss';
 interface IProps extends TNormalElementProps<HTMLSpanElement> {
   size?: 's' | 'm' | 'l' | 'xl';
   color?: 'primary' | 'secondary';
+  strength?: '400' | '500' | '600' | '700';
 }
 
 export default function AtomicSubtitle({
@@ -12,12 +13,14 @@ export default function AtomicSubtitle({
   className = '',
   size,
   color,
+  strength,
+
   ...props
 }: IProps) {
   return (
     <span
       {...props}
-      className={`${className}  subtitle-${size}  subtitle-${color}`}
+      className={`${className}  subtitle-${size} subtitle-${strength} subtitle-${color}`}
     >
       {children}
     </span>
@@ -27,4 +30,5 @@ export default function AtomicSubtitle({
 AtomicSubtitle.defaultProps = {
   size: 'm',
   color: 'primary',
+  strength: '400',
 };

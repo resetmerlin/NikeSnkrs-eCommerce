@@ -1,0 +1,24 @@
+.template__parent {
+  width: 85%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 0.3fr 0.5fr repeat(2, 0.3fr) 1fr 0.11fr 1fr 0.3fr 1fr 0.3fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.template__child-big {
+  grid-area: 2 / 2 / 8 / 7;
+  display: grid;
+  position: relative;
+}
+.template__child-small {
+  grid-area: 9 / 4 / 10 / 8;
+  display: flex;
+}
+.template__child-top-left {
+  grid-area: 2 / 2 / 3 / 5;
+}
+.template__child-center {
+  grid-area: 3 / 2 / 9 / 7;
+}

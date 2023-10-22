@@ -15,7 +15,8 @@ export function IntroLeft() {
       </AtomicTitle>
 
       <AtomicSubtitle color="secondary" size="m">
-        You will experience outstanding Nike Resell shop ever seen before
+        You will experience outstanding <br /> Nike Resell shop ever <br /> seen
+        before
       </AtomicSubtitle>
     </div>
   );
