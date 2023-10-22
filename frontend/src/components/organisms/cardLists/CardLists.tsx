@@ -1,7 +1,7 @@
-import Card from '../../molecules/card/Card';
+import { Card } from '../../molecules';
 import './CardLists.scss';
 
-function CardLists() {
+export default function CardLists({ products }) {
   return (
     <div className="card-lists">
       <Card />
@@ -10,5 +10,3 @@ function CardLists() {
     </div>
   );
 }
-
-export default CardLists;
