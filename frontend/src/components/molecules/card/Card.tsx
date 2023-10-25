@@ -1,19 +1,16 @@
+import { IProduct } from '../../../types/dto';
 import { AtomicCard, AtomicSubtitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './Card.scss';
 
-interface IProps {
-  product: { price: string; name: string };
-}
+interface IProps extends IProduct {}
 
 export default function Card({ product }: IProps) {
   return (
     <AtomicCard>
-      <img src="./card/Card-jordan.png" alt="card-jordan" />
+      <img src={`./products/${product?._id}.png`} alt="card-jordan" />
       <div className="card__content">
-        <AtomicSubtitle size="m">
-          Nike Jordan 1 Retro {product?.name}
-        </AtomicSubtitle>
+        <AtomicSubtitle size="m">{product?.name}</AtomicSubtitle>
 
         <div className="card__stars">
           <SvgStar color="black" />
@@ -22,7 +19,7 @@ export default function Card({ product }: IProps) {
           <SvgStar color="black" />
           <SvgStar color="black" />
         </div>
-        <AtomicSubtitle size="m">$ 300{product?.price}</AtomicSubtitle>
+        <AtomicSubtitle size="m">$ {product?.price}</AtomicSubtitle>
       </div>
     </AtomicCard>
   );

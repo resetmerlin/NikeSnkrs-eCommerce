@@ -1,30 +1,35 @@
 import { Layout } from '../../components/layouts';
-import { CardLists } from '../../components/organisms';
-
 import {
+  IntroCenter,
   IntroLeft,
-  IntroMiddle,
   IntroRight,
-} from '../../components/molecules/intro/Intro';
-import Parent from '../../components/template/Parent';
-import { ChildBig, ChildSmall } from '../../components/template/Child';
+} from '../../components/molecules/intro';
+import { CardLists } from '../../components/organisms';
+import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
+import { Template } from '../../components/template';
+import { useGetProductsQuery } from '../../features/api/apiSlice';
 
 function HomePage() {
+  const { data, isLoading } = useGetProductsQuery();
+  const cardProducts = data && [...data]?.slice(0, 3);
+
   return (
-    <>
-      <Layout>
-        <Parent>
-          <ChildBig>
-            <IntroLeft />
-            <IntroMiddle />
-            <IntroRight />
-          </ChildBig>
-          <ChildSmall>
-            <CardLists />
-          </ChildSmall>
-        </Parent>
-      </Layout>
-    </>
+    <Layout>
+      <Template.Default>
+        <Template.Center>
+          <IntroLeft />
+          <IntroCenter />
+          <IntroRight />
+        </Template.Center>
+        <Template.BottomRight>
+          {isLoading ? (
+            <CardListsSkeleton />
+          ) : (
+            <CardLists products={cardProducts} />
+          )}
+        </Template.BottomRight>
+      </Template.Default>
+    </Layout>
   );
 }
 
