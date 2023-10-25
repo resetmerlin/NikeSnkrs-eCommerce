@@ -1,12 +1,15 @@
+import { IProduct } from '../../../types/dto';
 import { Card } from '../../molecules';
 import './CardLists.scss';
 
-export default function CardLists({ products }) {
+interface IProps extends IProduct {}
+
+export default function CardLists({ products }: IProps) {
   return (
     <div className="card-lists">
-      <Card />
-      <Card />
-      <Card />
+      {products?.map((product) => {
+        return <Card product={product} key={product._id} />;
+      })}
     </div>
   );
 }
