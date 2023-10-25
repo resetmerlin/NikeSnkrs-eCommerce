@@ -1,4 +1,4 @@
-.template__parent {
+.template__default {
   width: 85%;
   height: auto;
   display: grid;
@@ -7,18 +7,18 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
-.template__child-big {
+.template__center {
   grid-area: 2 / 2 / 8 / 7;
   display: grid;
   position: relative;
 }
-.template__child-small {
+.template__bottom-right {
   grid-area: 9 / 4 / 10 / 8;
   display: flex;
 }
-.template__child-top-left {
+.template__top-left {
   grid-area: 2 / 2 / 3 / 5;
 }
-.template__child-center {
+.template__bottom-center {
   grid-area: 3 / 2 / 9 / 7;
 }
