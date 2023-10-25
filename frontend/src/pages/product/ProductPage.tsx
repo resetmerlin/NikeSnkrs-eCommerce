@@ -1,14 +1,13 @@
-import { AtomicSubtitle, AtomicTitle } from '../../components/atoms';
 import { Layout } from '../../components/layouts';
 import ItemInfo from '../../components/molecules/itemInfo/ItemInfo';
-import Parent from '../../components/template/Parent';
+import { Template } from '../../components/template';
 
 export default function ProductPage() {
   return (
     <Layout>
-      <Parent>
+      <Template.Default>
         <ItemInfo />
-      </Parent>
+      </Template.Default>
     </Layout>
   );
 }
