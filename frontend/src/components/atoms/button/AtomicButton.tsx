@@ -4,7 +4,8 @@ import './AtomicButton.scss';
 interface IProps extends TButtonElementProps {
   type?: 'submit' | 'button';
   color?: 'primary' | 'secondary';
-  shape?: 'normal' | 'round';
+  shape?: 'normal' | 'round' | 'rect' | 'none';
+  size?: 'xs' | 's' | 'm' | 'l' | 'xl';
 }
 
 export default function AtomicButton({
@@ -13,13 +14,14 @@ export default function AtomicButton({
   color,
   shape,
   type,
+  size,
   ...props
 }: IProps) {
   return (
     <button
       {...props}
       type={type}
-      className={`${className}   button-${color}   button-${shape} button`}
+      className={`${className}   button-${color}   button-${shape} button button-${size}`}
     >
       {children}
     </button>
