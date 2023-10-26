@@ -5,7 +5,7 @@ interface IProps extends TButtonElementProps {
   type?: 'submit' | 'button';
   color?: 'primary' | 'secondary';
   shape?: 'normal' | 'round' | 'rect' | 'none';
-  size?: 'xs' | 's' | 'm' | 'l' | 'xl';
+  size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 }
 
 export default function AtomicButton({
