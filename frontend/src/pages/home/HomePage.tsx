@@ -1,3 +1,4 @@
+import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Layout } from '../../components/layouts';
 import {
   IntroCenter,
@@ -6,7 +7,6 @@ import {
 } from '../../components/molecules/intro';
 import { CardLists } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
-import { Template } from '../../components/template';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 
 function HomePage() {
@@ -15,20 +15,20 @@ function HomePage() {
 
   return (
     <Layout>
-      <Template.Default>
-        <Template.Center>
+      <ParentTemplate size="s">
+        <ChildTemplate position="center">
           <IntroLeft />
           <IntroCenter />
           <IntroRight />
-        </Template.Center>
-        <Template.BottomRight>
+        </ChildTemplate>
+        <ChildTemplate position="bottomRight">
           {isLoading ? (
             <CardListsSkeleton />
           ) : (
             <CardLists products={cardProducts} />
           )}
-        </Template.BottomRight>
-      </Template.Default>
+        </ChildTemplate>
+      </ParentTemplate>
     </Layout>
   );
 }
