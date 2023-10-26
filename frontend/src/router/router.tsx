@@ -9,7 +9,11 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   { path: '/products', element: <ProductsPage /> },
-  { path: '/product', element: <ProductPage /> },
+  {
+    path: '/product',
+    element: <ProductPage />,
+    children: [{ path: ':id', element: <ProductPage /> }],
+  },
 ]);
 
 export default router;
