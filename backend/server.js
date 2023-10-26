@@ -1,11 +1,12 @@
-import express from "express";
-import colors from "colors";
-import dotenv from "dotenv";
-import connectDatabase from "./config/database.js";
-import productRoutes from "./routes/productRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
-import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import express from 'express';
+import colors from 'colors';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import connectDatabase from './config/database.js';
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 
@@ -15,14 +16,21 @@ connectDatabase();
 const app = express();
 
 app.use(express.json());
+//this allow us to accept json data in the body
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // products용 API(GET ALL, GET by ID)
-app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
-app.get("/api/config/paypal", (req, res) => {
+app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
+});
+app.get('/', (req, res) => {
+  res.send('Api is running...');
 });
 
 //not found handler
@@ -30,7 +38,7 @@ app.use(notFound);
 //error middleware
 app.use(errorHandler);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5328;
 
 //listen() method creates a listener on the specified port or path.
 app.listen(
