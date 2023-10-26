@@ -1,7 +1,6 @@
 import express from 'express';
 import colors from 'colors';
 import dotenv from 'dotenv';
-import morgan from 'morgan';
 import connectDatabase from './config/database.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -16,10 +15,6 @@ connectDatabase();
 const app = express();
 
 app.use(express.json());
-//this allow us to accept json data in the body
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
 
 // products용 API(GET ALL, GET by ID)
 app.use('/api/products', productRoutes);
