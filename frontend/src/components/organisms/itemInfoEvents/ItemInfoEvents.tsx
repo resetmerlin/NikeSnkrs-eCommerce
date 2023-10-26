@@ -17,14 +17,14 @@ export default function ItemInfoEvents({ product, goPrevPage }: IProduct) {
       <ItemInfo product={product} />
 
       <div className="itemInfoEvents__btn-wrap">
-        <AtomicButton shape="rect" type="submit" size="xl">
+        <AtomicButton shape="rect" type="submit" size="xxl">
           <AtomicSubtitle color="tertiary" size="xl" strength="600">
             Order Now
           </AtomicSubtitle>
         </AtomicButton>
 
-        <AtomicButton shape="rect" type="submit" color="secondary" size="xl">
-          <AtomicSubtitle size="xl" strength="600">
+        <AtomicButton shape="rect" type="submit" color="secondary" size="xxl">
+          <AtomicSubtitle size="l" strength="600">
             Favorite
           </AtomicSubtitle>
         </AtomicButton>
