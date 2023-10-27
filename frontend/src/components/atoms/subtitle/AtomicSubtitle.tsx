@@ -4,7 +4,7 @@ import './AtomicSubtitle.scss';
 
 interface IProps extends TNormalElementProps<HTMLSpanElement> {
   size?: 's' | 'm' | 'l' | 'xl';
-  color?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary' | 'tertiary';
   strength?: '400' | '500' | '600' | '700';
 }
 

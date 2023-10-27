@@ -5,7 +5,7 @@ import './Item.scss';
 
 export default function Item({ product }: IProduct) {
   return (
-    <AtomicItem>
+    <AtomicItem size="m">
       <img src={`./products/${product._id}.png`} alt="card-jordan" />
       <AtomicSubtitle size="l">{product?.name}</AtomicSubtitle>
       <div className="card__stars">

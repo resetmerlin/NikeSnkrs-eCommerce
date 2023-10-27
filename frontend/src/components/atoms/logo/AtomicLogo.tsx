@@ -14,8 +14,12 @@ export default function AtomicLogo({
   return (
     <img
       {...props}
-      src="./nike-logo-black.png"
+      src={'./nike-logo-black.png'}
       alt="nike-logo-black"
+      id="nike-logo"
+      onError={(e) => {
+        e.target.src = '../nike-logo-black.png';
+      }}
       className={`nike-${size}  nike`}
     />
   );
