@@ -3,7 +3,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
+// Button Size
+.button-s {
+  height: 3rem;
+  width: 3rem;
+}
+.button-m {
+  width: 5rem;
+  height: 2rem;
+}
+.button-l {
+  height: 15rem;
+  width: 15rem;
+}
+.button-xl {
+  height: 16rem;
+  width: 20rem;
+}
+
+.button-xxl {
+  height: 15rem;
+  width: 35rem;
+}
+// Button Color
 .button-primary {
   background-color: black;
   border: 2px solid black;
@@ -14,13 +38,23 @@
   border: 2px solid black;
   color: black;
 }
+
+// Button Shape
 .button-normal {
   border-radius: 5px;
-  width: 5rem;
-  height: 2rem;
 }
+
 .button-round {
-  height: 3rem;
-  width: 3rem;
   border-radius: 50%;
+}
+
+.button-rect {
+  border-radius: 0%;
+}
+
+.button-none {
+  height: auto;
+  width: auto;
+  background-color: transparent;
+  border: none;
 }

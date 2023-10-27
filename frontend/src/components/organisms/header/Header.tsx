@@ -1,5 +1,5 @@
-import { CartButton, LoginButton } from '../../molecules/button/Button';
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
+import { CartButton, LoginButton } from '../../molecules';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 
