@@ -3,7 +3,6 @@ import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Layout } from '../../components/layouts';
 import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import Object from '../../components/molecules/object/Object';
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -31,7 +30,7 @@ export default function ProductPage() {
           <ItemInfoEvents product={product} goPrevPage={goPrevPage} />
         </ChildTemplate>
         <ChildTemplate position="center" size="full">
-          <Object model={productId?.id} />
+          {/* <Object model={productId?.id} /> */}
         </ChildTemplate>
         <ChildTemplate position="right" size="full">
           <ItemNav
