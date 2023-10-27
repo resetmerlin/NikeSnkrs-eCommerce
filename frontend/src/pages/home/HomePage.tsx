@@ -16,12 +16,12 @@ function HomePage() {
   return (
     <Layout>
       <ParentTemplate size="s">
-        <ChildTemplate position="center">
+        <ChildTemplate position="center" size="s">
           <IntroLeft />
           <IntroCenter />
           <IntroRight />
         </ChildTemplate>
-        <ChildTemplate position="bottomRight">
+        <ChildTemplate position="bottomRight" size="s">
           {isLoading ? (
             <CardListsSkeleton />
           ) : (
