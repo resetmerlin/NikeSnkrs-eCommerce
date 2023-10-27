@@ -13,10 +13,10 @@ export default function ProductsPage() {
   return (
     <Layout>
       <ParentTemplate size="s">
-        <ChildTemplate position="topLeft">
+        <ChildTemplate position="topLeft" size="s">
           <AtomicTitle size="xs">Latest Products</AtomicTitle>
         </ChildTemplate>
-        <ChildTemplate position="bottomCenter">
+        <ChildTemplate position="bottomCenter" size="s">
           <ItemLists products={data} />
         </ChildTemplate>
       </ParentTemplate>
