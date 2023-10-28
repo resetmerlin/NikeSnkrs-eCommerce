@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { Header } from '../organisms';
+import { Header } from '../../organisms';
 
-export default function Layout({ children }: PropsWithChildren) {
+export default function LayoutHeader({ children }: PropsWithChildren) {
   return (
     <>
       <Header />

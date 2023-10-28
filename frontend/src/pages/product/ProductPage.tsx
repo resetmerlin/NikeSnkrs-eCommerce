@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Layout } from '../../components/layouts';
 import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
+import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 
 export default function ProductPage() {
   const navigate = useNavigate();
@@ -24,12 +24,12 @@ export default function ProductPage() {
     }
   };
   return (
-    <Layout>
+    <LayoutHeader>
       <ParentTemplate size="full">
         <ChildTemplate position="left" size="full">
           <ItemInfoEvents product={product} goPrevPage={goPrevPage} />
         </ChildTemplate>
-        <ChildTemplate position="center" size="full">
+        <ChildTemplate position="centerRight" size="full">
           {/* <Object model={productId?.id} /> */}
         </ChildTemplate>
         <ChildTemplate position="right" size="full">
@@ -40,6 +40,6 @@ export default function ProductPage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </Layout>
+    </LayoutHeader>
   );
 }
