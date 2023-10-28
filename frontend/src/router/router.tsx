@@ -3,6 +3,7 @@ import HomePage from '../pages/home/HomePage';
 import ProductsPage from '../pages/products/ProductsPage';
 import ProductPage from '../pages/product/ProductPage';
 import LoginPage from '../pages/login/LoginPage';
+import RegisterPage from '../pages/register/RegisterPage';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     children: [{ path: ':id', element: <ProductPage /> }],
   },
   { path: '/login', element: <LoginPage /> },
+  { path: '/register', element: <RegisterPage /> },
 ]);
 
 export default router;
