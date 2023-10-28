@@ -1,6 +1,7 @@
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
+import { Form } from '../../components/molecules';
 
 export default function LoginPage() {
   return (
@@ -10,7 +11,9 @@ export default function LoginPage() {
           <Background />
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
-          <UserMemberEvents />
+          <UserMemberEvents>
+            <Form />
+          </UserMemberEvents>
         </ChildTemplate>
       </ParentTemplate>
     </Layout>
