@@ -5,10 +5,10 @@ import {
   AtomicInput,
   AtomicLabel,
   AtomicSubtitle,
-} from '../../atoms';
-import './Form.scss';
+} from '../../../atoms';
+import './LoginForm.scss';
 
-export default function Form() {
+export default function LoginForm() {
   return (
     <AtomicForm>
       <div className="form__intro">
