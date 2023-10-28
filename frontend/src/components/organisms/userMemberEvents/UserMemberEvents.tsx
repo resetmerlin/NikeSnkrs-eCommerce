@@ -10,10 +10,7 @@ export default function UserMemberEvents({ children }: PropsWithChildren) {
         <AtomicLogo size="l" />
         <AtomicSubtitle size="xl">NikeSnkrs eCommerce</AtomicSubtitle>
       </div>
-
-      <div className="userMemberEvents__form">
-        <Form />
-      </div>
+      <div className="userMemberEvents__form">{children}</div>
     </div>
   );
 }
