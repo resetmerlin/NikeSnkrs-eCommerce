@@ -20,7 +20,7 @@ export default function AtomicSubtitle({
   return (
     <span
       {...props}
-      className={`${className}  subtitle-${size} subtitle-${strength} subtitle-${color}`}
+      className={`${className}  subtitle-${size} subtitle-${strength} subtitle-${color} subtitle`}
     >
       {children}
     </span>
