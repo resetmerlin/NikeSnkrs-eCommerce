@@ -1,7 +1,7 @@
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
-import { LoginForm } from '../../components/molecules';
+import { RegisterForm } from '../../components/molecules';
 
 export default function RegisterPage() {
   return (
@@ -12,7 +12,7 @@ export default function RegisterPage() {
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
-            <LoginForm />
+            <RegisterForm />
           </UserMemberEvents>
         </ChildTemplate>
       </ParentTemplate>
