@@ -1,5 +1,5 @@
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Layout } from '../../components/layouts';
+import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import {
   IntroCenter,
   IntroLeft,
@@ -14,7 +14,7 @@ function HomePage() {
   const cardProducts = data && [...data]?.slice(0, 3);
 
   return (
-    <Layout>
+    <LayoutHeader>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="s">
           <IntroLeft />
@@ -29,7 +29,7 @@ function HomePage() {
           )}
         </ChildTemplate>
       </ParentTemplate>
-    </Layout>
+    </LayoutHeader>
   );
 }
 
