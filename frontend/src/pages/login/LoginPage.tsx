@@ -1,6 +1,6 @@
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Background, UserLoginEvents } from '../../components/organisms';
+import { Background, UserMemberEvents } from '../../components/organisms';
 
 export default function LoginPage() {
   return (
@@ -10,7 +10,7 @@ export default function LoginPage() {
           <Background />
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
-          <UserLoginEvents />
+          <UserMemberEvents />
         </ChildTemplate>
       </ParentTemplate>
     </Layout>
