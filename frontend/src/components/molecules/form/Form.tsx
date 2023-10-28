@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   AtomicButton,
   AtomicForm,
@@ -34,6 +35,12 @@ export default function Form() {
           Submit
         </AtomicSubtitle>
       </AtomicButton>
+
+      <Link to="/register" className="margin__top-small">
+        <AtomicSubtitle size="s" color="secondary">
+          New Customer? Register Now!
+        </AtomicSubtitle>
+      </Link>
     </AtomicForm>
   );
 }
