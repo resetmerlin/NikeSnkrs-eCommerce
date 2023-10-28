@@ -28,7 +28,9 @@ export default function Header() {
 
       <div className="header__right">
         <CartButton />
-        <LoginButton />
+        <Link to="/login">
+          <LoginButton />
+        </Link>
       </div>
     </div>
   );
