@@ -1,7 +1,7 @@
 import { TNormalElementProps } from '../../../types';
-import './Form.scss';
+import './AtomicForm.scss';
 
-export default function Form({
+export default function AtomicForm({
   children,
   className = '',
 }: TNormalElementProps<HTMLFormElement>) {
