@@ -3,7 +3,7 @@ import './AtomicInput.scss';
 
 interface IProps extends TNormalElementProps<HTMLInputElement> {
   type: 'password' | 'email' | 'name';
-  name?: 'userPassword' | 'userEmail' | 'userName';
+  name?: 'userPassword' | 'userEmail' | 'userName' | 'userConfirmPassword';
 }
 
 export default function AtomicInput({
