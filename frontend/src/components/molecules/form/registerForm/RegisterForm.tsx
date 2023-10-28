@@ -12,22 +12,28 @@ export default function RegisterForm() {
   return (
     <AtomicForm>
       <div className="form__intro">
-        <AtomicSubtitle size="xl">Sign in</AtomicSubtitle>
+        <AtomicSubtitle size="xl">Register</AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
       </div>
       <div className="form__inputs-wrap">
+        {/* Email label & input */}
         <AtomicLabel htmlFor="userEmail">
           <AtomicSubtitle size="m">Email</AtomicSubtitle>
         </AtomicLabel>
-
         <AtomicInput type="email" id="email" name="userEmail" />
 
+        {/* Name label & input */}
+        <AtomicLabel htmlFor="userName">
+          <AtomicSubtitle size="m">Name</AtomicSubtitle>
+        </AtomicLabel>
+        <AtomicInput type="name" id="userName" name="userName" />
+
+        {/* password label & input */}
         <AtomicLabel htmlFor="userPassword">
           <AtomicSubtitle size="m">Password</AtomicSubtitle>
         </AtomicLabel>
-
         <AtomicInput type="password" id="user-password" name="userPassword" />
       </div>
       <AtomicButton size="m" type="submit">
