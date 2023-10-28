@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import { PropsWithChildren } from 'react';
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
 import { Form } from '../../molecules';
 import './UserLoginEvents.scss';
 
-export default function UserLoginEvents() {
+export default function UserLoginEvents({ children }: PropsWithChildren) {
   return (
     <div className="userInfoEvents">
       <div className="userInfoEvents__logo">
@@ -13,11 +13,6 @@ export default function UserLoginEvents() {
 
       <div className="userInfoEvents__form">
         <Form />
-        <Link to="/register" className="margin__top-small">
-          <AtomicSubtitle size="s" color="secondary">
-            New Customer? Register Now!
-          </AtomicSubtitle>
-        </Link>
       </div>
     </div>
   );
