@@ -1,5 +1,4 @@
 import { TNormalElementProps } from '../../../types';
-import './AtomicForm.scss';
 
 export default function AtomicForm({
   children,
