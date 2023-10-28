@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
 import { Form } from '../../molecules';
-import './UserInfoEvents.scss';
+import './UserLoginEvents.scss';
 
-export default function userLoginEvents() {
+export default function UserLoginEvents() {
   return (
     <div className="userInfoEvents">
       <div className="userInfoEvents__logo">

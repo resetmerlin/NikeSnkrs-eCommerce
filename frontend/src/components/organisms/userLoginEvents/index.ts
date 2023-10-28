@@ -1,1 +1,1 @@
-export { default as userLoginEvents } from './userLoginEvents';
+export { default as UserLoginEvents } from './UserLoginEvents';
