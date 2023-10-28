@@ -3,7 +3,7 @@ import { AtomicLogo, AtomicSubtitle } from '../../atoms';
 import { Form } from '../../molecules';
 import './UserInfoEvents.scss';
 
-export default function UserInfoEvents() {
+export default function userLoginEvents() {
   return (
     <div className="userInfoEvents">
       <div className="userInfoEvents__logo">
