@@ -24,14 +24,14 @@ export default function ItemInfo({ product }: IProduct) {
           </div>
           <div className="item-info__bottom-info__select">
             <AtomicSubtitle size="l">SELECT:</AtomicSubtitle>
-            <select id="product-select">
-              <option value="dog">1</option>
-              <option value="cat">2</option>
-              <option value="hamster">3</option>
-              <option value="parrot">4</option>
-              <option value="spider">5</option>
-              <option value="goldfish">6</option>
-              <option value="goldfish">7</option>
+            <select id="productSelect">
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={6}>6</option>
+              <option value={7}>7</option>
             </select>
           </div>
         </div>
