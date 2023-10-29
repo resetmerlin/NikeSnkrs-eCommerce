@@ -52,9 +52,9 @@ export default function RegisterForm() {
         </AtomicSubtitle>
       </AtomicButton>
 
-      <Link to="/register" className="margin__top-small">
+      <Link to="/login" className="margin__top-small">
         <AtomicSubtitle size="s" color="secondary">
-          New Customer? Register Now!
+          Have an account? Sign in right now
         </AtomicSubtitle>
       </Link>
     </AtomicForm>
