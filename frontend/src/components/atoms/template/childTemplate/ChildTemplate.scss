@@ -32,3 +32,12 @@
 .child-template-w-full-leftRight {
   grid-area: 1 / 1 / 11 / 8;
 }
+
+// w-m children
+.child-template-w-m-centerLeft {
+  grid-area: 3/2/3/5;
+}
+
+.child-template-w-m-topLeft {
+  grid-area: 2 / 2 / 3 / 5;
+}
