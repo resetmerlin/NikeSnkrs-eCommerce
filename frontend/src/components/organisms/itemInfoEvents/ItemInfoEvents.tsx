@@ -3,9 +3,13 @@ import { AtomicButton, AtomicSubtitle, SvgLeftArrowAlt } from '../../atoms';
 import { ItemInfo } from '../../molecules';
 import './ItemInfoEvents.scss';
 
-export default function ItemInfoEvents({ product, goPrevPage }: IProduct) {
+export default function ItemInfoEvents({
+  product,
+  goPrevPage,
+  addToCart,
+}: IProduct) {
   return (
-    <div className="itemInfoEvents">
+    <form className="itemInfoEvents" onSubmit={addToCart}>
       <AtomicButton
         type="button"
         shape="none"
@@ -29,6 +33,6 @@ export default function ItemInfoEvents({ product, goPrevPage }: IProduct) {
           </AtomicSubtitle>
         </AtomicButton>
       </div>
-    </div>
+    </form>
   );
 }
