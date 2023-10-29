@@ -27,7 +27,9 @@ export default function Header() {
       </div>
 
       <div className="header__right">
-        <CartButton />
+        <Link to="/cart">
+          <CartButton />
+        </Link>
         <Link to="/login">
           <LoginButton />
         </Link>
