@@ -1,15 +1,16 @@
 import { PropsWithChildren } from 'react';
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
-import { Form } from '../../molecules';
 import './UserMemberEvents.scss';
+import { Link } from 'react-router-dom';
 
 export default function UserMemberEvents({ children }: PropsWithChildren) {
   return (
     <div className="userMemberEvents">
-      <div className="userMemberEvents__logo">
+      <Link to="/" className="userMemberEvents__logo">
         <AtomicLogo size="l" />
         <AtomicSubtitle size="xl">NikeSnkrs eCommerce</AtomicSubtitle>
-      </div>
+      </Link>
+
       <div className="userMemberEvents__form">{children}</div>
     </div>
   );
