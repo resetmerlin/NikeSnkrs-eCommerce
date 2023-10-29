@@ -5,3 +5,4 @@ export { default as SvgStar } from './SvgStar';
 export { default as SvgStarHalf } from './SvgStarHalf';
 export { default as SvgDownArrow } from './SvgDownArrow';
 export { default as SvgUserCircle } from './SvgUserCircle';
+export { default as SvgX } from './SvgX';

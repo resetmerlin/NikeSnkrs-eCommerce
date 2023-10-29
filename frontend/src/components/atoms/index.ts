@@ -9,3 +9,6 @@ export * from './template';
 export * from './parts';
 export * from './canvas';
 export * from './model';
+export * from './form';
+export * from './input';
+export * from './label';
