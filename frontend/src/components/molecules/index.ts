@@ -5,6 +5,7 @@ export * from './itemColumn';
 export * from './button';
 export * from './object';
 export * from './form';
+export * from './cartColumn';
 
 // export * from './button';
 // export * from './intro';
