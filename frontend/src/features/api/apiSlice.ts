@@ -8,6 +8,9 @@ export const api = createApi({
     getProducts: build.query({
       query: () => '/products',
     }),
+    getProduct: build.query({
+      query: (id) => `/products/${id}`,
+    }),
     addOrders: build.mutation({
       query: (body) => ({
         url: `/orders`,
@@ -22,4 +25,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetProductsQuery } = api;
+export const { useGetProductsQuery, useGetProductQuery } = api;
