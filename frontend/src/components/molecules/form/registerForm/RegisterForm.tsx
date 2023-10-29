@@ -30,11 +30,21 @@ export default function RegisterForm() {
         </AtomicLabel>
         <AtomicInput type="name" id="userName" name="userName" />
 
-        {/* password label & input */}
+        {/* Password label & input */}
         <AtomicLabel htmlFor="userPassword">
           <AtomicSubtitle size="m">Password</AtomicSubtitle>
         </AtomicLabel>
-        <AtomicInput type="password" id="user-password" name="userPassword" />
+        <AtomicInput type="password" id="userPassword" name="userPassword" />
+
+        {/* Confirm Password label & input */}
+        <AtomicLabel htmlFor="userConfirmPassword">
+          <AtomicSubtitle size="m">Confirm Password</AtomicSubtitle>
+        </AtomicLabel>
+        <AtomicInput
+          type="password"
+          id="userConfirmPassword"
+          name="userConfirmPassword"
+        />
       </div>
       <AtomicButton size="m" type="submit">
         <AtomicSubtitle size="m" color="tertiary" strength="600">
