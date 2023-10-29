@@ -13,25 +13,22 @@ export default function ProductPage() {
   const { data: products } = useGetProductsQuery();
   const { data: singleProduct } = useGetProductQuery(productId?.id);
 
-  /** 전 페이지로 이동 */
   const goPrevPage = () => navigate(-1);
 
-  /** 현재 상품 */
+  /** Current product */
   const product =
     products &&
     [...products].filter((product) => product?._id == productId?.id)[0];
 
-  /** 전체 상품 속 현재 인덱스 */
+  /** Current index in total products */
   const currentIndex = products?.indexOf(product);
 
-  /** 다음 상품으로 이동 */
+  /** Go next product */
   const goNextProductPage = () => {
-    // 마지막 인덱스까지 도달할시
+    // if reaches last index
     if (currentIndex + 1 !== products.length) {
       navigate(`${products[currentIndex + 1]?._id}`);
-    }
-    // 마지막 인덱스가 아닐시
-    else {
+    } else {
       navigate(`${products[0]?._id}`);
     }
   };
