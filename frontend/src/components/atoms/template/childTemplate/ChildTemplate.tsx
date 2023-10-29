@@ -11,6 +11,7 @@ interface IProps extends TNormalElementProps<HTMLDivElement> {
     | 'left'
     | 'right'
     | 'centerRight'
+    | 'centerLeft'
     | 'leftRight';
 
   size: 's' | 'm' | 'full';
