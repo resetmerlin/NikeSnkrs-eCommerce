@@ -4,7 +4,7 @@ import {
   ParentTemplate,
 } from '../../components/atoms';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { CartAddress, OrderSummary } from '../../components/molecules';
+import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 
@@ -22,7 +22,7 @@ function CartPage() {
         </ChildTemplate>
 
         <ChildTemplate position="right" size="m">
-          <OrderSummary />
+          <CartSummary />
         </ChildTemplate>
 
         <ChildTemplate position="bottomLeft" size="m">
