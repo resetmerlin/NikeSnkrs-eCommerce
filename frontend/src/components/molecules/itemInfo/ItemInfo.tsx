@@ -4,7 +4,7 @@ import SvgStar from '../../atoms/icons/SvgStar';
 import './ItemInfo.scss';
 
 type IProps = {
-  product: IProduct | undefined;
+  product: IProduct;
 };
 
 export default function ItemInfo({ product }: IProps) {
@@ -29,13 +29,9 @@ export default function ItemInfo({ product }: IProps) {
           <div className="item-info__bottom-info__select">
             <AtomicSubtitle size="l">SELECT:</AtomicSubtitle>
             <select id="productSelect">
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-              <option value={6}>6</option>
-              <option value={7}>7</option>
+              {Array.from({ length: product?.countInStock }).map((_, num) => {
+                return <option value={num + 1}>{num + 1}</option>;
+              })}
             </select>
           </div>
         </div>
@@ -45,3 +41,7 @@ export default function ItemInfo({ product }: IProps) {
     </div>
   );
 }
+
+ItemInfo.defaultProps = {
+  product: [],
+};
