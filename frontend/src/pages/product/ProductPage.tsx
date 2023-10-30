@@ -1,22 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { ItemInfoEvents, ItemNav } from '../../components/organisms';
-import {
-  useGetProductQuery,
-  useGetProductsQuery,
-} from '../../features/api/apiSlice';
+import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-
-interface FormElements extends HTMLFormControlsCollection {
-  productSelect: HTMLInputElement;
-}
-interface UsernameFormElement extends FormElements {
-  readonly elements: FormElements;
-}
+import { IProduct } from '../../types/dto';
+import React from 'react';
 
 export default function ProductPage() {
   const navigate = useNavigate();
-  const productId = useParams();
+  const { id: paramId } = useParams();
   const { data: products } = useGetProductsQuery();
 
   const goPrevPage = () => {
@@ -26,30 +18,37 @@ export default function ProductPage() {
   /** Current product */
   const product =
     products &&
-    [...products].filter((product) => product?._id == productId?.id)[0];
+    [...products].filter(
+      (product): product is IProduct => product?._id == paramId
+    )[0];
 
   /** Current index in total products */
-  const currentIndex = products?.indexOf(product);
+  const currentIndex = product ? products?.indexOf(product) : -1;
 
   /** Go next product */
   const goNextProductPage = () => {
-    // if reaches last index
-    if (currentIndex + 1 !== products.length) {
-      navigate(`${products[currentIndex + 1]?._id}`);
-    } else {
-      navigate(`${products[0]?._id}`);
+    if (products) {
+      // if reaches last index
+      if (currentIndex + 1 !== products?.length) {
+        navigate(`${products[currentIndex + 1]?._id}`);
+      } else {
+        navigate(`${products[0]?._id}`);
+      }
     }
   };
 
   /** Add selected quantity and go cart page */
-  const addToCart = (e: React.FormEvent<UsernameFormElement>) => {
+  const addToCart = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const qty = e?.currentTarget?.elements?.productSelect?.value;
 
-    if (product.countInStock == 0) {
-      alert('Out of Stock');
-    } else {
-      navigate(`/cart/${product?._id}?qty=${qty}`);
+    const qty = e.currentTarget?.productSelect.value;
+
+    if (product) {
+      if (product.countInStock === 0) {
+        alert('Out of Stock');
+      } else {
+        navigate(`/cart/${product?._id}?qty=${qty}`);
+      }
     }
   };
 
@@ -64,12 +63,12 @@ export default function ProductPage() {
           />
         </ChildTemplate>
         <ChildTemplate position="centerRight" size="full">
-          {/* <Object model={productId?.id} /> */}
+          {/* <Object model={id?.id} /> */}
         </ChildTemplate>
         <ChildTemplate position="right" size="full">
           <ItemNav
             products={products}
-            productId={productId?.id}
+            productId={paramId}
             goNextProductPage={goNextProductPage}
           />
         </ChildTemplate>
