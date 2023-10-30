@@ -14,7 +14,7 @@ export default function ItemInfoEvents({
   product,
   goPrevPage,
   addToCart,
-}: IProps): React.ReactNode {
+}: IProps) {
   return (
     <form className="itemInfoEvents" onSubmit={addToCart}>
       <AtomicButton
