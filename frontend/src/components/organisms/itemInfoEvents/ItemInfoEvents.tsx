@@ -1,13 +1,20 @@
+import React from 'react';
 import { IProduct } from '../../../types/dto';
 import { AtomicButton, AtomicSubtitle, SvgLeftArrowAlt } from '../../atoms';
 import { ItemInfo } from '../../molecules';
 import './ItemInfoEvents.scss';
 
+type IProps = {
+  goPrevPage: () => void;
+  addToCart: (event: React.FormEvent<HTMLFormElement>) => void;
+  product: IProduct | undefined;
+};
+
 export default function ItemInfoEvents({
   product,
   goPrevPage,
   addToCart,
-}: IProduct) {
+}: IProps): React.ReactNode {
   return (
     <form className="itemInfoEvents" onSubmit={addToCart}>
       <AtomicButton

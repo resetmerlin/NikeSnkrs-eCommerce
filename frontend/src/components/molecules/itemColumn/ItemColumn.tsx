@@ -3,7 +3,12 @@ import { IProduct } from '../../../types/dto';
 import { AtomicItem } from '../../atoms';
 import './ItemColumn.scss';
 
-export default function ItemColumn({ product, productId }: IProduct) {
+type IProps = {
+  productId: string;
+  product: IProduct;
+};
+
+export default function ItemColumn({ product, productId }: IProps) {
   return (
     <Link to={`/product/${product._id}`}>
       <AtomicItem

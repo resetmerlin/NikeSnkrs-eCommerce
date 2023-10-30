@@ -3,7 +3,11 @@ import { AtomicSubtitle, AtomicTitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './ItemInfo.scss';
 
-export default function ItemInfo({ product }: IProduct) {
+type IProps = {
+  product: IProduct | undefined;
+};
+
+export default function ItemInfo({ product }: IProps) {
   return (
     <div className="item-info">
       <AtomicTitle size="m" strength="600">
