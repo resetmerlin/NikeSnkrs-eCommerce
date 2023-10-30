@@ -7,7 +7,7 @@ import './ItemInfoEvents.scss';
 type IProps = {
   goPrevPage: () => void;
   addToCart: (event: React.FormEvent<HTMLFormElement>) => void;
-  product: IProduct | undefined;
+  product: IProduct;
 };
 
 export default function ItemInfoEvents({
@@ -43,3 +43,7 @@ export default function ItemInfoEvents({
     </form>
   );
 }
+
+ItemInfoEvents.defaultProps = {
+  product: [],
+};
