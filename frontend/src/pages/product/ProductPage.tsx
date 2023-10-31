@@ -31,13 +31,11 @@ export default function ProductPage() {
 
   /** Go next product */
   const goNextProductPage = () => {
-    if (products) {
-      // if reaches last index
-      if (currentIndex + 1 !== products?.length) {
-        navigate(`${products[currentIndex + 1]?._id}`);
-      } else {
-        navigate(`${products[0]?._id}`);
-      }
+    // if reaches last index
+    if (currentIndex + 1 !== products?.length && products) {
+      navigate(`${products[currentIndex + 1]?._id}`);
+    } else if (products) {
+      navigate(`${products[0]?._id}`);
     }
   };
 
@@ -47,12 +45,10 @@ export default function ProductPage() {
 
     const qty = e.currentTarget?.productSelect.value;
 
-    if (product) {
-      if (product.countInStock === 0) {
-        alert('Out of Stock');
-      } else {
-        navigate(`/cart/${product?._id}?qty=${qty}`);
-      }
+    if (product?.countInStock === 0) {
+      alert('Out of Stock');
+    } else {
+      navigate(`/cart/${product?._id}?qty=${qty}`);
     }
   };
 
