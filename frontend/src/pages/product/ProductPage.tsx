@@ -1,15 +1,19 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { IProduct } from '../../types/dto';
-import React from 'react';
+
+export type ItemColRef = HTMLAnchorElement;
 
 export default function ProductPage() {
   const navigate = useNavigate();
   const { id: paramId } = useParams();
   const { data: products } = useGetProductsQuery();
+  const columnRef = useRef<ItemColRef | null>(null);
+  const [isObserving, setIsObserving] = useState(false);
 
   const goPrevPage = () => {
     navigate(-1);
@@ -52,6 +56,29 @@ export default function ProductPage() {
     }
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && columnRef.current) {
+        setIsObserving(entry.isIntersecting);
+      }
+    });
+    if (columnRef.current) {
+      observer.observe(columnRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [goNextProductPage, isObserving]);
+
+  useEffect(() => {
+    if (isObserving && columnRef.current) {
+      columnRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'start',
+      });
+    }
+  }, [goNextProductPage, isObserving]);
+
   return (
     <LayoutHeader>
       <ParentTemplate size="full">
@@ -70,6 +97,7 @@ export default function ProductPage() {
             products={products}
             productId={paramId}
             goNextProductPage={goNextProductPage}
+            ref={columnRef}
           />
         </ChildTemplate>
       </ParentTemplate>
