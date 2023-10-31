@@ -30,7 +30,11 @@ export default function ItemInfo({ product }: IProps) {
             <AtomicSubtitle size="l">SELECT:</AtomicSubtitle>
             <select id="productSelect">
               {Array.from({ length: product?.countInStock }).map((_, num) => {
-                return <option value={num + 1}>{num + 1}</option>;
+                return (
+                  <option value={num + 1} key={num + 1}>
+                    {num + 1}
+                  </option>
+                );
               })}
             </select>
           </div>
