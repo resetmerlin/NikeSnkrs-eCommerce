@@ -1,10 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProductId, IProducts } from '../../types/dto';
+import { IProduct, IProductId, IProducts } from '../../types/dto';
+import { cartAdded } from '../cart/cartReducers';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/api',
   }),
+  tagTypes: ['Gets'],
+
   endpoints: (build) => ({
     getProducts: build.query<IProducts, void>({
       query: () => '/products',
@@ -12,18 +15,27 @@ export const api = createApi({
     getProduct: build.query<IProductId, void>({
       query: (id) => `/products/${id}`,
     }),
-    addOrders: build.mutation({
-      query: (body) => ({
-        url: `/orders`,
-        method: 'POST',
-        body,
-        headers: { 'Content-Type': 'application/json' },
-      }),
-    }),
-    getOrders: build.query({
-      query: (id) => `/api/orders/${id}`,
+    addToCart: build.query<IProduct, { id: string; qty: number }>({
+      query: ({ id, qty }) => `/products/${id}`,
+      async onQueryStarted({ id, qty }, api) {
+        if (qty && id) {
+          const { dispatch, queryFulfilled } = api;
+          const { data } = await queryFulfilled;
+
+          const cartData = {
+            product: data._id,
+            name: data.name,
+            price: data.price,
+            countInStock: data.countInStock,
+            qty,
+          };
+
+          dispatch(cartAdded(cartData));
+        }
+      },
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductQuery } = api;
+export const { useGetProductsQuery, useGetProductQuery, useAddToCartQuery } =
+  api;
