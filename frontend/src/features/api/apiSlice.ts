@@ -6,7 +6,6 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/api',
   }),
-  tagTypes: ['Gets'],
 
   endpoints: (build) => ({
     getProducts: build.query<IProducts, void>({
