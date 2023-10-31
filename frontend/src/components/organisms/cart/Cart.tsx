@@ -2,7 +2,7 @@ import './Cart.scss';
 import { AtomicSubtitle } from '../../atoms';
 import { CartColumn } from '../../molecules';
 
-export default function Cart({ cartProducts }) {
+export default function Cart({ cartProducts, deletOnCart, qty }) {
   return (
     <div className="cart">
       <div className="cart__row">
@@ -22,9 +22,15 @@ export default function Cart({ cartProducts }) {
           Delete
         </AtomicSubtitle>
       </div>
-      {cartProducts?.map((cartProduct) => (
-        <CartColumn cartProduct={cartProduct} />
-      ))}
+      {cartProducts &&
+        cartProducts?.map((cartProduct) => (
+          <CartColumn
+            qty={qty}
+            cartProduct={cartProduct}
+            key={cartProduct?.product}
+            deletOnCart={deletOnCart}
+          />
+        ))}
     </div>
   );
 }
