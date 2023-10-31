@@ -1,12 +1,20 @@
 import { AtomicButton, AtomicSubtitle } from '../../atoms';
 import './CartSummary.scss';
 
-export default function CartSummary() {
+export default function CartSummary({
+  totalPrice,
+  paymentMethod,
+  currentDate,
+  productPrice,
+  shippingPrice,
+  taxPrice,
+  cartProducts,
+}) {
   return (
     <div className="orderSummary">
       <div>
         <AtomicSubtitle size="s" color="secondary">
-          Date Sunday October 29 2023
+          {currentDate}
         </AtomicSubtitle>
       </div>
       <div>
@@ -17,12 +25,12 @@ export default function CartSummary() {
           SUBTOTAL
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          (1)items
+          ({cartProducts?.length})items
         </AtomicSubtitle>
       </div>
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total Item Prices</AtomicSubtitle>
-        <AtomicSubtitle size="l">$175.0</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {productPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -30,7 +38,7 @@ export default function CartSummary() {
           SHIPPING
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          $3
+          ${shippingPrice}
         </AtomicSubtitle>
       </div>
 
@@ -39,13 +47,13 @@ export default function CartSummary() {
           TAX
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          $5
+          ${taxPrice}
         </AtomicSubtitle>
       </div>
 
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total</AtomicSubtitle>
-        <AtomicSubtitle size="l">$167.0</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {totalPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -53,7 +61,7 @@ export default function CartSummary() {
           Payment method
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          paypal
+          {paymentMethod}
         </AtomicSubtitle>
       </div>
       <AtomicButton size="m">Proceed to Checkout</AtomicButton>
