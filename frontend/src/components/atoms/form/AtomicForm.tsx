@@ -3,6 +3,11 @@ import { TNormalElementProps } from '../../../types';
 export default function AtomicForm({
   children,
   className = '',
+  ...props
 }: TNormalElementProps<HTMLFormElement>) {
-  return <form className={`${className}  form`}>{children}</form>;
+  return (
+    <form {...props} className={`${className}  form`}>
+      {children}
+    </form>
+  );
 }
