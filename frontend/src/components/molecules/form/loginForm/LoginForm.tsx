@@ -8,9 +8,14 @@ import {
 } from '../../../atoms';
 import './LoginForm.scss';
 
-export default function LoginForm() {
+export default function LoginForm({
+  errors,
+  loginSubmit,
+  handleSubmit,
+  register,
+}) {
   return (
-    <AtomicForm>
+    <AtomicForm onSubmit={handleSubmit(loginSubmit)}>
       <div className="form__intro">
         <AtomicSubtitle size="xl">Sign in</AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
@@ -22,13 +27,27 @@ export default function LoginForm() {
           <AtomicSubtitle size="m">Email</AtomicSubtitle>
         </AtomicLabel>
 
-        <AtomicInput type="email" id="email" name="userEmail" />
+        <AtomicInput
+          type="email"
+          id="userEmail"
+          name="userEmail"
+          register={register}
+        />
+
+        {errors?.['userEmail'] && <p>{errors?.['userEmail'].message}</p>}
 
         <AtomicLabel htmlFor="userPassword">
           <AtomicSubtitle size="m">Password</AtomicSubtitle>
         </AtomicLabel>
 
-        <AtomicInput type="password" id="user-password" name="userPassword" />
+        <AtomicInput
+          type="password"
+          id="userPassword"
+          name="userPassword"
+          register={register}
+        />
+
+        {errors?.['userPassword'] && <p>{errors?.['userPassword'].message}</p>}
       </div>
       <AtomicButton size="m" type="submit">
         <AtomicSubtitle size="m" color="tertiary" strength="600">
