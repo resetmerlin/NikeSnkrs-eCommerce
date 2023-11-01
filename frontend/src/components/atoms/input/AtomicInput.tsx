@@ -4,10 +4,10 @@ import './AtomicInput.scss';
 interface IProps extends TNormalElementProps<HTMLInputElement> {
   type: 'password' | 'email' | 'name';
   name: 'userPassword' | 'userEmail' | 'userName' | 'userConfirmPassword';
-  register: (name: string) => {
+  register?: (name: string) => {
     ref: (instance: any) => void;
     name: string;
-  };
+  } | void;
 }
 
 export default function AtomicInput({
@@ -20,7 +20,7 @@ export default function AtomicInput({
   return (
     <input
       {...props}
-      {...register(name)}
+      {...(register && register(name))}
       name={name}
       type={type}
       className={`${className} input`}
