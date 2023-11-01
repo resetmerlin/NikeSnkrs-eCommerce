@@ -13,6 +13,7 @@ export default function LoginForm({
   loginSubmit,
   handleSubmit,
   register,
+  LoginError,
 }) {
   return (
     <AtomicForm onSubmit={handleSubmit(loginSubmit)}>
@@ -21,6 +22,7 @@ export default function LoginForm({
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
+        {LoginError && <p>{LoginError}</p>}
       </div>
       <div className="form__inputs-wrap">
         <AtomicLabel htmlFor="userEmail">
