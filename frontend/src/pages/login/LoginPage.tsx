@@ -5,8 +5,20 @@ import { Background, UserMemberEvents } from '../../components/organisms';
 import { LoginForm } from '../../components/molecules';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
 
 export default function LoginPage() {
+  const [
+    userAuthenticate, // This is the mutation trigger
+    { error }, // This is the destructured mutation result
+  ] = useUserAuthenticatedMutation();
+
+  const errorMessage = error?.data?.message;
+
+  const loginSubmit = (data) => {
+    userAuthenticate(data.userEmail, data.userPassword);
+  };
+
   const loginSchema = yup.object().shape({
     userEmail: yup
       .string()
@@ -26,9 +38,6 @@ export default function LoginPage() {
     formState: { errors },
   } = methods;
 
-  const loginSubmit = (e) => {
-    console.log(e);
-  };
   return (
     <Layout>
       <ParentTemplate size="full">
@@ -43,6 +52,7 @@ export default function LoginPage() {
                 handleSubmit={handleSubmit}
                 loginSubmit={loginSubmit}
                 register={register}
+                LoginError={errorMessage}
               />
             </FormProvider>
           </UserMemberEvents>
