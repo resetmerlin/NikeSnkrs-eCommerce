@@ -33,8 +33,28 @@ export const api = createApi({
         }
       },
     }),
+    userAuthenticated: build.mutation<IProductId, void>({
+      query: (email, password) => ({
+        url: `/users/login`,
+        method: 'POST',
+        body: { email, password },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      async onQueryStarted(email, password, api) {
+        const { dispatch, queryFulfilled } = api;
+        const { data } = await queryFulfilled;
+
+        console.log(data);
+      },
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductQuery, useAddToCartQuery } =
-  api;
+export const {
+  useGetProductsQuery,
+  useGetProductQuery,
+  useAddToCartQuery,
+  useUserAuthenticatedMutation,
+} = api;
