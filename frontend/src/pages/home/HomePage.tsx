@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { CardLists, Intro } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import {
-  userInfoAdded,
-  userInfoDeleted,
-} from '../../features/user/userReducers';
+import { userInfoDeleted } from '../../features/user/userReducers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { localUserToState } from '../../hooks';
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -23,20 +20,7 @@ function HomePage() {
     dispatch(userInfoDeleted());
   };
 
-  /**  Put into cart if no product in cart but in localStorage, */
-  useEffect(() => {
-    if (userInfo.length == 0 && localStorage.getItem('userInfo')) {
-      const user = localStorage.getItem('userInfo');
-
-      if (user) {
-        const parsedItems = JSON.parse(user);
-        console.log(parsedItems);
-        if (parsedItems[0]) {
-          dispatch(userInfoAdded(parsedItems[0]));
-        }
-      }
-    }
-  }, [userInfo]);
+  localUserToState(userInfo, dispatch);
 
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOut}>
