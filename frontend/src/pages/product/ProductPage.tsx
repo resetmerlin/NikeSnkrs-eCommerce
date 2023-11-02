@@ -6,13 +6,12 @@ import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { IProduct, IUser } from '../../types/dto';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { userInfoDeleted } from '../../features/user/userReducers';
+import { logOut } from '../../hooks';
 
 export type ItemColRef = HTMLAnchorElement;
 
 export default function ProductPage() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const userInfo: IUser[] = useAppSelector((state) => state.userInfo);
   const { id: paramId } = useParams();
   const { data: products } = useGetProductsQuery();
@@ -21,10 +20,6 @@ export default function ProductPage() {
 
   const goPrevPage = () => {
     navigate(-1);
-  };
-
-  const logOut = () => {
-    dispatch(userInfoDeleted());
   };
 
   /** Current product */

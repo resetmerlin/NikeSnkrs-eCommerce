@@ -6,18 +6,13 @@ import {
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { ItemLists } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { userInfoDeleted } from '../../features/user/userReducers';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { logOut } from '../../hooks';
+import { useAppSelector } from '../../hooks/hooks';
 
 export default function ProductsPage() {
-  const dispatch = useAppDispatch();
   const { data } = useGetProductsQuery();
 
   const userInfo = useAppSelector((state) => state.userInfo);
-
-  const logOut = () => {
-    dispatch(userInfoDeleted());
-  };
 
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOut}>

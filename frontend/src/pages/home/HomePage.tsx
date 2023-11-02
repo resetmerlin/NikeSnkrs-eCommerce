@@ -3,9 +3,8 @@ import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { CardLists, Intro } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { userInfoDeleted } from '../../features/user/userReducers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { localUserToState } from '../../hooks';
+import { localUserToState, logOut } from '../../hooks';
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -15,10 +14,6 @@ function HomePage() {
   const cardProducts = data && [...data]?.slice(0, 3);
 
   const userInfo = useAppSelector((state) => state.userInfo);
-
-  const logOut = () => {
-    dispatch(userInfoDeleted());
-  };
 
   localUserToState(userInfo, dispatch);
 
