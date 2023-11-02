@@ -5,8 +5,12 @@ import { RegisterForm } from '../../components/molecules';
 import * as yup from 'yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useUserAuthorizedMutation } from '../../features/api/apiSlice';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
   const registerSchema = yup.object().shape({
     userEmail: yup
       .string()
@@ -30,9 +34,24 @@ export default function RegisterPage() {
     formState: { errors },
   } = methods;
 
-  const registerSubmit = (e) => {
-    console.log(e);
+  const [userAuthorize, { error, data }] = useUserAuthorizedMutation();
+
+  const errorMessage = error?.data?.message;
+
+  const registerSubmit = (data) => {
+    const user = {
+      name: data.userName,
+      email: data.userEmail,
+      password: data.userPassword,
+    };
+    userAuthorize(user);
   };
+
+  useEffect(() => {
+    if (data) {
+      navigate('/');
+    }
+  }, [data]);
 
   return (
     <Layout>
@@ -48,6 +67,7 @@ export default function RegisterPage() {
                 handleSubmit={handleSubmit}
                 errors={errors}
                 registerSubmit={registerSubmit}
+                errorMessage={errorMessage}
               />
             </FormProvider>
           </UserMemberEvents>
