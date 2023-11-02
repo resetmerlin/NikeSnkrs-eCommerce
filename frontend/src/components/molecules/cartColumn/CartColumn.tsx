@@ -2,11 +2,7 @@ import { IProduct } from '../../../types/dto';
 import { AtomicButton, AtomicSubtitle, SvgX } from '../../atoms';
 import './CartColumn.scss';
 
-export default function CartColumn({
-  cartProduct,
-  deletOnCart,
-  qty,
-}: IProduct) {
+export default function CartColumn({ cartProduct, deletOnCart }: IProduct) {
   return (
     <div className="cartColumn">
       <div>
@@ -22,7 +18,7 @@ export default function CartColumn({
         <AtomicSubtitle size="m">$ {cartProduct?.price}</AtomicSubtitle>
       </div>
       <div>
-        <select name="cartQty" id="cartQty">
+        <select name="cartQty" id="cartQty" defaultValue={cartProduct?.qty}>
           {Array.from({ length: cartProduct?.countInStock }).map((_, num) => {
             return (
               <option value={num + 1} key={num + 1}>
