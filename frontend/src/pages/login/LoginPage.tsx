@@ -6,6 +6,9 @@ import { LoginForm } from '../../components/molecules';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
+import { useEffect } from 'react';
+import { useAppSelector } from '../../hooks/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const [
@@ -13,10 +16,16 @@ export default function LoginPage() {
     { error }, // This is the destructured mutation result
   ] = useUserAuthenticatedMutation();
 
+  const navigate = useNavigate();
+
   const errorMessage = error?.data?.message;
+  const userInfo = useAppSelector((state) => state.userInfo);
 
   const loginSubmit = (data) => {
-    userAuthenticate(data.userEmail, data.userPassword);
+    userAuthenticate({
+      email: data.userEmail,
+      password: data.userPassword,
+    });
   };
 
   const loginSchema = yup.object().shape({
@@ -37,6 +46,12 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = methods;
+
+  useEffect(() => {
+    if (userInfo || localStorage.getItem('userInfo')) {
+      navigate('/');
+    }
+  }, [userInfo]);
 
   return (
     <Layout>
