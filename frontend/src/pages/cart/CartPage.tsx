@@ -10,12 +10,9 @@ import { Cart } from '../../components/organisms';
 import { useAddToCartQuery } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
-import { IProduct } from '../../types/dto';
+import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
-import {
-  userInfoAdded,
-  userInfoDeleted,
-} from '../../features/user/userReducers';
+import { userInfoDeleted } from '../../features/user/userReducers';
 
 function CartPage() {
   const { id } = useParams();
@@ -24,10 +21,13 @@ function CartPage() {
   const location = useLocation().search;
 
   const qty = Number(new URLSearchParams(location).get('qty'));
-  const { data, error } = useAddToCartQuery({ id, qty });
+  useAddToCartQuery({ id, qty });
 
-  const cartProducts = useAppSelector((state) => state.carts);
-  const deletOnCart = (product: IProduct) => dispatch(cartDeleted(product));
+  const cartProducts: ICarts = useAppSelector((state) => state.carts);
+
+  const deletOnCart = (product: ICart['product']) =>
+    dispatch(cartDeleted(product));
+
   const userInfo = useAppSelector((state) => state.userInfo);
 
   const taxPrice = 150;
