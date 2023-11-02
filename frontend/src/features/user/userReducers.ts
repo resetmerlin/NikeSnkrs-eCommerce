@@ -1,10 +1,11 @@
 import { createSlice, current } from '@reduxjs/toolkit';
+import { IUser } from '../../types/dto';
 
-const initialState = [];
+const initialState: any[] = [];
 
 export const userInfoSlice = createSlice({
   name: 'userInfo',
-  initialState: initialState,
+  initialState: initialState as IUser[],
   reducers: {
     userInfoAdded(state, action) {
       const data = action.payload;
