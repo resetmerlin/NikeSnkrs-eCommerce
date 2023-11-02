@@ -9,6 +9,12 @@ import { useUserAuthorizedMutation } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+export type RegisterData = {
+  userEmail: string;
+  userPassword: string;
+  userName: string;
+};
+
 export default function RegisterPage() {
   const navigate = useNavigate();
   const registerSchema = yup.object().shape({
@@ -38,7 +44,7 @@ export default function RegisterPage() {
 
   const errorMessage = error?.data?.message;
 
-  const registerSubmit = (data) => {
+  const registerSubmit = (data: RegisterData) => {
     const user = {
       name: data.userName,
       email: data.userEmail,
