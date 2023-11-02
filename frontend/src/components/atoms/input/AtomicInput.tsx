@@ -1,13 +1,18 @@
 import { TNormalElementProps } from '../../../types';
+import { UseFormRegister } from 'react-hook-form';
 import './AtomicInput.scss';
+
+type FormValues = {
+  userEmail: string;
+  userPassword: string;
+  userName?: string;
+  userConfirmPassword?: string;
+};
 
 interface IProps extends TNormalElementProps<HTMLInputElement> {
   type: 'password' | 'email' | 'name';
-  name: 'userPassword' | 'userEmail' | 'userName' | 'userConfirmPassword';
-  register?: (name: string) => {
-    ref: (instance: any) => void;
-    name: string;
-  } | void;
+  name: keyof FormValues;
+  register?: UseFormRegister<FormValues>;
 }
 
 export default function AtomicInput({
