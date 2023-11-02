@@ -4,12 +4,16 @@ import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { IProduct } from '../../types/dto';
+import { IProduct, IUser } from '../../types/dto';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { userInfoDeleted } from '../../features/user/userReducers';
 
 export type ItemColRef = HTMLAnchorElement;
 
 export default function ProductPage() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const userInfo: IUser[] = useAppSelector((state) => state.userInfo);
   const { id: paramId } = useParams();
   const { data: products } = useGetProductsQuery();
   const columnRef = useRef<ItemColRef | null>(null);
@@ -17,6 +21,10 @@ export default function ProductPage() {
 
   const goPrevPage = () => {
     navigate(-1);
+  };
+
+  const deleteUserInfo = () => {
+    dispatch(userInfoDeleted());
   };
 
   /** Current product */
@@ -76,7 +84,7 @@ export default function ProductPage() {
   }, [goNextProductPage, isObserving]);
 
   return (
-    <LayoutHeader>
+    <LayoutHeader deleteUserInfo={deleteUserInfo} userInfo={userInfo}>
       <ParentTemplate size="full">
         <ChildTemplate position="left" size="full">
           <ItemInfoEvents
