@@ -13,6 +13,7 @@ export default function RegisterForm({
   handleSubmit,
   errors,
   registerSubmit,
+  errorMessage,
 }) {
   return (
     <AtomicForm onSubmit={handleSubmit(registerSubmit)}>
@@ -21,6 +22,7 @@ export default function RegisterForm({
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
+        {errorMessage && <p>{errorMessage}</p>}
       </div>
       <div className="form__inputs-wrap">
         {/* Email label & input */}
