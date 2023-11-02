@@ -12,6 +12,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
 import { IProduct } from '../../types/dto';
 import { useEffect } from 'react';
+import {
+  userInfoAdded,
+  userInfoDeleted,
+} from '../../features/user/userReducers';
 
 function CartPage() {
   const { id } = useParams();
@@ -21,9 +25,6 @@ function CartPage() {
 
   const qty = Number(new URLSearchParams(location).get('qty'));
   const { data, error } = useAddToCartQuery({ id, qty });
-
-  console.log(data);
-  console.log(error);
 
   const cartProducts = useAppSelector((state) => state.carts);
   const deletOnCart = (product: IProduct) => dispatch(cartDeleted(product));
@@ -48,7 +49,7 @@ function CartPage() {
   const currentDate = dateFormat.format(date);
 
   useEffect(() => {
-    if (!userInfo || !localStorage.getItem('userInfo')) {
+    if (userInfo.length == 0 || !localStorage.getItem('userInfo')) {
       navigate('/login');
     }
   }, [userInfo]);
@@ -64,8 +65,12 @@ function CartPage() {
     }
   }, [cartProducts]);
 
+  const deleteUserInfo = () => {
+    dispatch(userInfoDeleted());
+  };
+
   return (
-    <LayoutHeader>
+    <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
       <ParentTemplate size="m">
         <ChildTemplate position="topLeft" size="m">
           <AtomicTitle size="xs">Cart</AtomicTitle>
