@@ -17,7 +17,7 @@ export const cartSlice = createSlice({
       } else {
         state.push(data);
       }
-      localStorage.setItem('cartItems', JSON.stringify(current(state)));
+      localStorage.setItem('cartItems', JSON.stringify(state));
     },
     cartDeleted(state, action) {
       const indexToDelete = state.findIndex(
@@ -29,7 +29,7 @@ export const cartSlice = createSlice({
         state.splice(indexToDelete, 1);
       }
 
-      localStorage.setItem('cartItems', JSON.stringify(current(state)));
+      localStorage.setItem('cartItems', JSON.stringify(state));
     },
     cartAddressAdded(_, action) {
       const { data } = action.payload;
