@@ -34,20 +34,20 @@ export default function ProductPage() {
       (product): product is IProduct => product?._id == paramId
     )[0];
 
-  /** Current index in total products */
+  /** Current product index of total products */
   const currentIndex = product ? products?.indexOf(product) : -1;
 
   /** Go next product */
   const goNextProductPage = () => {
-    // if reaches last index
     if (currentIndex + 1 !== products?.length && products) {
       navigate(`${products[currentIndex + 1]?._id}`);
-    } else if (products) {
+    } // Go first if reaches last index
+    else if (products) {
       navigate(`${products[0]?._id}`);
     }
   };
 
-  /** Add selected quantity and go cart page */
+  /** go cart page with quantity params */
   const addToCart = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -60,6 +60,7 @@ export default function ProductPage() {
     }
   };
 
+  /** Observe product column */
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && columnRef.current) {
@@ -73,6 +74,7 @@ export default function ProductPage() {
     return () => observer.disconnect();
   }, [goNextProductPage, isObserving]);
 
+  /** Follow the observed column */
   useEffect(() => {
     if (isObserving && columnRef.current) {
       columnRef.current.scrollIntoView({
