@@ -6,3 +6,4 @@ export * from './itemNav';
 export * from './userMemberEvents';
 export * from './background';
 export * from './cart';
+export * from './intro';
