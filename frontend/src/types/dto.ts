@@ -19,4 +19,14 @@ export interface IProduct {
 }
 
 export type IProducts = IProduct[];
+
 export interface IProductId extends Pick<IProduct, '_id'> {}
+
+export type IUser = {
+  email: string;
+  isAdmin: boolean;
+  name: string;
+  token: string;
+  _id: string;
+};
+export type IUsers = IUser[]; // An array of user objects
