@@ -7,7 +7,7 @@ import {
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
-import { useAddToCartQuery } from '../../features/api/apiSlice';
+import { useAddToCartMutation } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
 import { ICart, ICarts } from '../../types/dto';
@@ -22,35 +22,47 @@ function CartPage() {
 
   const qty = Number(new URLSearchParams(location).get('qty'));
 
-  useAddToCartQuery({ id, qty });
+  /** fetch chosen product */
+  const [addToCart] = useAddToCartMutation();
 
   const cartProducts: ICarts = useAppSelector((state) => state.carts);
+  const userInfo = useAppSelector((state) => state.userInfo);
 
+  /** Delete product on cart */
   const deletOnCart = (product: ICart['product']) =>
     dispatch(cartDeleted(product));
 
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const logOut = () => {
+    dispatch(userInfoDeleted());
+  };
 
+  /** Fetch if id, qty exists */
+  useEffect(() => {
+    if (id && qty) {
+      addToCart({ id, qty });
+    }
+  }, [id, qty]);
+
+  /** Check user Login else go to login page */
   useEffect(() => {
     if (!localStorage.getItem('userInfo') && userInfo.length == 0) {
       navigate('/login');
     }
   }, [userInfo]);
 
+  /**  Put into cart if no product in cart but in localStorage, */
   useEffect(() => {
     if (cartProducts.length == 0 && localStorage.getItem('cartItems')) {
       const cartItems = localStorage.getItem('cartItems');
-      const parsedItems = JSON.parse(cartItems);
 
-      if (parsedItems[0]) {
-        dispatch(cartAdded(parsedItems[0]));
+      if (cartItems) {
+        const parsedItems = JSON.parse(cartItems);
+        if (parsedItems[0]) {
+          dispatch(cartAdded(parsedItems[0]));
+        }
       }
     }
   }, [cartProducts]);
-
-  const deleteUserInfo = () => {
-    dispatch(userInfoDeleted());
-  };
 
   const taxPrice = 150;
 
@@ -73,20 +85,17 @@ function CartPage() {
     totalPrice: +productPrice - taxPrice - shippingPrice,
     paymentMethod: 'paypal',
     currentDate: dateFormat.format(date),
+    qty: cartProducts.length,
   };
 
   return (
-    <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
+    <LayoutHeader userInfo={userInfo} logOut={logOut}>
       <ParentTemplate size="m">
         <ChildTemplate position="topLeft" size="m">
           <AtomicTitle size="xs">Cart</AtomicTitle>
         </ChildTemplate>
         <ChildTemplate position="centerLeft" size="m">
-          <Cart
-            cartProducts={cartProducts}
-            deletOnCart={deletOnCart}
-            qty={qty}
-          />
+          <Cart cartProducts={cartProducts} deletOnCart={deletOnCart} />
         </ChildTemplate>
 
         <ChildTemplate position="right" size="m">
