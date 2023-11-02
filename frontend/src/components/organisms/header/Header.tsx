@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 
 type IProps = {
   userInfo: IUser[];
-  deleteUserInfo: () => void;
+  logOut: () => void;
 };
 
-export default function Header({ userInfo, deleteUserInfo }: IProps) {
+export default function Header({ userInfo, logOut }: IProps) {
   return (
     <div className="header" id="header">
       <div className="header__left">
@@ -38,7 +38,7 @@ export default function Header({ userInfo, deleteUserInfo }: IProps) {
         </Link>
 
         {userInfo && userInfo.length > 0 ? (
-          <UserButton deleteUserInfo={deleteUserInfo} />
+          <UserButton logOut={logOut} />
         ) : (
           <Link to="/login">
             <LoginButton />

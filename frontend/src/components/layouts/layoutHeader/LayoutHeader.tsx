@@ -4,17 +4,13 @@ import { IUser } from '../../../types/dto';
 
 interface IProps extends PropsWithChildren {
   userInfo: IUser[];
-  deleteUserInfo: () => void;
+  logOut: () => void;
 }
 
-export default function LayoutHeader({
-  children,
-  userInfo,
-  deleteUserInfo,
-}: IProps) {
+export default function LayoutHeader({ children, userInfo, logOut }: IProps) {
   return (
     <>
-      <Header userInfo={userInfo} deleteUserInfo={deleteUserInfo} />
+      <Header userInfo={userInfo} logOut={logOut} />
       <main id="container">{children}</main>
     </>
   );
