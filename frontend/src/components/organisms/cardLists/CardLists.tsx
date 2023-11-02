@@ -3,7 +3,7 @@ import { Card } from '../../molecules';
 import './CardLists.scss';
 
 type IProps = {
-  products: IProducts;
+  products: IProducts | undefined;
 };
 
 export default function CardLists({ products }: IProps) {
