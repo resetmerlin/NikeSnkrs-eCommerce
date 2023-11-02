@@ -6,12 +6,21 @@ import {
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { ItemLists } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
+import { userInfoDeleted } from '../../features/user/userReducers';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 export default function ProductsPage() {
+  const dispatch = useAppDispatch();
   const { data } = useGetProductsQuery();
 
+  const userInfo = useAppSelector((state) => state.userInfo);
+
+  const deleteUserInfo = () => {
+    dispatch(userInfoDeleted());
+  };
+
   return (
-    <LayoutHeader>
+    <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
       <ParentTemplate size="s">
         <ChildTemplate position="topLeft" size="s">
           <AtomicTitle size="xs">Latest Products</AtomicTitle>
