@@ -1,8 +1,13 @@
-import { IProduct } from '../../../types/dto';
+import { ICart } from '../../../types/dto';
 import { AtomicButton, AtomicSubtitle, SvgX } from '../../atoms';
 import './CartColumn.scss';
 
-export default function CartColumn({ cartProduct, deletOnCart }: IProduct) {
+type IProps = {
+  cartProduct: ICart;
+  deletOnCart: (product: ICart['product']) => void;
+};
+
+export default function CartColumn({ cartProduct, deletOnCart }: IProps) {
   return (
     <div className="cartColumn">
       <div>
