@@ -7,14 +7,23 @@ import {
   AtomicSubtitle,
 } from '../../../atoms';
 import './LoginForm.scss';
+import { UseFormReturn } from 'react-hook-form';
+import { FormData } from '../../../../pages/login/LoginPage';
 
+type IProps = {
+  loginSubmit: (data: FormData) => void;
+  LoginError: string;
+  register: UseFormReturn<FormData>['register'];
+  handleSubmit: UseFormReturn<FormData>['handleSubmit'];
+  errors: UseFormReturn<FormData>['formState']['errors'];
+};
 export default function LoginForm({
   errors,
   loginSubmit,
   handleSubmit,
   register,
   LoginError,
-}) {
+}: IProps) {
   return (
     <AtomicForm onSubmit={handleSubmit(loginSubmit)}>
       <div className="form__intro">
