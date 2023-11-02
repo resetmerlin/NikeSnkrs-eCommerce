@@ -13,6 +13,7 @@ import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
 import { userInfoDeleted } from '../../features/user/userReducers';
+import { localCartToState } from '../../hooks';
 
 function CartPage() {
   const { id } = useParams();
@@ -51,18 +52,7 @@ function CartPage() {
   }, [userInfo]);
 
   /**  Put into cart if no product in cart but in localStorage, */
-  useEffect(() => {
-    if (cartProducts.length == 0 && localStorage.getItem('cartItems')) {
-      const cartItems = localStorage.getItem('cartItems');
-
-      if (cartItems) {
-        const parsedItems = JSON.parse(cartItems);
-        if (parsedItems[0]) {
-          dispatch(cartAdded(parsedItems[0]));
-        }
-      }
-    }
-  }, [cartProducts]);
+  localCartToState(cartProducts, dispatch);
 
   const taxPrice = 150;
 
