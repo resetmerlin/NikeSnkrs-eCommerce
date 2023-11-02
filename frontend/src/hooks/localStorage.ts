@@ -3,6 +3,7 @@ import { userInfoAdded } from '../features/user/userReducers';
 import { AppDispatch } from '../store';
 import { ICarts, IUser } from '../types/dto';
 import { cartAdded } from '../features/cart/cartReducers';
+import { NavigateFunction } from 'react-router-dom';
 
 /**  Put into userInfo if no user in state but in localStorage, */
 export function localUserToState(userInfo: IUser[], dispatch: AppDispatch) {
@@ -35,4 +36,13 @@ export function localCartToState(cartProducts: ICarts, dispatch: AppDispatch) {
       }
     }
   }, [cartProducts]);
+}
+
+/** Check user Login else go to login page */
+export function goToLogin(userInfo: IUser[], navigate: NavigateFunction) {
+  useEffect(() => {
+    if (!localStorage.getItem('userInfo') && userInfo.length == 0) {
+      navigate('/login');
+    }
+  }, [userInfo]);
 }
