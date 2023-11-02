@@ -1,12 +1,22 @@
 import { AtomicButton, AtomicSubtitle } from '../../atoms';
 import './CartSummary.scss';
 
-export default function CartSummary(prices) {
+type IProps = {
+  currentDate: string;
+  qty: number;
+  productPrice: string;
+  shippingPrice: number;
+  totalPrice: number;
+  taxPrice: number;
+  paymentMethod: string;
+};
+
+export default function CartSummary(props: IProps) {
   return (
     <div className="orderSummary">
       <div>
         <AtomicSubtitle size="s" color="secondary">
-          {prices?.currentDate}
+          {props?.currentDate}
         </AtomicSubtitle>
       </div>
       <div>
@@ -17,12 +27,12 @@ export default function CartSummary(prices) {
           SUBTOTAL
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ({prices?.cartProducts?.length})items
+          ({props?.qty})items
         </AtomicSubtitle>
       </div>
       <div className="orderSummary__border">
-        <AtomicSubtitle size="l">Total Item Prices</AtomicSubtitle>
-        <AtomicSubtitle size="l">$ {prices?.productPrice}</AtomicSubtitle>
+        <AtomicSubtitle size="l">Total Item props</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {props?.productPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -30,7 +40,7 @@ export default function CartSummary(prices) {
           SHIPPING
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ${prices?.shippingPrice}
+          ${props?.shippingPrice}
         </AtomicSubtitle>
       </div>
 
@@ -39,13 +49,13 @@ export default function CartSummary(prices) {
           TAX
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ${prices?.taxPrice}
+          ${props?.taxPrice}
         </AtomicSubtitle>
       </div>
 
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total</AtomicSubtitle>
-        <AtomicSubtitle size="l">$ {prices?.totalPrice}</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {props?.totalPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -53,7 +63,7 @@ export default function CartSummary(prices) {
           Payment method
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          {prices?.paymentMethod}
+          {props?.paymentMethod}
         </AtomicSubtitle>
       </div>
       <AtomicButton size="m">Proceed to Checkout</AtomicButton>
