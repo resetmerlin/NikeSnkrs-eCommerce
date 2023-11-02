@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   AtomicTitle,
   ChildTemplate,
@@ -9,24 +9,30 @@ import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
 import { useAddToCartQuery } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { cartDeleted } from '../../features/cart/cartReducers';
+import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
 import { IProduct } from '../../types/dto';
+import { useEffect } from 'react';
 
 function CartPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const location = useLocation().search;
 
   const qty = Number(new URLSearchParams(location).get('qty'));
-  useAddToCartQuery({ id, qty });
+  const { data, error } = useAddToCartQuery({ id, qty });
+
+  console.log(data);
+  console.log(error);
 
   const cartProducts = useAppSelector((state) => state.carts);
   const deletOnCart = (product: IProduct) => dispatch(cartDeleted(product));
+  const userInfo = useAppSelector((state) => state.userInfo);
 
   const taxPrice = 150;
   const shippingPrice = 3000;
   const productPrice = cartProducts
-    .reduce((acc, item) => acc + Number(item.qty) * Number(item.price), 0)
+    .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
     .toFixed(1);
 
   const totalPrice = +productPrice - taxPrice - shippingPrice;
@@ -40,6 +46,23 @@ function CartPage() {
   });
 
   const currentDate = dateFormat.format(date);
+
+  useEffect(() => {
+    if (!userInfo || !localStorage.getItem('userInfo')) {
+      navigate('/login');
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (cartProducts.length == 0 && localStorage.getItem('cartItems')) {
+      const cartItems = localStorage.getItem('cartItems');
+      const parsedItems = JSON.parse(cartItems);
+
+      if (parsedItems[0]) {
+        dispatch(cartAdded(parsedItems[0]));
+      }
+    }
+  }, [cartProducts]);
 
   return (
     <LayoutHeader>
