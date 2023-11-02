@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { userInfoAdded } from '../features/user/userReducers';
 import { AppDispatch } from '../store';
 import { ICarts, IUser } from '../types/dto';
-import { cartAdded } from '../features/cart/cartReducers';
+import { cartAdded } from '../features/cart/cartSlice';
 import { NavigateFunction } from 'react-router-dom';
 
 /**  Put into userInfo if no user in state but in localStorage, */

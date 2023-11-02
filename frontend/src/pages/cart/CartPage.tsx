@@ -9,7 +9,7 @@ import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { cartDeleted } from '../../features/cart/cartReducers';
+import { cartDeleted } from '../../features/cart/cartSlice';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
 import { goToLogin, localCartToState, logOut } from '../../hooks';
