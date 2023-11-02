@@ -7,14 +7,23 @@ import {
   AtomicSubtitle,
 } from '../../../atoms';
 import './RegisterForm.scss';
+import { UseFormReturn } from 'react-hook-form';
+import { RegisterData } from '../../../../pages/register/RegisterPage';
 
+type IProps = {
+  registerSubmit: (data: RegisterData) => void;
+  errorMessage: string;
+  register: UseFormReturn<RegisterData>['register'];
+  handleSubmit: UseFormReturn<RegisterData>['handleSubmit'];
+  errors: UseFormReturn<RegisterData>['formState']['errors'];
+};
 export default function RegisterForm({
   register,
   handleSubmit,
   errors,
   registerSubmit,
   errorMessage,
-}) {
+}: IProps) {
   return (
     <AtomicForm onSubmit={handleSubmit(registerSubmit)}>
       <div className="form__intro">
