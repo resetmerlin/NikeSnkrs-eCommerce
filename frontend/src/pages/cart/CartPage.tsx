@@ -9,11 +9,10 @@ import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
+import { cartDeleted } from '../../features/cart/cartReducers';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
-import { userInfoDeleted } from '../../features/user/userReducers';
-import { localCartToState } from '../../hooks';
+import { goToLogin, localCartToState, logOut } from '../../hooks';
 
 function CartPage() {
   const { id } = useParams();
@@ -33,10 +32,6 @@ function CartPage() {
   const deletOnCart = (product: ICart['product']) =>
     dispatch(cartDeleted(product));
 
-  const logOut = () => {
-    dispatch(userInfoDeleted());
-  };
-
   /** Fetch if id, qty exists */
   useEffect(() => {
     if (id && qty) {
@@ -44,12 +39,8 @@ function CartPage() {
     }
   }, [id, qty]);
 
-  /** Check user Login else go to login page */
-  useEffect(() => {
-    if (!localStorage.getItem('userInfo') && userInfo.length == 0) {
-      navigate('/login');
-    }
-  }, [userInfo]);
+  /** Check user auth, if no auth go to login page */
+  goToLogin(userInfo, navigate);
 
   /**  Put into cart if no product in cart but in localStorage, */
   localCartToState(cartProducts, dispatch);
