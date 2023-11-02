@@ -1,20 +1,12 @@
 import { AtomicButton, AtomicSubtitle } from '../../atoms';
 import './CartSummary.scss';
 
-export default function CartSummary({
-  totalPrice,
-  paymentMethod,
-  currentDate,
-  productPrice,
-  shippingPrice,
-  taxPrice,
-  cartProducts,
-}) {
+export default function CartSummary(prices) {
   return (
     <div className="orderSummary">
       <div>
         <AtomicSubtitle size="s" color="secondary">
-          {currentDate}
+          {prices?.currentDate}
         </AtomicSubtitle>
       </div>
       <div>
@@ -25,12 +17,12 @@ export default function CartSummary({
           SUBTOTAL
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ({cartProducts?.length})items
+          ({prices?.cartProducts?.length})items
         </AtomicSubtitle>
       </div>
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total Item Prices</AtomicSubtitle>
-        <AtomicSubtitle size="l">$ {productPrice}</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {prices?.productPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -38,7 +30,7 @@ export default function CartSummary({
           SHIPPING
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ${shippingPrice}
+          ${prices?.shippingPrice}
         </AtomicSubtitle>
       </div>
 
@@ -47,13 +39,13 @@ export default function CartSummary({
           TAX
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ${taxPrice}
+          ${prices?.taxPrice}
         </AtomicSubtitle>
       </div>
 
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total</AtomicSubtitle>
-        <AtomicSubtitle size="l">$ {totalPrice}</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {prices?.totalPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -61,7 +53,7 @@ export default function CartSummary({
           Payment method
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          {paymentMethod}
+          {prices?.paymentMethod}
         </AtomicSubtitle>
       </div>
       <AtomicButton size="m">Proceed to Checkout</AtomicButton>
