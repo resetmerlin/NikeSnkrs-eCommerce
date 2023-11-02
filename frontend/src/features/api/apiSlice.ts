@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IProduct, IProductId, IProducts } from '../../types/dto';
 import { cartAdded } from '../cart/cartReducers';
+import { userInfoAdded } from '../user/userReducers';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -34,19 +35,39 @@ export const api = createApi({
       },
     }),
     userAuthenticated: build.mutation<IProductId, void>({
-      query: (email, password) => ({
+      query: ({ email, password }) => ({
         url: `/users/login`,
         method: 'POST',
-        body: { email, password },
+        body: { email: email, password: password },
         headers: {
           'Content-Type': 'application/json',
         },
       }),
-      async onQueryStarted(email, password, api) {
+      async onQueryStarted({ email, password }, api) {
         const { dispatch, queryFulfilled } = api;
         const { data } = await queryFulfilled;
 
-        console.log(data);
+        dispatch(userInfoAdded(data));
+      },
+    }),
+    userAuthorized: build.mutation<IProductId, void>({
+      query: (user) => ({
+        url: `/users/register`,
+        method: 'POST',
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          password: user.password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+      async onQueryStarted(user, api) {
+        const { dispatch, queryFulfilled } = api;
+        const { data } = await queryFulfilled;
+
+        dispatch(userInfoAdded(data));
       },
     }),
   }),
@@ -57,4 +78,5 @@ export const {
   useGetProductQuery,
   useAddToCartQuery,
   useUserAuthenticatedMutation,
+  useUserAuthorizedMutation,
 } = api;
