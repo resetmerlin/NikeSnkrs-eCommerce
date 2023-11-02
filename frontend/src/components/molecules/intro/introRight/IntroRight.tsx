@@ -1,5 +1,4 @@
 import { AtomicSubtitle, AtomicTitle } from '../../../atoms';
-import '../Intro.scss';
 
 export default function IntroRight() {
   return (
