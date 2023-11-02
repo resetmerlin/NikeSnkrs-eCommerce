@@ -1,4 +1,9 @@
-import { useForm, FormProvider } from 'react-hook-form';
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  UseFormReturn,
+} from 'react-hook-form';
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
@@ -10,6 +15,11 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 
+export type FormData = {
+  userEmail: string;
+  userPassword: string;
+};
+
 export default function LoginPage() {
   const [
     userAuthenticate, // This is the mutation trigger
@@ -19,9 +29,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const errorMessage = error?.data?.message;
+
   const userInfo = useAppSelector((state) => state.userInfo);
 
-  const loginSubmit = (data) => {
+  const loginSubmit = (data: { userEmail: string; userPassword: string }) => {
     userAuthenticate({
       email: data.userEmail,
       password: data.userPassword,
@@ -36,7 +47,7 @@ export default function LoginPage() {
     userPassword: yup.string().required('Please write your password'),
   });
 
-  const methods = useForm({
+  const methods: UseFormReturn<FormData> = useForm({
     mode: 'onChange',
     resolver: yupResolver(loginSchema),
   });
@@ -48,7 +59,7 @@ export default function LoginPage() {
   } = methods;
 
   useEffect(() => {
-    if (userInfo || localStorage.getItem('userInfo')) {
+    if (userInfo.length !== 0 || localStorage.getItem('userInfo')) {
       navigate('/');
     }
   }, [userInfo]);
