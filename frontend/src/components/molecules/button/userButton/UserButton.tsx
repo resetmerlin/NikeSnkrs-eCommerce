@@ -1,12 +1,27 @@
-import { AtomicButton, AtomicSubtitle, SvgUserCircle } from '../../../atoms';
+import { AtomicButton, SvgUserCircle } from '../../../atoms';
+import './UserButton.scss';
 
-export default function UserButton() {
+export default function UserButton({ deleteUserInfo }) {
   return (
-    <AtomicButton shape="rect" size="l">
-      <SvgUserCircle size="6rem" color="white" />
-      <AtomicSubtitle size="m" color="tertiary" strength="600">
-        User Name
-      </AtomicSubtitle>
-    </AtomicButton>
+    <>
+      <input type="checkbox" name="userCheck" id="userCheck" />
+      <label htmlFor="userCheck" className="userCheck">
+        <SvgUserCircle size="3rem" color="white" />
+      </label>
+      <div className="userCheck-popup">
+        <AtomicButton shape="rect" size="xs" color="secondary">
+          Profile
+        </AtomicButton>
+
+        <AtomicButton
+          shape="rect"
+          size="xs"
+          color="secondary"
+          onClick={deleteUserInfo}
+        >
+          Log Out
+        </AtomicButton>
+      </div>
+    </>
   );
 }

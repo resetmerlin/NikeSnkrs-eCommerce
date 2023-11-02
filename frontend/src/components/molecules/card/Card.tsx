@@ -3,8 +3,9 @@ import { AtomicCard, AtomicSubtitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './Card.scss';
 
-interface IProps extends IProduct {}
-
+type IProps = {
+  product: IProduct;
+};
 export default function Card({ product }: IProps) {
   return (
     <AtomicCard>

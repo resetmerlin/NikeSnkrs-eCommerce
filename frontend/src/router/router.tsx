@@ -19,7 +19,14 @@ const router = createBrowserRouter([
   },
   { path: '/login', element: <LoginPage /> },
   { path: '/register', element: <RegisterPage /> },
-  { path: '/cart', element: <CartPage /> },
+  {
+    path: '/cart',
+    element: <CartPage />,
+    children: [
+      { path: ':id', element: <CartPage /> },
+      { path: '', element: <CartPage /> },
+    ],
+  },
 ]);
 
 export default router;

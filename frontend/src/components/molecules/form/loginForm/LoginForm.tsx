@@ -7,28 +7,58 @@ import {
   AtomicSubtitle,
 } from '../../../atoms';
 import './LoginForm.scss';
+import { UseFormReturn } from 'react-hook-form';
+import { FormData } from '../../../../pages/login/LoginPage';
 
-export default function LoginForm() {
+type IProps = {
+  loginSubmit: (data: FormData) => void;
+  LoginError: string;
+  register: UseFormReturn<FormData>['register'];
+  handleSubmit: UseFormReturn<FormData>['handleSubmit'];
+  errors: UseFormReturn<FormData>['formState']['errors'];
+};
+export default function LoginForm({
+  errors,
+  loginSubmit,
+  handleSubmit,
+  register,
+  LoginError,
+}: IProps) {
   return (
-    <AtomicForm>
+    <AtomicForm onSubmit={handleSubmit(loginSubmit)}>
       <div className="form__intro">
         <AtomicSubtitle size="xl">Sign in</AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
+        {LoginError && <p>{LoginError}</p>}
       </div>
       <div className="form__inputs-wrap">
         <AtomicLabel htmlFor="userEmail">
           <AtomicSubtitle size="m">Email</AtomicSubtitle>
         </AtomicLabel>
 
-        <AtomicInput type="email" id="email" name="userEmail" />
+        <AtomicInput
+          type="email"
+          id="userEmail"
+          name="userEmail"
+          register={register}
+        />
+
+        {errors?.['userEmail'] && <p>{errors?.['userEmail'].message}</p>}
 
         <AtomicLabel htmlFor="userPassword">
           <AtomicSubtitle size="m">Password</AtomicSubtitle>
         </AtomicLabel>
 
-        <AtomicInput type="password" id="user-password" name="userPassword" />
+        <AtomicInput
+          type="password"
+          id="userPassword"
+          name="userPassword"
+          register={register}
+        />
+
+        {errors?.['userPassword'] && <p>{errors?.['userPassword'].message}</p>}
       </div>
       <AtomicButton size="m" type="submit">
         <AtomicSubtitle size="m" color="tertiary" strength="600">

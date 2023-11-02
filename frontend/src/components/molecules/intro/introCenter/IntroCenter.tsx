@@ -1,12 +1,9 @@
-import { AtomicTitle } from '../../../atoms';
-import '../Intro.scss';
-
 export default function IntroCenter() {
   return (
-    <div className="intro-middle">
-      <AtomicTitle size="max" color="secondary" strength="500">
-        NIKE
-      </AtomicTitle>
-    </div>
+    <img
+      src="./products/64057e49aafc2434e58a9485.png"
+      alt="64057e49aafc2434e58a9485"
+      className="intro-center"
+    />
   );
 }

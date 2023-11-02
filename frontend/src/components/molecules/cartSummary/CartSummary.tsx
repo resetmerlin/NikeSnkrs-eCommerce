@@ -1,12 +1,22 @@
 import { AtomicButton, AtomicSubtitle } from '../../atoms';
 import './CartSummary.scss';
 
-export default function CartSummary() {
+type IProps = {
+  currentDate: string;
+  qty: number;
+  productPrice: string;
+  shippingPrice: number;
+  totalPrice: number;
+  taxPrice: number;
+  paymentMethod: string;
+};
+
+export default function CartSummary(props: IProps) {
   return (
     <div className="orderSummary">
       <div>
         <AtomicSubtitle size="s" color="secondary">
-          Date Sunday October 29 2023
+          {props?.currentDate}
         </AtomicSubtitle>
       </div>
       <div>
@@ -17,12 +27,12 @@ export default function CartSummary() {
           SUBTOTAL
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          (1)items
+          ({props?.qty})items
         </AtomicSubtitle>
       </div>
       <div className="orderSummary__border">
-        <AtomicSubtitle size="l">Total Item Prices</AtomicSubtitle>
-        <AtomicSubtitle size="l">$175.0</AtomicSubtitle>
+        <AtomicSubtitle size="l">Total Item props</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {props?.productPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -30,7 +40,7 @@ export default function CartSummary() {
           SHIPPING
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          $3
+          ${props?.shippingPrice}
         </AtomicSubtitle>
       </div>
 
@@ -39,13 +49,13 @@ export default function CartSummary() {
           TAX
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          $5
+          ${props?.taxPrice}
         </AtomicSubtitle>
       </div>
 
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total</AtomicSubtitle>
-        <AtomicSubtitle size="l">$167.0</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {props?.totalPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -53,7 +63,7 @@ export default function CartSummary() {
           Payment method
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          paypal
+          {props?.paymentMethod}
         </AtomicSubtitle>
       </div>
       <AtomicButton size="m">Proceed to Checkout</AtomicButton>

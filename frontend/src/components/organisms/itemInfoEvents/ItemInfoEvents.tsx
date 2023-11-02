@@ -1,11 +1,22 @@
+import React from 'react';
 import { IProduct } from '../../../types/dto';
 import { AtomicButton, AtomicSubtitle, SvgLeftArrowAlt } from '../../atoms';
 import { ItemInfo } from '../../molecules';
 import './ItemInfoEvents.scss';
 
-export default function ItemInfoEvents({ product, goPrevPage }: IProduct) {
+type IProps = {
+  goPrevPage: () => void;
+  addToCart: (event: React.FormEvent<HTMLFormElement>) => void;
+  product: IProduct;
+};
+
+export default function ItemInfoEvents({
+  product,
+  goPrevPage,
+  addToCart,
+}: IProps) {
   return (
-    <div className="itemInfoEvents">
+    <form className="itemInfoEvents" onSubmit={addToCart}>
       <AtomicButton
         type="button"
         shape="none"
@@ -29,6 +40,10 @@ export default function ItemInfoEvents({ product, goPrevPage }: IProduct) {
           </AtomicSubtitle>
         </AtomicButton>
       </div>
-    </div>
+    </form>
   );
 }
+
+ItemInfoEvents.defaultProps = {
+  product: [],
+};

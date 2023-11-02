@@ -1,10 +1,16 @@
 import { PropsWithChildren } from 'react';
 import { Header } from '../../organisms';
+import { IUser } from '../../../types/dto';
 
-export default function LayoutHeader({ children }: PropsWithChildren) {
+interface IProps extends PropsWithChildren {
+  userInfo: IUser[];
+  logOut: () => void;
+}
+
+export default function LayoutHeader({ children, userInfo, logOut }: IProps) {
   return (
     <>
-      <Header />
+      <Header userInfo={userInfo} logOut={logOut} />
       <main id="container">{children}</main>
     </>
   );
