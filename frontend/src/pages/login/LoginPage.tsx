@@ -27,7 +27,7 @@ export default function LoginPage() {
 
   const userInfo = useAppSelector((state) => state.userInfo);
 
-  const loginSubmit = (data: { userEmail: string; userPassword: string }) => {
+  const loginSubmit = (data: FormData) => {
     userAuthenticate({
       email: data.userEmail,
       password: data.userPassword,
