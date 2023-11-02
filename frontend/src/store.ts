@@ -3,6 +3,7 @@ import { api } from './features/api/apiSlice';
 import { productsSlice } from './features/product/productReducers';
 import authReducers from './features/auth/authReducers';
 import { cartSlice } from './features/cart/cartReducers';
+import { userInfoSlice } from './features/user/userReducers';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     products: productsSlice.reducer,
     carts: cartSlice.reducer,
     auth: authReducers,
+    userInfo: userInfoSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
