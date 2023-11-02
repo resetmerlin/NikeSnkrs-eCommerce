@@ -34,7 +34,10 @@ export const api = createApi({
         }
       },
     }),
-    userAuthenticated: build.mutation<IProductId, void>({
+    userAuthenticated: build.mutation<
+      IProductId,
+      { email: string; password: string }
+    >({
       query: ({ email, password }) => ({
         url: `/users/login`,
         method: 'POST',
@@ -43,14 +46,17 @@ export const api = createApi({
           'Content-Type': 'application/json',
         },
       }),
-      async onQueryStarted({ email, password }, api) {
+      async onQueryStarted({}, api) {
         const { dispatch, queryFulfilled } = api;
         const { data } = await queryFulfilled;
 
         dispatch(userInfoAdded(data));
       },
     }),
-    userAuthorized: build.mutation<IProductId, void>({
+    userAuthorized: build.mutation<
+      IProductId,
+      { name: string; email: string; password: string }
+    >({
       query: (user) => ({
         url: `/users/register`,
         method: 'POST',
@@ -63,7 +69,7 @@ export const api = createApi({
           'Content-Type': 'application/json',
         },
       }),
-      async onQueryStarted(user, api) {
+      async onQueryStarted(_, api) {
         const { dispatch, queryFulfilled } = api;
         const { data } = await queryFulfilled;
 
