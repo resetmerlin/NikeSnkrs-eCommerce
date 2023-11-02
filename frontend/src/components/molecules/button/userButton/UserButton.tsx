@@ -1,7 +1,11 @@
 import { AtomicButton, SvgUserCircle } from '../../../atoms';
 import './UserButton.scss';
 
-export default function UserButton({ deleteUserInfo }) {
+type IProps = {
+  logOut: () => void;
+};
+
+export default function UserButton({ logOut }: IProps) {
   return (
     <>
       <input type="checkbox" name="userCheck" id="userCheck" />
@@ -13,12 +17,7 @@ export default function UserButton({ deleteUserInfo }) {
           Profile
         </AtomicButton>
 
-        <AtomicButton
-          shape="rect"
-          size="xs"
-          color="secondary"
-          onClick={deleteUserInfo}
-        >
+        <AtomicButton shape="rect" size="xs" color="secondary" onClick={logOut}>
           Log Out
         </AtomicButton>
       </div>
