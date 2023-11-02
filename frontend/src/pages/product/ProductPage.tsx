@@ -23,7 +23,7 @@ export default function ProductPage() {
     navigate(-1);
   };
 
-  const deleteUserInfo = () => {
+  const logOut = () => {
     dispatch(userInfoDeleted());
   };
 
@@ -86,7 +86,7 @@ export default function ProductPage() {
   }, [goNextProductPage, isObserving]);
 
   return (
-    <LayoutHeader deleteUserInfo={deleteUserInfo} userInfo={userInfo}>
+    <LayoutHeader logOut={logOut} userInfo={userInfo}>
       <ParentTemplate size="full">
         <ChildTemplate position="left" size="full">
           <ItemInfoEvents
