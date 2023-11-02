@@ -29,4 +29,12 @@ export type IUser = {
   token: string;
   _id: string;
 };
+
+export interface ICart
+  extends Pick<IProduct, 'name' | 'price' | 'countInStock'> {
+  qty: number;
+  product: IProduct['_id'];
+}
+export type ICarts = ICart[];
+
 export type IUsers = IUser[]; // An array of user objects
