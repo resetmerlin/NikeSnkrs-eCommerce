@@ -8,13 +8,20 @@ import {
 import { CardLists } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
+import { userInfoDeleted } from '../../features/user/userReducers';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 function HomePage() {
+  const dispatch = useAppDispatch();
   const { data, isLoading } = useGetProductsQuery();
   const cardProducts = data && [...data]?.slice(0, 3);
+  const userInfo = useAppSelector((state) => state.userInfo);
 
+  const deleteUserInfo = () => {
+    dispatch(userInfoDeleted());
+  };
   return (
-    <LayoutHeader>
+    <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="s">
           <IntroLeft />
