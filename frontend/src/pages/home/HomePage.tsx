@@ -5,7 +5,7 @@ import {
   IntroLeft,
   IntroRight,
 } from '../../components/molecules/intro';
-import { CardLists } from '../../components/organisms';
+import { CardLists, Intro } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { userInfoDeleted } from '../../features/user/userReducers';
@@ -24,9 +24,7 @@ function HomePage() {
     <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="s">
-          <IntroLeft />
-          <IntroCenter />
-          <IntroRight />
+          <Intro />
         </ChildTemplate>
         <ChildTemplate position="bottomRight" size="s">
           {isLoading ? (
