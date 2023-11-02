@@ -15,12 +15,12 @@ export default function ProductsPage() {
 
   const userInfo = useAppSelector((state) => state.userInfo);
 
-  const deleteUserInfo = () => {
+  const logOut = () => {
     dispatch(userInfoDeleted());
   };
 
   return (
-    <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
+    <LayoutHeader userInfo={userInfo} logOut={logOut}>
       <ParentTemplate size="s">
         <ChildTemplate position="topLeft" size="s">
           <AtomicTitle size="xs">Latest Products</AtomicTitle>
