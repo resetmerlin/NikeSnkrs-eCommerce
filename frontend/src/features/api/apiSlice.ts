@@ -15,7 +15,7 @@ export const api = createApi({
     getProduct: build.query<IProductId, void>({
       query: (id) => `/products/${id}`,
     }),
-    addToCart: build.query<IProduct, { id: string; qty: number }>({
+    addToCart: build.mutation<IProduct, { id: string; qty: number }>({
       query: ({ id, qty }) => `/products/${id}`,
       async onQueryStarted({ id, qty }, api) {
         if (qty && id) {
@@ -82,7 +82,7 @@ export const api = createApi({
 export const {
   useGetProductsQuery,
   useGetProductQuery,
-  useAddToCartQuery,
+  useAddToCartMutation,
   useUserAuthenticatedMutation,
   useUserAuthorizedMutation,
 } = api;
