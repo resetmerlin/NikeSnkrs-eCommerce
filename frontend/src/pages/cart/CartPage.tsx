@@ -21,6 +21,7 @@ function CartPage() {
   const location = useLocation().search;
 
   const qty = Number(new URLSearchParams(location).get('qty'));
+
   useAddToCartQuery({ id, qty });
 
   const cartProducts: ICarts = useAppSelector((state) => state.carts);
@@ -30,26 +31,8 @@ function CartPage() {
 
   const userInfo = useAppSelector((state) => state.userInfo);
 
-  const taxPrice = 150;
-  const shippingPrice = 3000;
-  const productPrice = cartProducts
-    .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
-    .toFixed(1);
-
-  const totalPrice = +productPrice - taxPrice - shippingPrice;
-
-  const paymentMethod = 'paypal';
-
-  const date = new Date();
-
-  const dateFormat = new Intl.DateTimeFormat('en-kr', {
-    dateStyle: 'full',
-  });
-
-  const currentDate = dateFormat.format(date);
-
   useEffect(() => {
-    if (userInfo.length == 0 || !localStorage.getItem('userInfo')) {
+    if (!localStorage.getItem('userInfo') && userInfo.length == 0) {
       navigate('/login');
     }
   }, [userInfo]);
@@ -69,6 +52,29 @@ function CartPage() {
     dispatch(userInfoDeleted());
   };
 
+  const taxPrice = 150;
+
+  const shippingPrice = 3000;
+
+  const productPrice = cartProducts
+    .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
+    .toFixed(1);
+
+  const date = new Date();
+
+  const dateFormat = new Intl.DateTimeFormat('en-kr', {
+    dateStyle: 'full',
+  });
+
+  const prices = {
+    taxPrice,
+    shippingPrice,
+    productPrice,
+    totalPrice: +productPrice - taxPrice - shippingPrice,
+    paymentMethod: 'paypal',
+    currentDate: dateFormat.format(date),
+  };
+
   return (
     <LayoutHeader userInfo={userInfo} deleteUserInfo={deleteUserInfo}>
       <ParentTemplate size="m">
@@ -84,15 +90,7 @@ function CartPage() {
         </ChildTemplate>
 
         <ChildTemplate position="right" size="m">
-          <CartSummary
-            cartProducts={cartProducts}
-            totalPrice={totalPrice}
-            paymentMethod={paymentMethod}
-            productPrice={productPrice}
-            shippingPrice={shippingPrice}
-            taxPrice={taxPrice}
-            currentDate={currentDate}
-          />
+          <CartSummary {...prices} />
         </ChildTemplate>
 
         <ChildTemplate position="bottomLeft" size="m">
