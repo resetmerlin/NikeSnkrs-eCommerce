@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { CardLists, Intro } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { userInfoDeleted } from '../../features/user/userReducers';
+import {
+  userInfoAdded,
+  userInfoDeleted,
+} from '../../features/user/userReducers';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 function HomePage() {
@@ -18,6 +22,22 @@ function HomePage() {
   const logOut = () => {
     dispatch(userInfoDeleted());
   };
+
+  /**  Put into cart if no product in cart but in localStorage, */
+  useEffect(() => {
+    if (userInfo.length == 0 && localStorage.getItem('userInfo')) {
+      const user = localStorage.getItem('userInfo');
+
+      if (user) {
+        const parsedItems = JSON.parse(user);
+        console.log(parsedItems);
+        if (parsedItems[0]) {
+          dispatch(userInfoAdded(parsedItems[0]));
+        }
+      }
+    }
+  }, [userInfo]);
+
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOut}>
       <ParentTemplate size="s">
