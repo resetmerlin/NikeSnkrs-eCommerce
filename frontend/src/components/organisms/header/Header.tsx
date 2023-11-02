@@ -1,9 +1,9 @@
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
-import { CartButton, LoginButton } from '../../molecules';
+import { CartButton, LoginButton, UserButton } from '../../molecules';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ userInfo, deleteUserInfo }) {
   return (
     <div className="header" id="header">
       <div className="header__left">
@@ -30,9 +30,14 @@ export default function Header() {
         <Link to="/cart">
           <CartButton />
         </Link>
-        <Link to="/login">
-          <LoginButton />
-        </Link>
+
+        {userInfo?.length !== 0 ? (
+          <UserButton deleteUserInfo={deleteUserInfo} />
+        ) : (
+          <Link to="/login">
+            <LoginButton />
+          </Link>
+        )}
       </div>
     </div>
   );
