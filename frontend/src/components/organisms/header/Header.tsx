@@ -1,9 +1,15 @@
+import { IUser } from '../../../types/dto';
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
 import { CartButton, LoginButton, UserButton } from '../../molecules';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 
-export default function Header({ userInfo, deleteUserInfo }) {
+type IProps = {
+  userInfo: IUser[];
+  deleteUserInfo: () => void;
+};
+
+export default function Header({ userInfo, deleteUserInfo }: IProps) {
   return (
     <div className="header" id="header">
       <div className="header__left">
@@ -31,7 +37,7 @@ export default function Header({ userInfo, deleteUserInfo }) {
           <CartButton />
         </Link>
 
-        {userInfo?.length !== 0 ? (
+        {userInfo && userInfo.length > 0 ? (
           <UserButton deleteUserInfo={deleteUserInfo} />
         ) : (
           <Link to="/login">
