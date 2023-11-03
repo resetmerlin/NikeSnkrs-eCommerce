@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { userInfoAdded } from '../features/user/userReducers';
+import { userInfoAdded } from '../features/user/userInfoSlice';
 import { AppDispatch } from '../store';
 import { ICarts, IUser } from '../types/dto';
 import { cartAdded } from '../features/cart/cartSlice';

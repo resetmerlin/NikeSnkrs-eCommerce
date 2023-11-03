@@ -1,4 +1,4 @@
-import { userInfoDeleted } from '../features/user/userReducers';
+import { userInfoDeleted } from '../features/user/userInfoSlice';
 import { useAppDispatch } from './hooks';
 
 /** Logout; Delete userInfo state  */

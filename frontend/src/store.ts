@@ -3,7 +3,7 @@ import { api } from './features/api/apiSlice';
 import { productSlice } from './features/product/productSlice';
 import authReducers from './features/auth/authReducers';
 import { cartSlice } from './features/cart/cartSlice';
-import { userInfoSlice } from './features/user/userReducers';
+import { userInfoSlice } from './features/user/userInfoSlice';
 
 export const store = configureStore({
   reducer: {

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IProduct, IProductId, IProducts } from '../../types/dto';
 import { cartAdded } from '../cart/cartSlice';
-import { userInfoAdded } from '../user/userReducers';
+import { userInfoAdded } from '../user/userInfoSlice';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
