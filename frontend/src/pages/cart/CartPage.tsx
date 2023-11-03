@@ -69,9 +69,12 @@ function CartPage() {
     currentDate: dateFormat.format(date),
     qty: cart.length,
   };
+  const logOutHandler = () => {
+    logOut(dispatch);
+  };
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOut}>
+    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="m">
         <ChildTemplate position="topLeft" size="m">
           <AtomicTitle size="xs">Cart</AtomicTitle>

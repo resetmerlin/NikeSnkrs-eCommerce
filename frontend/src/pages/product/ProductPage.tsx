@@ -5,7 +5,7 @@ import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { IProduct, IUser } from '../../types/dto';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
 
@@ -13,6 +13,7 @@ export type ItemColRef = HTMLAnchorElement;
 
 export default function ProductPage() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const userInfo: IUser[] = useAppSelector(selectUser);
 
   const { id: paramId } = useParams();
@@ -82,8 +83,12 @@ export default function ProductPage() {
     }
   }, [goNextProductPage, isObserving]);
 
+  const logOutHandler = () => {
+    logOut(dispatch);
+  };
+
   return (
-    <LayoutHeader logOut={logOut} userInfo={userInfo}>
+    <LayoutHeader logOut={logOutHandler} userInfo={userInfo}>
       <ParentTemplate size="full">
         <ChildTemplate position="left" size="full">
           <ItemInfoEvents

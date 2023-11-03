@@ -18,8 +18,12 @@ function HomePage() {
 
   localUserToState(userInfo, dispatch);
 
+  const logOutHandler = () => {
+    logOut(dispatch);
+  };
+
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOut}>
+    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="s">
           <Intro />
