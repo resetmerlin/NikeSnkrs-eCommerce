@@ -13,6 +13,7 @@ import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
 import { goToLogin, localCartToState, logOut } from '../../hooks';
+import { selectUser } from '../../features/user/userInfoSlice';
 
 function CartPage() {
   const { id } = useParams();
@@ -26,8 +27,7 @@ function CartPage() {
   const [addToCart] = useAddToCartMutation();
 
   const cart: ICarts = useAppSelector(selectCart);
-
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const userInfo = useAppSelector(selectUser);
 
   /** Delete product on cart */
   const deletOnCart = (product: ICart['product']) =>
