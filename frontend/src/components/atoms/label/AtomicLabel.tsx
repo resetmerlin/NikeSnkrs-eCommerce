@@ -1,7 +1,15 @@
 import { TNormalElementProps } from '../../../types';
 
 interface IProps extends TNormalElementProps<HTMLLabelElement> {
-  htmlFor?: 'userPassword' | 'userEmail' | 'userName' | 'userConfirmPassword';
+  htmlFor:
+    | 'userPassword'
+    | 'userEmail'
+    | 'userName'
+    | 'userConfirmPassword'
+    | 'postalCode'
+    | 'address'
+    | 'specificAddress'
+    | 'referenceItem';
 }
 export default function Label({
   children,
