@@ -5,7 +5,7 @@ import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { IProduct, IUser } from '../../types/dto';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { logOut } from '../../hooks';
 
 export type ItemColRef = HTMLAnchorElement;
