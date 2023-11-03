@@ -14,7 +14,8 @@ export default function CartColumn({ cartProduct, deletOnCart }: IProps) {
         <img
           src={`./products/${cartProduct?.product}.png`}
           onError={(e) => {
-            e.target.src = `../products/${cartProduct?.product}.png`;
+            const target = e.target as HTMLImageElement;
+            target.src = `../products/${cartProduct?.product}.png`;
           }}
           alt="cart-product"
         />
