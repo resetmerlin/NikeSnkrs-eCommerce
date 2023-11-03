@@ -9,7 +9,7 @@ import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { cartDeleted } from '../../features/cart/cartSlice';
+import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
 import { goToLogin, localCartToState, logOut } from '../../hooks';
@@ -25,7 +25,8 @@ function CartPage() {
   /** fetch chosen product */
   const [addToCart] = useAddToCartMutation();
 
-  const cartProducts: ICarts = useAppSelector((state) => state.carts);
+  const cart: ICarts = useAppSelector(selectCart);
+
   const userInfo = useAppSelector((state) => state.userInfo);
 
   /** Delete product on cart */
@@ -43,13 +44,13 @@ function CartPage() {
   goToLogin(userInfo, navigate);
 
   /**  Put into cart if no product in cart but in localStorage, */
-  localCartToState(cartProducts, dispatch);
+  localCartToState(cart, dispatch);
 
   const taxPrice = 150;
 
   const shippingPrice = 3000;
 
-  const productPrice = cartProducts
+  const productPrice = cart
     .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
     .toFixed(1);
 
@@ -66,7 +67,7 @@ function CartPage() {
     totalPrice: +productPrice - taxPrice - shippingPrice,
     paymentMethod: 'paypal',
     currentDate: dateFormat.format(date),
-    qty: cartProducts.length,
+    qty: cart.length,
   };
 
   return (
@@ -76,7 +77,7 @@ function CartPage() {
           <AtomicTitle size="xs">Cart</AtomicTitle>
         </ChildTemplate>
         <ChildTemplate position="centerLeft" size="m">
-          <Cart cartProducts={cartProducts} deletOnCart={deletOnCart} />
+          <Cart cartProducts={cart} deletOnCart={deletOnCart} />
         </ChildTemplate>
 
         <ChildTemplate position="right" size="m">
