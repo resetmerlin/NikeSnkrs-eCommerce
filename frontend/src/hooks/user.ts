@@ -1,9 +1,7 @@
 import { userInfoDeleted } from '../features/user/userInfoSlice';
-import { useAppDispatch } from './hooks';
+import { AppDispatch } from '../store';
 
 /** Logout; Delete userInfo state  */
-export function logOut() {
-  const dispatch = useAppDispatch();
-
+export function logOut(dispatch: AppDispatch) {
   dispatch(userInfoDeleted());
 }
