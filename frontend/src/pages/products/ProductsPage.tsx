@@ -6,13 +6,14 @@ import {
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { ItemLists } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
+import { selectUser } from '../../features/user/userInfoSlice';
 import { logOut } from '../../hooks';
 import { useAppSelector } from '../../hooks/hooks';
 
 export default function ProductsPage() {
   const { data } = useGetProductsQuery();
 
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const userInfo = useAppSelector(selectUser);
 
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOut}>

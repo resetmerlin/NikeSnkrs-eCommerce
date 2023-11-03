@@ -7,12 +7,14 @@ import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { IProduct, IUser } from '../../types/dto';
 import { useAppSelector } from '../../hooks/hooks';
 import { logOut } from '../../hooks';
+import { selectUser } from '../../features/user/userInfoSlice';
 
 export type ItemColRef = HTMLAnchorElement;
 
 export default function ProductPage() {
   const navigate = useNavigate();
-  const userInfo: IUser[] = useAppSelector((state) => state.userInfo);
+  const userInfo: IUser[] = useAppSelector(selectUser);
+
   const { id: paramId } = useParams();
   const { data: products } = useGetProductsQuery();
   const columnRef = useRef<ItemColRef | null>(null);

@@ -5,6 +5,7 @@ import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSke
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { localUserToState, logOut } from '../../hooks';
+import { selectUser } from '../../features/user/userInfoSlice';
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ function HomePage() {
   /** 3 products */
   const cardProducts = data && [...data]?.slice(0, 3);
 
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const userInfo = useAppSelector(selectUser);
 
   localUserToState(userInfo, dispatch);
 
