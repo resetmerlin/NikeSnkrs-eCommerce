@@ -7,3 +7,5 @@ export * from './userMemberEvents';
 export * from './background';
 export * from './cart';
 export * from './intro';
+export * from './userInfo';
+export * from './userAddress';
