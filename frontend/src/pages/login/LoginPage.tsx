@@ -3,12 +3,12 @@ import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
 import { LoginForm } from '../../components/molecules';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
+import { loginSchema } from '../../components/schema';
 
 export type FormData = {
   userEmail: string;
@@ -33,14 +33,6 @@ export default function LoginPage() {
       password: data.userPassword,
     });
   };
-
-  const loginSchema = yup.object().shape({
-    userEmail: yup
-      .string()
-      .required('Please write your email')
-      .matches(/^[^\s@]+@example\.com$/, '@example.com required'),
-    userPassword: yup.string().required('Please write your password'),
-  });
 
   const methods: UseFormReturn<FormData> = useForm({
     mode: 'onChange',
