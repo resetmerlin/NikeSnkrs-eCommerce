@@ -109,22 +109,16 @@ export const api = createApi({
         dispatch(userInfoAdded(data));
       },
     }),
-    getUser: build.mutation<IUser, { _id: string; token: string }>({
+    getUser: build.mutation<IUser, { token: string }>({
       query: (user) => {
         return {
-          url: `/users/${user?._id}`,
+          url: `/users/profile`,
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user?.token}`,
           },
         };
-      },
-      async onQueryStarted(_, api) {
-        const { dispatch, queryFulfilled } = api;
-        const { data } = await queryFulfilled;
-
-        console.log(data);
       },
     }),
   }),
