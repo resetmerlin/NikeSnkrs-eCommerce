@@ -14,7 +14,7 @@ export type ItemColRef = HTMLAnchorElement;
 export default function ProductPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const userInfo: IUser[] = useAppSelector(selectUser);
+  const userInfo: IUser = useAppSelector(selectUser);
 
   const { id: paramId } = useParams();
   const { data: products } = useGetProductsQuery();

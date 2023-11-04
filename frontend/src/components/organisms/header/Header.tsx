@@ -5,7 +5,7 @@ import './Header.scss';
 import { Link } from 'react-router-dom';
 
 type IProps = {
-  userInfo: IUser[];
+  userInfo: IUser;
   logOut: () => void;
 };
 
@@ -37,7 +37,7 @@ export default function Header({ userInfo, logOut }: IProps) {
           <CartButton />
         </Link>
 
-        {userInfo && userInfo.length > 0 ? (
+        {userInfo && userInfo.token ? (
           <UserButton logOut={logOut} />
         ) : (
           <Link to="/login">

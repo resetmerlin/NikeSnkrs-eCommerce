@@ -3,7 +3,7 @@ import { Header } from '../../organisms';
 import { IUser } from '../../../types/dto';
 
 interface IProps extends PropsWithChildren {
-  userInfo: IUser[];
+  userInfo: IUser;
   logOut: () => void;
 }
 
