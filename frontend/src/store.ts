@@ -1,18 +1,28 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from './features/api/apiSlice';
 import { productSlice } from './features/product/productSlice';
-import authReducers from './features/auth/authReducers';
 import { cartSlice } from './features/cart/cartSlice';
 import { userInfoSlice } from './features/user/userInfoSlice';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-export const store = configureStore({
-  reducer: {
-    [api.reducerPath]: api.reducer,
-    products: productSlice.reducer,
-    carts: cartSlice.reducer,
-    auth: authReducers,
-    userInfo: userInfoSlice.reducer,
-  },
+const rootReducer = combineReducers({
+  [api.reducerPath]: api.reducer,
+  products: productSlice.reducer,
+  carts: cartSlice.reducer,
+  userInfo: userInfoSlice.reducer,
+});
+
+// Persist configuration
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+  whitelist: ['userInfo', 'carts'], // Add the slice names you want to persist
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+const store = configureStore({
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
 });
@@ -21,3 +31,7 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+
+const persistor = persistStore(store);
+
+export { store, persistor };
