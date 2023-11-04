@@ -46,7 +46,7 @@ export default function LoginPage() {
   } = methods;
 
   useEffect(() => {
-    if (userInfo.length !== 0 || localStorage.getItem('userInfo')) {
+    if (userInfo.token && userInfo._id) {
       navigate('/');
     }
   }, [userInfo]);
