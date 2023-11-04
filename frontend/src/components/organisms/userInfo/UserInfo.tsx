@@ -7,6 +7,9 @@ import {
   AtomicTitle,
 } from '../../atoms';
 import './UserInfo.scss';
+import { IUser } from '../../../types/dto';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 type IProps = {
   profileSubmit: (data: ProfileData) => void;
@@ -14,6 +17,13 @@ type IProps = {
   register: UseFormReturn<ProfileData>['register'];
   handleSubmit: UseFormReturn<ProfileData>['handleSubmit'];
   errors: UseFormReturn<ProfileData>['formState']['errors'];
+  data: { message: string };
+  error:
+    | { data: { message: string } }
+    | undefined
+    | FetchBaseQueryError
+    | SerializedError;
+  userInfo: IUser | undefined;
 };
 
 export default function UserInfo({
@@ -23,6 +33,7 @@ export default function UserInfo({
   errors,
   data,
   error,
+  userInfo,
 }: IProps) {
   return (
     <form className="userInfo" onSubmit={handleSubmit(profileSubmit)}>
@@ -32,13 +43,23 @@ export default function UserInfo({
         {error && <p>{error?.data?.message}</p>}
       </div>
       <AtomicLabel htmlFor="userEmail">Enter Email</AtomicLabel>
-      <AtomicInput type="email" name="userEmail" register={register} />
+      <AtomicInput
+        type="email"
+        name="userEmail"
+        register={register}
+        placeholder={userInfo?.email}
+      />
 
       {errors?.['userEmail'] && <p>{errors?.['userEmail'].message}</p>}
 
       <AtomicLabel htmlFor="userName">Enter name</AtomicLabel>
 
-      <AtomicInput type="name" name="userName" register={register} />
+      <AtomicInput
+        type="name"
+        name="userName"
+        register={register}
+        placeholder={userInfo?.name}
+      />
 
       {errors?.['userName'] && <p>{errors?.['userName'].message}</p>}
 
