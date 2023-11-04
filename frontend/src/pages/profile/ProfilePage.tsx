@@ -7,7 +7,11 @@ import { UserAddress, UserInfo } from '../../components/organisms';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../components/schema';
-import { useUserChangedMutation } from '../../features/api/apiSlice';
+import {
+  useGetUserMutation,
+  useUserChangedMutation,
+} from '../../features/api/apiSlice';
+import { useEffect } from 'react';
 
 export type ProfileData = {
   userEmail: string;
@@ -23,6 +27,7 @@ export default function ProfilePage() {
   };
 
   const [userChange, { error, data }] = useUserChangedMutation();
+  const [getUser] = useGetUserMutation();
 
   const methods = useForm({
     mode: 'onChange',
@@ -49,6 +54,15 @@ export default function ProfilePage() {
   } = methods;
   localUserToState(userInfo, dispatch);
 
+  useEffect(() => {
+    if (userInfo[0]?._id) {
+      const user = {
+        _id: userInfo[0]._id,
+        token: userInfo[0].token,
+      };
+      getUser(user);
+    }
+  }, [userInfo]);
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
