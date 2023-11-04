@@ -21,11 +21,15 @@ export default function UserInfo({
   handleSubmit,
   profileSubmit,
   errors,
+  data,
+  error,
 }: IProps) {
   return (
     <form className="userInfo" onSubmit={handleSubmit(profileSubmit)}>
       <div>
         <AtomicTitle size="xs">User Info:</AtomicTitle>
+        {data && <p className="userInfo__success">Updated Successfully!</p>}
+        {error && <p>{error?.data?.message}</p>}
       </div>
       <AtomicLabel htmlFor="userEmail">Enter Email</AtomicLabel>
       <AtomicInput type="email" name="userEmail" register={register} />
