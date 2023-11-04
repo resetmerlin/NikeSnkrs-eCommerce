@@ -1,24 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../types/dto';
 
-const initialState: any[] = [];
+const initialState = {};
 
 export const userInfoSlice = createSlice({
   name: 'userInfo',
-  initialState: initialState as IUser[],
+  initialState: initialState as IUser,
   reducers: {
     userInfoAdded(state, action) {
-      const data = action.payload;
-
-      if (state.length == 0) {
-        state.push(data);
-        localStorage.setItem('userInfo', JSON.stringify(state));
+      if (state) {
+        return Object.assign({}, state, action.payload);
       }
     },
-    userInfoDeleted: () => {
-      localStorage.removeItem('userInfo');
-
-      return initialState;
+    userInfoDeleted: (state) => {
+      return delete state.userInfo;
     },
   },
 });
