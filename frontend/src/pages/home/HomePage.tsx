@@ -4,7 +4,7 @@ import { CardLists, Intro } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { localUserToState, logOut } from '../../hooks';
+import { logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
 
 function HomePage() {
@@ -15,8 +15,6 @@ function HomePage() {
   const cardProducts = data && [...data]?.slice(0, 3);
 
   const userInfo = useAppSelector(selectUser);
-
-  localUserToState(userInfo, dispatch);
 
   const logOutHandler = () => {
     logOut(dispatch);
