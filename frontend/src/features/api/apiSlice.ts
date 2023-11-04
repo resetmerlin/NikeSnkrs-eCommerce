@@ -109,6 +109,24 @@ export const api = createApi({
         dispatch(userInfoAdded(data));
       },
     }),
+    getUser: build.mutation<IUser, { _id: string; token: string }>({
+      query: (user) => {
+        return {
+          url: `/users/${user?._id}`,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user?.token}`,
+          },
+        };
+      },
+      async onQueryStarted(_, api) {
+        const { dispatch, queryFulfilled } = api;
+        const { data } = await queryFulfilled;
+
+        console.log(data);
+      },
+    }),
   }),
 });
 
@@ -119,7 +137,5 @@ export const {
   useUserAuthenticatedMutation,
   useUserAuthorizedMutation,
   useUserChangedMutation,
+  useGetUserMutation,
 } = api;
-function getState() {
-  throw new Error('Function not implemented.');
-}
