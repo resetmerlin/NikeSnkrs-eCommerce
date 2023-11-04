@@ -3,6 +3,11 @@
   flex-direction: column;
   width: 48rem;
   font-size: 2rem;
+
+  &__success {
+    font-size: 1.4rem;
+    color: blue !important;
+  }
   p {
     font-size: 1.4rem;
     color: red;
@@ -11,6 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
   input {
     height: 5rem;
