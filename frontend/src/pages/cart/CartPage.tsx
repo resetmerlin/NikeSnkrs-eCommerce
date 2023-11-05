@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
-import { goToLogin, localCartToState, logOut } from '../../hooks';
+import { goToLogin, logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
 
 function CartPage() {
@@ -28,6 +28,7 @@ function CartPage() {
 
   const cart: ICarts = useAppSelector(selectCart);
   const userInfo = useAppSelector(selectUser);
+  const address = useAppSelector((state) => state.addresss);
 
   /** Delete product on cart */
   const deletOnCart = (product: ICart['product']) =>
@@ -42,9 +43,6 @@ function CartPage() {
 
   /** Check user auth, if no auth go to login page */
   goToLogin(userInfo, navigate);
-
-  /**  Put into cart if no product in cart but in localStorage, */
-  localCartToState(cart, dispatch);
 
   const taxPrice = 150;
 
@@ -88,7 +86,7 @@ function CartPage() {
         </ChildTemplate>
 
         <ChildTemplate position="bottomLeft" size="m">
-          <CartAddress />
+          <CartAddress address={address} />
         </ChildTemplate>
       </ParentTemplate>
     </LayoutHeader>
