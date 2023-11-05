@@ -5,12 +5,14 @@ import { cartSlice } from './features/cart/cartSlice';
 import { userInfoSlice } from './features/user/userInfoSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { addressSlice } from './features/address/addressSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   products: productSlice.reducer,
   carts: cartSlice.reducer,
   userInfo: userInfoSlice.reducer,
+  addresss: addressSlice.reducer,
 });
 
 // Persist configuration
@@ -18,7 +20,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['userInfo', 'carts'], // Add the slice names you want to persist
+  whitelist: ['userInfo', 'carts', 'addresss'], // Add the slice names you want to persist
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
