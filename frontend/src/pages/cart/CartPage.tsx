@@ -9,10 +9,11 @@ import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
 import { useAddToCartMutation } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { cartAdded, cartDeleted } from '../../features/cart/cartReducers';
+import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
 import { ICart, ICarts } from '../../types/dto';
 import { useEffect } from 'react';
-import { userInfoDeleted } from '../../features/user/userReducers';
+import { goToLogin, logOut } from '../../hooks';
+import { selectUser } from '../../features/user/userInfoSlice';
 
 function CartPage() {
   const { id } = useParams();
@@ -25,16 +26,13 @@ function CartPage() {
   /** fetch chosen product */
   const [addToCart] = useAddToCartMutation();
 
-  const cartProducts: ICarts = useAppSelector((state) => state.carts);
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const cart: ICarts = useAppSelector(selectCart);
+  const userInfo = useAppSelector(selectUser);
+  const address = useAppSelector((state) => state.addresss);
 
   /** Delete product on cart */
   const deletOnCart = (product: ICart['product']) =>
     dispatch(cartDeleted(product));
-
-  const logOut = () => {
-    dispatch(userInfoDeleted());
-  };
 
   /** Fetch if id, qty exists */
   useEffect(() => {
@@ -43,32 +41,14 @@ function CartPage() {
     }
   }, [id, qty]);
 
-  /** Check user Login else go to login page */
-  useEffect(() => {
-    if (!localStorage.getItem('userInfo') && userInfo.length == 0) {
-      navigate('/login');
-    }
-  }, [userInfo]);
-
-  /**  Put into cart if no product in cart but in localStorage, */
-  useEffect(() => {
-    if (cartProducts.length == 0 && localStorage.getItem('cartItems')) {
-      const cartItems = localStorage.getItem('cartItems');
-
-      if (cartItems) {
-        const parsedItems = JSON.parse(cartItems);
-        if (parsedItems[0]) {
-          dispatch(cartAdded(parsedItems[0]));
-        }
-      }
-    }
-  }, [cartProducts]);
+  /** Check user auth, if no auth go to login page */
+  goToLogin(userInfo, navigate);
 
   const taxPrice = 150;
 
   const shippingPrice = 3000;
 
-  const productPrice = cartProducts
+  const productPrice = cart
     .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
     .toFixed(1);
 
@@ -85,17 +65,20 @@ function CartPage() {
     totalPrice: +productPrice - taxPrice - shippingPrice,
     paymentMethod: 'paypal',
     currentDate: dateFormat.format(date),
-    qty: cartProducts.length,
+    qty: cart.length,
+  };
+  const logOutHandler = () => {
+    logOut(dispatch);
   };
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOut}>
+    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="m">
         <ChildTemplate position="topLeft" size="m">
           <AtomicTitle size="xs">Cart</AtomicTitle>
         </ChildTemplate>
         <ChildTemplate position="centerLeft" size="m">
-          <Cart cartProducts={cartProducts} deletOnCart={deletOnCart} />
+          <Cart cartProducts={cart} deletOnCart={deletOnCart} />
         </ChildTemplate>
 
         <ChildTemplate position="right" size="m">
@@ -103,7 +86,7 @@ function CartPage() {
         </ChildTemplate>
 
         <ChildTemplate position="bottomLeft" size="m">
-          <CartAddress />
+          <CartAddress address={address} />
         </ChildTemplate>
       </ParentTemplate>
     </LayoutHeader>

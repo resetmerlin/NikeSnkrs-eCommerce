@@ -15,6 +15,14 @@
   grid-area: 3/2/9/8;
 }
 
+.child-template-w-s-centerRight {
+  grid-area: 3/5/8/7;
+}
+
+.child-template-w-s-centerLeft {
+  grid-area: 3/2/3/5;
+}
+
 // w-full children
 .child-template-w-full-right {
   grid-area: 11/9/ 1/8;

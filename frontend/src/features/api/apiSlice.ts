@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProduct, IProductId, IProducts } from '../../types/dto';
-import { cartAdded } from '../cart/cartReducers';
-import { userInfoAdded } from '../user/userReducers';
+import { IProduct, IProductId, IProducts, IUser } from '../../types/dto';
+import { cartAdded } from '../cart/cartSlice';
+import { userInfoAdded } from '../user/userInfoSlice';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -35,7 +35,7 @@ export const api = createApi({
       },
     }),
     userAuthenticated: build.mutation<
-      IProductId,
+      IUser,
       { email: string; password: string }
     >({
       query: ({ email, password }) => ({
@@ -54,7 +54,7 @@ export const api = createApi({
       },
     }),
     userAuthorized: build.mutation<
-      IProductId,
+      IUser,
       { name: string; email: string; password: string }
     >({
       query: (user) => ({
@@ -76,6 +76,51 @@ export const api = createApi({
         dispatch(userInfoAdded(data));
       },
     }),
+    userChanged: build.mutation<
+      IUser,
+      {
+        _id: string;
+        name: string;
+        email: string;
+        password: string;
+        token: string;
+      }
+    >({
+      query: (user) => {
+        return {
+          url: `/users/profile`,
+          method: 'PUT',
+          body: JSON.stringify({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user?.token}`,
+          },
+        };
+      },
+      async onQueryStarted(_, api) {
+        const { dispatch, queryFulfilled } = api;
+        const { data } = await queryFulfilled;
+
+        dispatch(userInfoAdded(data));
+      },
+    }),
+    getUser: build.mutation<IUser, { token: string }>({
+      query: (user) => {
+        return {
+          url: `/users/profile`,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user?.token}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -85,4 +130,6 @@ export const {
   useAddToCartMutation,
   useUserAuthenticatedMutation,
   useUserAuthorizedMutation,
+  useUserChangedMutation,
+  useGetUserMutation,
 } = api;

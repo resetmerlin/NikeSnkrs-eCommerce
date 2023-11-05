@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const cartSlice = createSlice({
   name: 'carts',
@@ -17,7 +17,6 @@ export const cartSlice = createSlice({
       } else {
         state.push(data);
       }
-      localStorage.setItem('cartItems', JSON.stringify(state));
     },
     cartDeleted(state, action) {
       const indexToDelete = state.findIndex(
@@ -28,17 +27,11 @@ export const cartSlice = createSlice({
       if (indexToDelete !== -1) {
         state.splice(indexToDelete, 1);
       }
-
-      localStorage.setItem('cartItems', JSON.stringify(state));
-    },
-    cartAddressAdded(_, action) {
-      const { data } = action.payload;
-
-      localStorage.setItem('shippingAddress', JSON.stringify(data));
     },
   },
 });
 
 export const { cartAdded, cartDeleted, cartAddressAdded } = cartSlice.actions;
+export const selectCart = (state) => state.carts;
 
 export default cartSlice.reducer;

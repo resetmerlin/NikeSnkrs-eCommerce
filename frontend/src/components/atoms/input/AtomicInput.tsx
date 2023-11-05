@@ -7,6 +7,10 @@ type FormValues = {
   userPassword: string;
   userName?: string;
   userConfirmPassword?: string;
+  postalCode: string;
+  address: string;
+  specificAddress: string;
+  referenceItem: string;
 };
 
 interface IProps extends TNormalElementProps<HTMLInputElement> {
