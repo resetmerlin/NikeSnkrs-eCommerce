@@ -30,7 +30,14 @@ const router = createBrowserRouter([
     ],
   },
   { path: '/profile', element: <ProfilePage /> },
-  { path: '/order', element: <OrderPage /> },
+  {
+    path: '/order',
+    element: <OrderPage />,
+    children: [
+      { path: ':id', element: <OrderPage /> },
+      { path: '', element: <OrderPage /> },
+    ],
+  },
 ]);
 
 export default router;
