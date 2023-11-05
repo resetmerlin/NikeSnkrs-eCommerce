@@ -1,7 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProduct, IProductId, IProducts, IUser } from '../../types/dto';
+import {
+  ICarts,
+  IOrder,
+  IProduct,
+  IProductId,
+  IProducts,
+  IUser,
+} from '../../types/dto';
 import { cartAdded } from '../cart/cartSlice';
 import { userInfoAdded } from '../user/userInfoSlice';
+import { orderAdded } from '../order/orderSlice';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -121,6 +129,49 @@ export const api = createApi({
         };
       },
     }),
+    addToOrder: build.mutation<
+      IOrder,
+      {
+        email: string;
+        name: string;
+        carts: ICarts;
+        shippingAddress: string;
+        paymentMethod: string;
+        token: string;
+        productPrice: number;
+        taxPrice: number;
+        shippingPrice: number;
+        totalPrice: number;
+      }
+    >({
+      query: (order) => {
+        return {
+          url: `/orders`,
+          method: 'POST',
+          body: JSON.stringify({
+            email: order.email,
+            name: order.name,
+            orderItems: order.carts,
+            shippingAddress: order.shippingAddress,
+            paymentMethod: order.paymentMethod,
+            itemsPrice: order.productPrice,
+            taxPrice: order.taxPrice,
+            shippingPrice: order.shippingPrice,
+            totalPrice: order.totalPrice,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${order?.token}`,
+          },
+        };
+      },
+      async onQueryStarted(_, api) {
+        const { dispatch, queryFulfilled } = api;
+        const { data } = await queryFulfilled;
+
+        dispatch(orderAdded(data));
+      },
+    }),
   }),
 });
 
@@ -132,4 +183,5 @@ export const {
   useUserAuthorizedMutation,
   useUserChangedMutation,
   useGetUserMutation,
+  useAddToOrderMutation,
 } = api;

@@ -6,6 +6,7 @@ import { userInfoSlice } from './features/user/userInfoSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { addressSlice } from './features/address/addressSlice';
+import { orderSlice } from './features/order/orderSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   carts: cartSlice.reducer,
   userInfo: userInfoSlice.reducer,
   addresss: addressSlice.reducer,
+  orders: orderSlice.reducer,
 });
 
 // Persist configuration

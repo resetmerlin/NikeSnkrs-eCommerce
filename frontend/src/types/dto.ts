@@ -38,3 +38,26 @@ export interface ICart
 export type ICarts = ICart[];
 
 export type IUsers = IUser[]; // An array of user objects
+
+export type IAddress = {
+  address: string;
+};
+
+export type IOrder = {
+  shippingAddress: IAddress;
+  _id: string;
+  user: IUser;
+  email: Pick<IUser, 'email'>;
+  name: Pick<IUser, 'name'>;
+  orderItems: ICart;
+  paymentMethod: string;
+  productPrice: number;
+  taxPrice: number;
+  shippingPrice: number;
+  totalPrice: string;
+  isPaid: boolean;
+  isDelivered: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
