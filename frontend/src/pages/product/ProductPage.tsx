@@ -8,6 +8,7 @@ import { IProduct, IUser } from '../../types/dto';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
+import { ProductImage } from '../../components/molecules';
 
 export type ItemColRef = HTMLAnchorElement;
 
@@ -99,6 +100,7 @@ export default function ProductPage() {
         </ChildTemplate>
         <ChildTemplate position="centerRight" size="full">
           {/* <Object model={id?.id} /> */}
+          <ProductImage productId={product?._id} />
         </ChildTemplate>
         <ChildTemplate position="right" size="full">
           <ItemNav
