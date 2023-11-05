@@ -9,20 +9,26 @@ import {
 import './LoginForm.scss';
 import { UseFormReturn } from 'react-hook-form';
 import { FormData } from '../../../../pages/login/LoginPage';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 type IProps = {
   loginSubmit: (data: FormData) => void;
-  LoginError: string;
+  loginError:
+    | { data: { message: string } }
+    | FetchBaseQueryError
+    | SerializedError
+    | undefined;
   register: UseFormReturn<FormData>['register'];
   handleSubmit: UseFormReturn<FormData>['handleSubmit'];
-  formErrors: UseFormReturn<FormData>['formState']['errors'];
+  inputErrors: UseFormReturn<FormData>['formState']['errors'];
 };
 export default function LoginForm({
-  formErrors,
+  inputErrors,
   loginSubmit,
   handleSubmit,
   register,
-  LoginError,
+  loginError,
 }: IProps) {
   return (
     <AtomicForm onSubmit={handleSubmit(loginSubmit)}>
@@ -31,7 +37,7 @@ export default function LoginForm({
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
-        {LoginError && <p>{LoginError}</p>}
+        {loginError?.data?.message && <p>{loginError?.data?.message}</p>}
       </div>
       <div className="form__inputs-wrap">
         <AtomicLabel htmlFor="userEmail">
@@ -45,8 +51,8 @@ export default function LoginForm({
           register={register}
         />
 
-        {formErrors?.['userEmail'] && (
-          <p>{formErrors?.['userEmail'].message}</p>
+        {inputErrors?.['userEmail'] && (
+          <p>{inputErrors?.['userEmail'].message}</p>
         )}
 
         <AtomicLabel htmlFor="userPassword">
@@ -60,8 +66,8 @@ export default function LoginForm({
           register={register}
         />
 
-        {formErrors?.['userPassword'] && (
-          <p>{formErrors?.['userPassword'].message}</p>
+        {inputErrors?.['userPassword'] && (
+          <p>{inputErrors?.['userPassword'].message}</p>
         )}
       </div>
       <AtomicButton size="m" type="submit">

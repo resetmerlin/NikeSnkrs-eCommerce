@@ -21,10 +21,8 @@ export default function LoginPage() {
 
   const [
     userAuthenticate, // authenticate mutator
-    { error }, // This is the destructured mutation result
+    { error: loginError },
   ] = useUserAuthenticatedMutation();
-
-  const errorMessage = error?.data?.message;
 
   const loginSubmit = (data: FormData) => {
     userAuthenticate({
@@ -36,12 +34,13 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors: formErrors },
+    formState: { errors: inputErrors },
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(loginSchema),
   });
 
+  // Go to home page after login
   useEffect(() => {
     if (userInfo.token && userInfo._id) {
       navigate('/');
@@ -57,11 +56,11 @@ export default function LoginPage() {
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
             <LoginForm
-              formErrors={formErrors}
+              inputErrors={inputErrors}
               handleSubmit={handleSubmit}
               loginSubmit={loginSubmit}
               register={register}
-              LoginError={errorMessage}
+              loginError={loginError}
             />
           </UserMemberEvents>
         </ChildTemplate>
