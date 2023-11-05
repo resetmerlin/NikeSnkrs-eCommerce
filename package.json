@@ -1,0 +1,41 @@
+{
+  "name": "nikesnkrs-ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm run dev --prefix frontend",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:export": "node backend/seeder",
+    "data:export-user": "node backend/seeder -user",
+    "data:export-product": "node backend/seeder -product"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resetmerlin/NikeSnkrs-eCommerce.git"
+  },
+  "author": "resetmerlin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/resetmerlin/NikeSnkrs-eCommerce/issues"
+  },
+  "homepage": "https://github.com/resetmerlin/NikeSnkrs-eCommerce#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^2.0.22"
+  }
+}
