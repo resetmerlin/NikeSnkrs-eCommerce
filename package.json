@@ -12,7 +12,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:export": "node backend/seeder",
     "data:export-user": "node backend/seeder -user",
-    "data:export-product": "node backend/seeder -product"
+    "data:export-product": "node backend/seeder -product",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",
