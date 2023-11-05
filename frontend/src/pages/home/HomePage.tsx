@@ -9,12 +9,12 @@ import { selectUser } from '../../features/user/userInfoSlice';
 
 function HomePage() {
   const dispatch = useAppDispatch();
-  const { data, isLoading } = useGetProductsQuery();
+  const userInfo = useAppSelector(selectUser);
+
+  const { data: products, isLoading } = useGetProductsQuery();
 
   /** 3 products */
-  const threeProducts = data && [...data]?.slice(0, 3);
-
-  const userInfo = useAppSelector(selectUser);
+  const threeProducts = products && [...products]?.slice(0, 3);
 
   const logOutHandler = () => {
     logOut(dispatch);
