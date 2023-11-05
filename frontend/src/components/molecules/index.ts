@@ -8,6 +8,7 @@ export * from './form';
 export * from './cartColumn';
 export * from './cartSummary';
 export * from './cartAddress';
+export * from './orderColumn';
 
 // export * from './button';
 // export * from './intro';
