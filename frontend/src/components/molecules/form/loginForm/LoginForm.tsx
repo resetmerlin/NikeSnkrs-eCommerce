@@ -14,11 +14,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 type IProps = {
   loginSubmit: (data: FormData) => void;
-  loginError:
-    | { data: { message: string } }
-    | FetchBaseQueryError
-    | SerializedError
-    | undefined;
+  loginError: FetchBaseQueryError | SerializedError | undefined;
   register: UseFormReturn<FormData>['register'];
   handleSubmit: UseFormReturn<FormData>['handleSubmit'];
   inputErrors: UseFormReturn<FormData>['formState']['errors'];
@@ -37,7 +33,9 @@ export default function LoginForm({
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
-        {loginError?.data?.message && <p>{loginError?.data?.message}</p>}
+        {loginError && 'data' in loginError && (
+          <p>{(loginError as { data: { message: string } })?.data?.message}</p>
+        )}
       </div>
       <div className="form__inputs-wrap">
         <AtomicLabel htmlFor="userEmail">
