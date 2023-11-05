@@ -30,3 +30,6 @@ To install the project and its dependencies, follow these steps:
     password: 123456
 ```
 2. you get register just using @example.com. There is no heavy validation on it
+
+### Pattern that I used 
+- [Atomic design pattern](https://github.com/danilowoz/react-atomic-design)
