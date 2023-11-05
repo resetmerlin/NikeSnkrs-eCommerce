@@ -25,9 +25,6 @@ app.use('/api/orders', orderRoutes);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
-app.get('/', (req, res) => {
-  res.send('Api is running...');
-});
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
