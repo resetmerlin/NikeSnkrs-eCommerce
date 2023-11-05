@@ -16,16 +16,15 @@ export type FormData = {
 };
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const userInfo = useAppSelector((state) => state.userInfo);
+
   const [
-    userAuthenticate, // This is the mutation trigger
+    userAuthenticate, // authenticate mutator
     { error }, // This is the destructured mutation result
   ] = useUserAuthenticatedMutation();
 
-  const navigate = useNavigate();
-
   const errorMessage = error?.data?.message;
-
-  const userInfo = useAppSelector((state) => state.userInfo);
 
   const loginSubmit = (data: FormData) => {
     userAuthenticate({
@@ -34,16 +33,14 @@ export default function LoginPage() {
     });
   };
 
-  const methods: UseFormReturn<FormData> = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(loginSchema),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = methods;
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(loginSchema),
+  });
 
   useEffect(() => {
     if (userInfo.token && userInfo._id) {
@@ -59,15 +56,13 @@ export default function LoginPage() {
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
-            <FormProvider {...methods}>
-              <LoginForm
-                errors={errors}
-                handleSubmit={handleSubmit}
-                loginSubmit={loginSubmit}
-                register={register}
-                LoginError={errorMessage}
-              />
-            </FormProvider>
+            <LoginForm
+              errors={errors}
+              handleSubmit={handleSubmit}
+              loginSubmit={loginSubmit}
+              register={register}
+              LoginError={errorMessage}
+            />
           </UserMemberEvents>
         </ChildTemplate>
       </ParentTemplate>
