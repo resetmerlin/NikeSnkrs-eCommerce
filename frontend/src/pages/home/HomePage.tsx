@@ -12,7 +12,7 @@ function HomePage() {
   const { data, isLoading } = useGetProductsQuery();
 
   /** 3 products */
-  const cardProducts = data && [...data]?.slice(0, 3);
+  const threeProducts = data && [...data]?.slice(0, 3);
 
   const userInfo = useAppSelector(selectUser);
 
@@ -30,7 +30,7 @@ function HomePage() {
           {isLoading ? (
             <CardListsSkeleton />
           ) : (
-            <CardLists products={cardProducts} />
+            <CardLists products={threeProducts} />
           )}
         </ChildTemplate>
       </ParentTemplate>
