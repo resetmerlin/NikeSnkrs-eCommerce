@@ -17,6 +17,6 @@ export const orderSlice = createSlice({
 });
 
 export const { orderAdded, orderDeleted } = orderSlice.actions;
-export const selectUser = (state) => state.orders;
+export const selectOrder = (state) => state.orders;
 
 export default orderSlice.reducer;
