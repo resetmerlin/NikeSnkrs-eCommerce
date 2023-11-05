@@ -66,7 +66,9 @@ export default function CartSummary(props: IProps) {
           {props?.paymentMethod}
         </AtomicSubtitle>
       </div>
-      <AtomicButton size="m">Proceed to Checkout</AtomicButton>
+      <AtomicButton size="m" type="button" onClick={props?.addToOrderHandler}>
+        Proceed to Checkout
+      </AtomicButton>
     </div>
   );
 }
