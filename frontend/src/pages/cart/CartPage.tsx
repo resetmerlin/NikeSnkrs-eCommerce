@@ -28,7 +28,7 @@ function CartPage() {
 
   /** fetch chosen product */
   const [addToCart] = useAddToCartMutation();
-  const [addToOrder] = useAddToOrderMutation();
+  const [addToOrder, { data: orderData }] = useAddToOrderMutation();
 
   const cart: ICarts = useAppSelector(selectCart);
   const userInfo = useAppSelector(selectUser);
@@ -48,9 +48,9 @@ function CartPage() {
   /** Check user auth, if no auth go to login page */
   goToLogin(userInfo, navigate);
 
-  const taxPrice = 150;
+  const taxPrice = 15;
 
-  const shippingPrice = 3000;
+  const shippingPrice = 3;
 
   const productPrice = cart
     .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
@@ -66,7 +66,9 @@ function CartPage() {
     logOut(dispatch);
   };
 
-  const addToOrderHandler = () => {
+  const addToOrderHandler = (e) => {
+    e.preventDefault();
+
     const order = {
       email: userInfo?.email,
       name: userInfo?.name,
@@ -82,8 +84,15 @@ function CartPage() {
       token: userInfo?.token,
     };
 
-    dispatch(addToOrder(order));
+    addToOrder(order);
   };
+
+  useEffect(() => {
+    if (orderData) {
+      navigate(`/order/${orderData._id}`);
+    }
+  }, [orderData]);
+
   const prices = {
     taxPrice,
     shippingPrice,
