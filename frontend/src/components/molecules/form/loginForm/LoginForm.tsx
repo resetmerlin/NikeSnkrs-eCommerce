@@ -15,10 +15,10 @@ type IProps = {
   LoginError: string;
   register: UseFormReturn<FormData>['register'];
   handleSubmit: UseFormReturn<FormData>['handleSubmit'];
-  errors: UseFormReturn<FormData>['formState']['errors'];
+  formErrors: UseFormReturn<FormData>['formState']['errors'];
 };
 export default function LoginForm({
-  errors,
+  formErrors,
   loginSubmit,
   handleSubmit,
   register,
@@ -45,7 +45,9 @@ export default function LoginForm({
           register={register}
         />
 
-        {errors?.['userEmail'] && <p>{errors?.['userEmail'].message}</p>}
+        {formErrors?.['userEmail'] && (
+          <p>{formErrors?.['userEmail'].message}</p>
+        )}
 
         <AtomicLabel htmlFor="userPassword">
           <AtomicSubtitle size="m">Password</AtomicSubtitle>
@@ -58,7 +60,9 @@ export default function LoginForm({
           register={register}
         />
 
-        {errors?.['userPassword'] && <p>{errors?.['userPassword'].message}</p>}
+        {formErrors?.['userPassword'] && (
+          <p>{formErrors?.['userPassword'].message}</p>
+        )}
       </div>
       <AtomicButton size="m" type="submit">
         <AtomicSubtitle size="m" color="tertiary" strength="600">

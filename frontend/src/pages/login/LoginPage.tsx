@@ -36,7 +36,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors: formErrors },
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(loginSchema),
@@ -57,7 +57,7 @@ export default function LoginPage() {
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
             <LoginForm
-              errors={errors}
+              formErrors={formErrors}
               handleSubmit={handleSubmit}
               loginSubmit={loginSubmit}
               register={register}
