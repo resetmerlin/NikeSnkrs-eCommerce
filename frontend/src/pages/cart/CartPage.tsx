@@ -7,7 +7,10 @@ import {
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { CartAddress, CartSummary } from '../../components/molecules';
 import { Cart } from '../../components/organisms';
-import { useAddToCartMutation } from '../../features/api/apiSlice';
+import {
+  useAddToCartMutation,
+  useAddToOrderMutation,
+} from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
 import { ICart, ICarts } from '../../types/dto';
@@ -25,6 +28,7 @@ function CartPage() {
 
   /** fetch chosen product */
   const [addToCart] = useAddToCartMutation();
+  const [addToOrder] = useAddToOrderMutation();
 
   const cart: ICarts = useAppSelector(selectCart);
   const userInfo = useAppSelector(selectUser);
@@ -58,6 +62,28 @@ function CartPage() {
     dateStyle: 'full',
   });
 
+  const logOutHandler = () => {
+    logOut(dispatch);
+  };
+
+  const addToOrderHandler = () => {
+    const order = {
+      email: userInfo?.email,
+      name: userInfo?.name,
+      carts: cart,
+      shippingAddress: {
+        address: address?.address,
+      },
+      paymentMethod: 'paypal',
+      itemsPrice: productPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice: +productPrice - taxPrice - shippingPrice,
+      token: userInfo?.token,
+    };
+
+    dispatch(addToOrder(order));
+  };
   const prices = {
     taxPrice,
     shippingPrice,
@@ -66,11 +92,8 @@ function CartPage() {
     paymentMethod: 'paypal',
     currentDate: dateFormat.format(date),
     qty: cart.length,
+    addToOrderHandler,
   };
-  const logOutHandler = () => {
-    logOut(dispatch);
-  };
-
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="m">
