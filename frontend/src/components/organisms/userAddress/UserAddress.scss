@@ -7,6 +7,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    button {
+      margin-bottom: 1rem;
+    }
   }
   input {
     height: 5rem;
