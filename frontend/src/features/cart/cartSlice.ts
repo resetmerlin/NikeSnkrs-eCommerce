@@ -28,11 +28,6 @@ export const cartSlice = createSlice({
         state.splice(indexToDelete, 1);
       }
     },
-    cartAddressAdded(_, action) {
-      const { data } = action.payload;
-
-      localStorage.setItem('shippingAddress', JSON.stringify(data));
-    },
   },
 });
 
