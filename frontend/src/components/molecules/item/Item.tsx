@@ -3,7 +3,11 @@ import { AtomicItem, AtomicSubtitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './Item.scss';
 
-export default function Item({ product }: IProduct) {
+type IProps = {
+  product: IProduct;
+};
+
+export default function Item({ product }: IProps) {
   return (
     <AtomicItem size="m">
       <img src={`./products/${product._id}.png`} alt="card-jordan" />

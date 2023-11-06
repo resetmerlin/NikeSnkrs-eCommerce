@@ -12,9 +12,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 export default function ProductsPage() {
   const dispatch = useAppDispatch();
-  const { data } = useGetProductsQuery();
-
   const userInfo = useAppSelector(selectUser);
+  const { data: products } = useGetProductsQuery();
 
   const logOutHandler = () => {
     logOut(dispatch);
@@ -27,7 +26,7 @@ export default function ProductsPage() {
           <AtomicTitle size="xs">Latest Products</AtomicTitle>
         </ChildTemplate>
         <ChildTemplate position="bottomCenter" size="s">
-          <ItemLists products={data} />
+          <ItemLists products={products} />
         </ChildTemplate>
       </ParentTemplate>
     </LayoutHeader>
