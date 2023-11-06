@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../components/schema';
+import { IUser } from '../../types/dto';
 
 export type LoginData = {
   userEmail: string;
@@ -17,7 +18,7 @@ export type LoginData = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const userInfo: IUser = useAppSelector((state) => state.userInfo);
 
   // Login via api
   const [userAuthenticate, { error: loginError }] =

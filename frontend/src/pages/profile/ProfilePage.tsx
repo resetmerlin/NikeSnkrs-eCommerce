@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
 import { goToLogin, logOut } from '../../hooks';
 import { UserAddress, UserInfo } from '../../components/organisms';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../components/schema';
 import {
@@ -47,23 +47,8 @@ export default function ProfilePage() {
   // Get user profile via api
   const [getUser, { data: getUserData }] = useGetUserMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors: inputErrors },
-  } = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(registerSchema),
-  });
-
-  const {
-    register: addressRegister,
-    handleSubmit: handleSubmit2,
-    setValue,
-  } = useForm();
-
   // Submit profile
-  const profileSubmit = (data: ProfileData) => {
+  const profileSubmit: SubmitHandler<ProfileData> = (data: ProfileData) => {
     if (userInfo._id) {
       const user = {
         _id: userInfo._id,
@@ -76,8 +61,17 @@ export default function ProfilePage() {
     }
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: inputErrors },
+  } = useForm<ProfileData>({
+    mode: 'onChange',
+    resolver: yupResolver(registerSchema),
+  });
+
   // Submit address
-  const addressSubmit = (data: { address: string }) => {
+  const addressSubmit: SubmitHandler<AddressData> = (data: AddressData) => {
     if (data) {
       const address = {
         address: data.address,
@@ -86,6 +80,13 @@ export default function ProfilePage() {
     }
   };
 
+  const {
+    register: addressRegister,
+    handleSubmit: handleSubmit2,
+    setValue,
+  } = useForm<AddressData>();
+
+  // Daumn Popup
   const open = useDaumPostcodePopup();
 
   const addressPopup = (data: {
