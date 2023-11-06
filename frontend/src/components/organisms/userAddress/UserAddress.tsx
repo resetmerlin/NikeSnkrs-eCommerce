@@ -1,3 +1,5 @@
+import { UseFormReturn } from 'react-hook-form';
+import { AddressData } from '../../../pages/profile/ProfilePage';
 import {
   AtomicButton,
   AtomicInput,
@@ -6,13 +8,23 @@ import {
 } from '../../atoms';
 import './UserAddress.scss';
 
+type IProps = {
+  addressHandler: () => void;
+  addressInfo: {
+    address: string;
+  };
+  register: UseFormReturn<AddressData>;
+  handleSubmit: UseFormReturn<AddressData>['handleSubmit'];
+  addressSubmit: (data: AddressData) => void;
+};
+
 export default function UserAddress({
   addressHandler,
   register,
   handleSubmit,
   addressSubmit,
   addressInfo,
-}) {
+}: IProps) {
   return (
     <form className="userAddress" onSubmit={handleSubmit(addressSubmit)}>
       <div>

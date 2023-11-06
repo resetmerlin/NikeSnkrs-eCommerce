@@ -1,4 +1,4 @@
-import { useForm, FormProvider, UseFormReturn } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
@@ -19,12 +19,12 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const userInfo = useAppSelector((state) => state.userInfo);
 
-  const [
-    userAuthenticate, // authenticate mutator
-    { error: loginError },
-  ] = useUserAuthenticatedMutation();
+  // Login via api
+  const [userAuthenticate, { error: loginError }] =
+    useUserAuthenticatedMutation();
 
-  const loginSubmit = (data: LoginData) => {
+  // Submit login
+  const loginSubmit: SubmitHandler<LoginData> = (data: LoginData) => {
     userAuthenticate({
       email: data.userEmail,
       password: data.userPassword,
@@ -35,7 +35,7 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors: inputErrors },
-  } = useForm({
+  } = useForm<LoginData>({
     mode: 'onChange',
     resolver: yupResolver(loginSchema),
   });

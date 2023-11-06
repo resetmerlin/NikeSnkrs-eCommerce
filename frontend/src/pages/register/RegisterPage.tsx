@@ -2,7 +2,7 @@ import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
 import { RegisterForm } from '../../components/molecules';
-import { FormProvider, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserAuthorizedMutation } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
@@ -19,10 +19,12 @@ export type RegisterData = {
 export default function RegisterPage() {
   const navigate = useNavigate();
 
+  // Register via api
   const [userAuthorize, { error: registerError, data }] =
     useUserAuthorizedMutation();
 
-  const registerSubmit = (data: RegisterData) => {
+  // Submit register
+  const registerSubmit: SubmitHandler<RegisterData> = (data: RegisterData) => {
     const user = {
       name: data.userName,
       email: data.userEmail,
@@ -35,7 +37,7 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     formState: { errors: inputErrors },
-  } = useForm({
+  } = useForm<RegisterData>({
     mode: 'onChange',
     resolver: yupResolver(registerSchema),
   });

@@ -38,21 +38,21 @@ export default function LoginForm({
         )}
       </div>
       <div className="form__inputs-wrap">
+        {/* Email label & input */}
         <AtomicLabel htmlFor="userEmail">
           <AtomicSubtitle size="m">Email</AtomicSubtitle>
         </AtomicLabel>
-
         <AtomicInput
           type="email"
           id="userEmail"
           name="userEmail"
           register={register}
         />
-
         {inputErrors?.['userEmail'] && (
           <p>{inputErrors?.['userEmail'].message}</p>
         )}
 
+        {/* Password label & input */}
         <AtomicLabel htmlFor="userPassword">
           <AtomicSubtitle size="m">Password</AtomicSubtitle>
         </AtomicLabel>

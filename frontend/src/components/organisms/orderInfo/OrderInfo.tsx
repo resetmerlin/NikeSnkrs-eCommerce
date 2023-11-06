@@ -5,12 +5,16 @@ import './OrderInfo.scss';
 
 type IProps = {
   order: IOrder;
+  clientId: string;
+  checkPaid: (paid: boolean) => void;
+  currentDate: string;
+  paypalPaid: boolean;
 };
 
 export default function OrderInfo({
   order,
   clientId,
-  checkPaypal,
+  checkPaid,
   currentDate,
   paypalPaid,
 }: IProps) {
@@ -94,7 +98,7 @@ export default function OrderInfo({
           }}
         >
           <PayPalButtons
-            createOrder={(data, actions) => {
+            createOrder={(_, actions) => {
               return actions.order.create({
                 purchase_units: [
                   {
@@ -108,7 +112,7 @@ export default function OrderInfo({
             currency="USD"
             showSpinner={false}
             totalPrice={order.totalPrice}
-            paymentCheck={checkPaypal}
+            paymentCheck={checkPaid}
             orderId={order?._id}
           />
         </PayPalScriptProvider>
