@@ -13,7 +13,7 @@ type IProps = {
   addressInfo: {
     address: string;
   };
-  register: UseFormReturn<AddressData>;
+  register: UseFormReturn<AddressData>['register'];
   handleSubmit: UseFormReturn<AddressData>['handleSubmit'];
   addressSubmit: (data: AddressData) => void;
 };
