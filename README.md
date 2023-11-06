@@ -33,3 +33,8 @@ To install the project and its dependencies, follow these steps:
 
 ### Pattern that I used 
 - [Atomic design pattern](https://github.com/danilowoz/react-atomic-design)
+
+#### Feedback
+- This is my first project of using atomic design patterns. The good thing about the atomic design pattern is I can think about reusability more deeply than the other moment.
+- Also the independence of atoms and molecules may easily revise the style code rather than putting it all together.
+- However, when a component grows rapidly and needs to name it, it's getting hard. Also thinking about reusability could postpone writing your business logic. So what I recommend is just make a team with some designer and ask them about atoms like how many buttons are there? would be good to enhance the speed of making atoms by just looking at some website. 
