@@ -39,7 +39,7 @@ export function localCartToState(cartProducts: ICarts, dispatch: AppDispatch) {
 }
 
 /** Check user Login else go to login page */
-export function goToLogin(userInfo: IUser[], navigate: NavigateFunction) {
+export function goToLogin(userInfo: IUser, navigate: NavigateFunction) {
   useEffect(() => {
     if (!userInfo?.token) {
       navigate('/login');

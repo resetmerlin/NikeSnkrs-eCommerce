@@ -13,7 +13,7 @@ import {
 } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
-import { ICart, ICarts } from '../../types/dto';
+import { IAddress, ICart, ICarts, IUser } from '../../types/dto';
 import { useEffect } from 'react';
 import { goToLogin, logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
@@ -30,79 +30,68 @@ function CartPage() {
   const [addToCart] = useAddToCartMutation();
   const [addToOrder, { data: orderData }] = useAddToOrderMutation();
 
-  const cart: ICarts = useAppSelector(selectCart);
-  const userInfo = useAppSelector(selectUser);
-  const address = useAppSelector((state) => state.addresss);
+  const carts: ICarts = useAppSelector(selectCart);
+  const userInfo: IUser = useAppSelector(selectUser);
+  const address: IAddress = useAppSelector((state) => state.addresss);
+
+  /** Check user auth, if no auth go to login page */
+  goToLogin(userInfo, navigate);
 
   /** Delete product on cart */
   const deletOnCart = (product: ICart['product']) =>
     dispatch(cartDeleted(product));
 
-  /** Fetch if id, qty exists */
-  useEffect(() => {
-    if (id && qty) {
-      addToCart({ id, qty });
-    }
-  }, [id, qty]);
-
-  /** Check user auth, if no auth go to login page */
-  goToLogin(userInfo, navigate);
-
-  const taxPrice = 15;
-
-  const shippingPrice = 3;
-
-  const productPrice = cart
-    .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
-    .toFixed(1);
-
-  const date = new Date();
-
-  const dateFormat = new Intl.DateTimeFormat('en-kr', {
-    dateStyle: 'full',
-  });
-
   const logOutHandler = () => {
     logOut(dispatch);
   };
 
-  const addToOrderHandler = (e) => {
-    e.preventDefault();
+  // Numbers for the payment summary
+  const taxPrice = 15;
+  const shippingPrice = 3;
+  const productPrice = carts
+    .reduce((acc, item) => acc + Number(item?.qty) * Number(item?.price), 0)
+    .toFixed(1);
+  const date = new Date();
+  const dateFormat = new Intl.DateTimeFormat('en-kr', {
+    dateStyle: 'full',
+  });
+  const paymentMethod = 'paypal';
+  const totalPrice = +productPrice - taxPrice - shippingPrice;
 
+  // Add to Order
+  const addToOrderHandler = () => {
     const order = {
       email: userInfo?.email,
       name: userInfo?.name,
-      carts: cart,
+      carts,
       shippingAddress: {
         address: address?.address,
       },
-      paymentMethod: 'paypal',
+      paymentMethod,
       itemsPrice: productPrice,
       taxPrice,
       shippingPrice,
-      totalPrice: +productPrice - taxPrice - shippingPrice,
+      totalPrice,
       token: userInfo?.token,
     };
 
     addToOrder(order);
   };
 
+  /** If Ordered, go order page */
   useEffect(() => {
     if (orderData) {
       navigate(`/order/${orderData._id}`);
     }
   }, [orderData]);
 
-  const prices = {
-    taxPrice,
-    shippingPrice,
-    productPrice,
-    totalPrice: +productPrice - taxPrice - shippingPrice,
-    paymentMethod: 'paypal',
-    currentDate: dateFormat.format(date),
-    qty: cart.length,
-    addToOrderHandler,
-  };
+  /** Fetch Product if id, qty exists */
+  useEffect(() => {
+    if (id && qty) {
+      addToCart({ id, qty });
+    }
+  }, [id, qty]);
+
   return (
     <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="m">
@@ -110,11 +99,20 @@ function CartPage() {
           <AtomicTitle size="xs">Cart</AtomicTitle>
         </ChildTemplate>
         <ChildTemplate position="centerLeft" size="m">
-          <Cart cartProducts={cart} deletOnCart={deletOnCart} />
+          <Cart cartProducts={carts} deletOnCart={deletOnCart} />
         </ChildTemplate>
 
         <ChildTemplate position="right" size="m">
-          <CartSummary {...prices} />
+          <CartSummary
+            taxPrice={taxPrice}
+            shippingPrice={shippingPrice}
+            productPrice={productPrice}
+            totalPrice={totalPrice}
+            paymentMethod={paymentMethod}
+            qty={carts.length}
+            currentDate={dateFormat.format(date)}
+            addToOrderHandler={addToOrderHandler}
+          />
         </ChildTemplate>
 
         <ChildTemplate position="bottomLeft" size="m">

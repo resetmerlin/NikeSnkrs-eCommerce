@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IAddress } from '../../types/dto';
 
 const initialState = {};
 
 export const addressSlice = createSlice({
   name: 'address',
-  initialState: initialState,
+  initialState: initialState as IAddress,
   reducers: {
     addressAdded(state, action) {
       if (state) {

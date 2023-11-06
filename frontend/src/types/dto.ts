@@ -44,7 +44,9 @@ export type IAddress = {
 };
 
 export type IOrder = {
-  shippingAddress: IAddress;
+  shippingAddress: {
+    address: IAddress;
+  };
   _id: string;
   user: IUser;
   email: Pick<IUser, 'email'>;
