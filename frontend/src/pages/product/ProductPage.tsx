@@ -17,7 +17,7 @@ export default function ProductPage() {
   const dispatch = useAppDispatch();
   const userInfo: IUser = useAppSelector(selectUser);
 
-  const { id: paramId } = useParams();
+  const { id: productId } = useParams();
   const { data: products } = useGetProductsQuery();
   const columnRef = useRef<ItemColRef | null>(null);
   const [isObserving, setIsObserving] = useState(false);
@@ -26,27 +26,32 @@ export default function ProductPage() {
     navigate(-1);
   };
 
+  const logOutHandler = () => {
+    logOut(dispatch);
+  };
+
   /** Current product */
   const product =
     products &&
     [...products].filter(
-      (product): product is IProduct => product?._id == paramId
+      (product): product is IProduct => product?._id == productId
     )[0];
 
-  /** Current product index of total products */
+  /** Current product index  */
   const currentIndex = product ? products?.indexOf(product) : -1;
 
-  /** Go next product */
+  /** Go next product page */
   const goNextProductPage = () => {
     if (currentIndex + 1 !== products?.length && products) {
       navigate(`${products[currentIndex + 1]?._id}`);
-    } // Go first if reaches last index
+    }
+    // Go first if reaches last index
     else if (products) {
       navigate(`${products[0]?._id}`);
     }
   };
 
-  /** go cart page with quantity params */
+  /** go cart page with quantity */
   const addToCart = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -84,10 +89,6 @@ export default function ProductPage() {
     }
   }, [goNextProductPage, isObserving]);
 
-  const logOutHandler = () => {
-    logOut(dispatch);
-  };
-
   return (
     <LayoutHeader logOut={logOutHandler} userInfo={userInfo}>
       <ParentTemplate size="full">
@@ -105,7 +106,7 @@ export default function ProductPage() {
         <ChildTemplate position="right" size="full">
           <ItemNav
             products={products}
-            productId={paramId}
+            productId={productId}
             goNextProductPage={goNextProductPage}
             ref={columnRef}
           />
