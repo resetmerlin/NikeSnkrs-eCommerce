@@ -8,16 +8,16 @@ import {
 } from '../../../atoms';
 import './LoginForm.scss';
 import { UseFormReturn } from 'react-hook-form';
-import { FormData } from '../../../../pages/login/LoginPage';
+import { LoginData } from '../../../../pages/login/LoginPage';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
 
 type IProps = {
-  loginSubmit: (data: FormData) => void;
+  loginSubmit: (data: LoginData) => void;
   loginError: FetchBaseQueryError | SerializedError | undefined;
-  register: UseFormReturn<FormData>['register'];
-  handleSubmit: UseFormReturn<FormData>['handleSubmit'];
-  inputErrors: UseFormReturn<FormData>['formState']['errors'];
+  register: UseFormReturn<LoginData>['register'];
+  handleSubmit: UseFormReturn<LoginData>['handleSubmit'];
+  inputErrors: UseFormReturn<LoginData>['formState']['errors'];
 };
 export default function LoginForm({
   inputErrors,

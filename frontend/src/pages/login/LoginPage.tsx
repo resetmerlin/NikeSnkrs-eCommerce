@@ -10,7 +10,7 @@ import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../components/schema';
 
-export type FormData = {
+export type LoginData = {
   userEmail: string;
   userPassword: string;
 };
@@ -24,7 +24,7 @@ export default function LoginPage() {
     { error: loginError },
   ] = useUserAuthenticatedMutation();
 
-  const loginSubmit = (data: FormData) => {
+  const loginSubmit = (data: LoginData) => {
     userAuthenticate({
       email: data.userEmail,
       password: data.userPassword,

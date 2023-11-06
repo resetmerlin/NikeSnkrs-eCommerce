@@ -13,25 +13,14 @@ export type RegisterData = {
   userEmail: string;
   userPassword: string;
   userName: string;
+  userConfirmPassword: string;
 };
 
 export default function RegisterPage() {
   const navigate = useNavigate();
 
-  const methods = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(registerSchema),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-
-  const [userAuthorize, { error, data }] = useUserAuthorizedMutation();
-
-  const errorMessage = error?.data?.message;
+  const [userAuthorize, { error: registerError, data }] =
+    useUserAuthorizedMutation();
 
   const registerSubmit = (data: RegisterData) => {
     const user = {
@@ -42,6 +31,16 @@ export default function RegisterPage() {
     userAuthorize(user);
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: inputErrors },
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(registerSchema),
+  });
+
+  // Go home after register
   useEffect(() => {
     if (data) {
       navigate('/');
@@ -56,15 +55,13 @@ export default function RegisterPage() {
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
-            <FormProvider {...methods}>
-              <RegisterForm
-                register={register}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                registerSubmit={registerSubmit}
-                errorMessage={errorMessage}
-              />
-            </FormProvider>
+            <RegisterForm
+              register={register}
+              handleSubmit={handleSubmit}
+              inputErrors={inputErrors}
+              registerSubmit={registerSubmit}
+              registerError={registerError}
+            />
           </UserMemberEvents>
         </ChildTemplate>
       </ParentTemplate>
