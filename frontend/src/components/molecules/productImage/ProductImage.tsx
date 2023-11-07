@@ -1,6 +1,10 @@
 import './ProductImage.scss';
 
-export default function ProductImage({ productId }) {
+type IProps = {
+  productId: string | undefined;
+};
+
+export default function ProductImage({ productId }: IProps) {
   return (
     <img
       src={`../products/${productId}.png`}

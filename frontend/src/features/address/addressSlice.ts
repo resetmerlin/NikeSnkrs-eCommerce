@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IAddress } from '../../types/dto';
 
 const initialState = {};
 
 export const addressSlice = createSlice({
   name: 'address',
-  initialState: initialState as IAddress,
+  initialState: initialState,
   reducers: {
     addressAdded(state, action) {
       if (state) {
@@ -17,6 +16,6 @@ export const addressSlice = createSlice({
 });
 
 export const { addressAdded, addressDeleted } = addressSlice.actions;
-export const selectAddress = (state) => state.address;
+export const selectAddress = (state: any) => state.address;
 
 export default addressSlice.reducer;

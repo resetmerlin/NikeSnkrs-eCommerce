@@ -8,6 +8,10 @@ import { IOrder } from '../../types/dto';
 import { selectOrder } from '../../features/order/orderSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  OnApproveBraintreeActions,
+  OnApproveBraintreeData,
+} from '@paypal/react-paypal-js';
 
 export default function OrderPage() {
   const dispatch = useAppDispatch();
@@ -19,8 +23,14 @@ export default function OrderPage() {
   const [paypalPaid, setPaypalPaid] = useState(false);
 
   // Check user paid
-  const checkPaid = (paid: boolean) => {
-    if (paid) setPaypalPaid(true);
+  const checkPaid = async (
+    _data: OnApproveBraintreeData,
+    actions: OnApproveBraintreeActions
+  ) => {
+    const details = await actions.order.capture();
+    console.log('Order successfully captured:', details);
+
+    setPaypalPaid(true);
   };
 
   const logOutHandler = () => {

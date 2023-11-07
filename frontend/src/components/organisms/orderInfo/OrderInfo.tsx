@@ -92,7 +92,7 @@ export default function OrderInfo({
       {clientId && !paypalPaid && (
         <PayPalScriptProvider
           options={{
-            'client-id': `${clientId}`,
+            clientId: `${clientId}`,
             components: 'buttons',
             currency: 'USD',
           }}
@@ -105,15 +105,15 @@ export default function OrderInfo({
                     amount: {
                       value: order.totalPrice.toString(), // Set the price here
                     },
+                    payee: {
+                      merchant_id: order?._id,
+                      email_address: order?.email,
+                    },
                   },
                 ],
               });
             }}
-            currency="USD"
-            showSpinner={false}
-            totalPrice={order.totalPrice}
             paymentCheck={checkPaid}
-            orderId={order?._id}
           />
         </PayPalScriptProvider>
       )}
