@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AtomicButton, AtomicSubtitle, AtomicTitle } from '../../atoms';
 import './CartAddress.scss';
-import { IAddress } from '../../../types/dto';
+import { IAddress } from '../../../../types/dto';
+import { AtomicButton, AtomicSubtitle, AtomicTitle } from '../../../atoms';
 
 type IProps = {
   address: IAddress;

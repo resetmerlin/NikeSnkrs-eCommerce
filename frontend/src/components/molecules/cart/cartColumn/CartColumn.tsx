@@ -1,5 +1,5 @@
-import { ICart } from '../../../types/dto';
-import { AtomicButton, AtomicSubtitle, SvgX } from '../../atoms';
+import { ICart } from '../../../../types/dto';
+import { AtomicButton, AtomicSubtitle, SvgX } from '../../../atoms';
 import './CartColumn.scss';
 
 type IProps = {

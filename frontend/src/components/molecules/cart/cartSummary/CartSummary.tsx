@@ -1,4 +1,4 @@
-import { AtomicButton, AtomicSubtitle } from '../../atoms';
+import { AtomicButton, AtomicSubtitle } from '../../../atoms';
 import './CartSummary.scss';
 
 type IProps = {
