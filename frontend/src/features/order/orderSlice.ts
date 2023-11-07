@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IOrder } from '../../types/dto';
 
 const initialState = {};
 
 export const orderSlice = createSlice({
   name: 'orders',
-  initialState: initialState as IOrder,
+  initialState: initialState,
   reducers: {
     orderAdded(state, action) {
       if (state) {
@@ -17,6 +16,6 @@ export const orderSlice = createSlice({
 });
 
 export const { orderAdded, orderDeleted } = orderSlice.actions;
-export const selectOrder = (state) => state.orders;
+export const selectOrder = (state: any) => state.orders;
 
 export default orderSlice.reducer;

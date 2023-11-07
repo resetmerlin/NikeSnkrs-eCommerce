@@ -9,14 +9,24 @@ type IProps = {
   totalPrice: number;
   taxPrice: number;
   paymentMethod: string;
+  addToOrderHandler: () => void;
 };
 
-export default function CartSummary(props: IProps) {
+export default function CartSummary({
+  taxPrice,
+  shippingPrice,
+  productPrice,
+  totalPrice,
+  qty,
+  currentDate,
+  addToOrderHandler,
+  paymentMethod,
+}: IProps) {
   return (
     <div className="orderSummary">
       <div>
         <AtomicSubtitle size="s" color="secondary">
-          {props?.currentDate}
+          {currentDate}
         </AtomicSubtitle>
       </div>
       <div>
@@ -27,12 +37,12 @@ export default function CartSummary(props: IProps) {
           SUBTOTAL
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ({props?.qty})items
+          ({qty})items
         </AtomicSubtitle>
       </div>
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total Item props</AtomicSubtitle>
-        <AtomicSubtitle size="l">$ {props?.productPrice}</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {productPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -40,7 +50,7 @@ export default function CartSummary(props: IProps) {
           SHIPPING
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ${props?.shippingPrice}
+          ${shippingPrice}
         </AtomicSubtitle>
       </div>
 
@@ -49,13 +59,13 @@ export default function CartSummary(props: IProps) {
           TAX
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          ${props?.taxPrice}
+          ${taxPrice}
         </AtomicSubtitle>
       </div>
 
       <div className="orderSummary__border">
         <AtomicSubtitle size="l">Total</AtomicSubtitle>
-        <AtomicSubtitle size="l">$ {props?.totalPrice}</AtomicSubtitle>
+        <AtomicSubtitle size="l">$ {totalPrice}</AtomicSubtitle>
       </div>
 
       <div>
@@ -63,10 +73,10 @@ export default function CartSummary(props: IProps) {
           Payment method
         </AtomicSubtitle>
         <AtomicSubtitle size="m" color="secondary">
-          {props?.paymentMethod}
+          {paymentMethod}
         </AtomicSubtitle>
       </div>
-      <AtomicButton size="m" type="button" onClick={props?.addToOrderHandler}>
+      <AtomicButton size="m" type="button" onClick={addToOrderHandler}>
         Proceed to Checkout
       </AtomicButton>
     </div>

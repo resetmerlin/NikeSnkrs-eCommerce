@@ -1,4 +1,4 @@
-import { useForm, FormProvider, UseFormReturn } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
@@ -9,42 +9,39 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../components/schema';
+import { IUser } from '../../types/dto';
 
-export type FormData = {
+export type LoginData = {
   userEmail: string;
   userPassword: string;
 };
 
 export default function LoginPage() {
-  const [
-    userAuthenticate, // This is the mutation trigger
-    { error }, // This is the destructured mutation result
-  ] = useUserAuthenticatedMutation();
-
   const navigate = useNavigate();
+  const userInfo: IUser = useAppSelector((state) => state.userInfo);
 
-  const errorMessage = error?.data?.message;
+  // Login via api
+  const [userAuthenticate, { error: loginError }] =
+    useUserAuthenticatedMutation();
 
-  const userInfo = useAppSelector((state) => state.userInfo);
-
-  const loginSubmit = (data: FormData) => {
+  // Submit login
+  const loginSubmit: SubmitHandler<LoginData> = (data: LoginData) => {
     userAuthenticate({
       email: data.userEmail,
       password: data.userPassword,
     });
   };
 
-  const methods: UseFormReturn<FormData> = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: inputErrors },
+  } = useForm<LoginData>({
     mode: 'onChange',
     resolver: yupResolver(loginSchema),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-
+  // Go to home page after login
   useEffect(() => {
     if (userInfo.token && userInfo._id) {
       navigate('/');
@@ -59,15 +56,13 @@ export default function LoginPage() {
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
-            <FormProvider {...methods}>
-              <LoginForm
-                errors={errors}
-                handleSubmit={handleSubmit}
-                loginSubmit={loginSubmit}
-                register={register}
-                LoginError={errorMessage}
-              />
-            </FormProvider>
+            <LoginForm
+              inputErrors={inputErrors}
+              handleSubmit={handleSubmit}
+              loginSubmit={loginSubmit}
+              register={register}
+              loginError={loginError}
+            />
           </UserMemberEvents>
         </ChildTemplate>
       </ParentTemplate>

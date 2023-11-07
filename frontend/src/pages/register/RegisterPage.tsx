@@ -2,7 +2,7 @@ import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { Background, UserMemberEvents } from '../../components/organisms';
 import { RegisterForm } from '../../components/molecules';
-import { FormProvider, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserAuthorizedMutation } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
@@ -13,27 +13,18 @@ export type RegisterData = {
   userEmail: string;
   userPassword: string;
   userName: string;
+  userConfirmPassword: string;
 };
 
 export default function RegisterPage() {
   const navigate = useNavigate();
 
-  const methods = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(registerSchema),
-  });
+  // Register via api
+  const [userAuthorize, { error: registerError, data }] =
+    useUserAuthorizedMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-
-  const [userAuthorize, { error, data }] = useUserAuthorizedMutation();
-
-  const errorMessage = error?.data?.message;
-
-  const registerSubmit = (data: RegisterData) => {
+  // Submit register
+  const registerSubmit: SubmitHandler<RegisterData> = (data: RegisterData) => {
     const user = {
       name: data.userName,
       email: data.userEmail,
@@ -42,6 +33,16 @@ export default function RegisterPage() {
     userAuthorize(user);
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: inputErrors },
+  } = useForm<RegisterData>({
+    mode: 'onChange',
+    resolver: yupResolver(registerSchema),
+  });
+
+  // Go home after register
   useEffect(() => {
     if (data) {
       navigate('/');
@@ -56,15 +57,13 @@ export default function RegisterPage() {
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
           <UserMemberEvents>
-            <FormProvider {...methods}>
-              <RegisterForm
-                register={register}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                registerSubmit={registerSubmit}
-                errorMessage={errorMessage}
-              />
-            </FormProvider>
+            <RegisterForm
+              register={register}
+              handleSubmit={handleSubmit}
+              inputErrors={inputErrors}
+              registerSubmit={registerSubmit}
+              registerError={registerError}
+            />
           </UserMemberEvents>
         </ChildTemplate>
       </ParentTemplate>

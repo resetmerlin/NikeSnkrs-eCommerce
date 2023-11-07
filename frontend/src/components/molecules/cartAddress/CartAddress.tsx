@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import { AtomicButton, AtomicSubtitle, AtomicTitle } from '../../atoms';
 import './CartAddress.scss';
+import { IAddress } from '../../../types/dto';
 
-export default function CartAddress({ address }) {
+type IProps = {
+  address: IAddress;
+};
+
+export default function CartAddress({ address }: IProps) {
   return (
     <div className="cardAddress">
       <AtomicTitle size="xs">Address</AtomicTitle>
@@ -11,7 +16,7 @@ export default function CartAddress({ address }) {
         <AtomicSubtitle size="m">Address: {address?.address}</AtomicSubtitle>
       </div>
       <Link to="/profile">
-        <AtomicButton size="m">Change Address</AtomicButton>{' '}
+        <AtomicButton size="m">Change Address</AtomicButton>
       </Link>
     </div>
   );

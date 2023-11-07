@@ -44,11 +44,13 @@ export type IAddress = {
 };
 
 export type IOrder = {
-  shippingAddress: IAddress;
+  shippingAddress: {
+    address: string;
+  };
   _id: string;
   user: IUser;
-  email: Pick<IUser, 'email'>;
-  name: Pick<IUser, 'name'>;
+  email: string;
+  name: string;
   orderItems: ICart;
   paymentMethod: string;
   productPrice: number;

@@ -1,7 +1,11 @@
 import { AtomicTitle } from '../../atoms';
 import './OrderColumn.scss';
 
-export default function OrderColumn({ title }) {
+type IProps = {
+  title: string;
+};
+
+export default function OrderColumn({ title }: IProps) {
   return (
     <>
       <AtomicTitle>{title}</AtomicTitle>

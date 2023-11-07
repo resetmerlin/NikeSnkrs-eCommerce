@@ -24,7 +24,7 @@ export const api = createApi({
       query: (id) => `/products/${id}`,
     }),
     addToCart: build.mutation<IProduct, { id: string; qty: number }>({
-      query: ({ id, qty }) => `/products/${id}`,
+      query: ({ id }) => `/products/${id}`,
       async onQueryStarted({ id, qty }, api) {
         if (qty && id) {
           const { dispatch, queryFulfilled } = api;
@@ -135,10 +135,12 @@ export const api = createApi({
         email: string;
         name: string;
         carts: ICarts;
-        shippingAddress: string;
+        shippingAddress: {
+          address: string;
+        };
         paymentMethod: string;
         token: string;
-        productPrice: number;
+        itemsPrice: string;
         taxPrice: number;
         shippingPrice: number;
         totalPrice: number;
@@ -154,7 +156,7 @@ export const api = createApi({
             orderItems: order.carts,
             shippingAddress: order.shippingAddress,
             paymentMethod: order.paymentMethod,
-            itemsPrice: order.productPrice,
+            itemsPrice: order.itemsPrice,
             taxPrice: order.taxPrice,
             shippingPrice: order.shippingPrice,
             totalPrice: order.totalPrice,

@@ -2,9 +2,9 @@ import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
-import { goToLogin, localUserToState, logOut } from '../../hooks';
+import { goToLogin, logOut } from '../../hooks';
 import { UserAddress, UserInfo } from '../../components/organisms';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../components/schema';
 import {
@@ -22,37 +22,33 @@ export type ProfileData = {
   userName: string;
   userConfirmPassword: string;
 };
+export type AddressData = {
+  address: string;
+};
+
 export default function ProfilePage() {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectUser);
   const addressInfo = useAppSelector((state) => state.addresss);
+
   const navigate = useNavigate();
 
   const logOutHandler = () => {
     logOut(dispatch);
   };
 
+  // Check user login else go login page
   goToLogin(userInfo, navigate);
 
-  const [userChange, { error, data }] = useUserChangedMutation();
+  // Change profile via api
+  const [userChange, { error: profileError, data: profileSuccess }] =
+    useUserChangedMutation();
+
+  // Get user profile via api
   const [getUser, { data: getUserData }] = useGetUserMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: 'onChange',
-    resolver: yupResolver(registerSchema),
-  });
-
-  const {
-    register: addressRegister,
-    handleSubmit: handleSubmit2,
-    setValue,
-  } = useForm();
-
-  const profileSubmit = (data: ProfileData) => {
+  // Submit profile
+  const profileSubmit: SubmitHandler<ProfileData> = (data: ProfileData) => {
     if (userInfo._id) {
       const user = {
         _id: userInfo._id,
@@ -65,7 +61,17 @@ export default function ProfilePage() {
     }
   };
 
-  const addressSubmit = (data) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: inputErrors },
+  } = useForm<ProfileData>({
+    mode: 'onChange',
+    resolver: yupResolver(registerSchema),
+  });
+
+  // Submit address
+  const addressSubmit: SubmitHandler<AddressData> = (data: AddressData) => {
     if (data) {
       const address = {
         address: data.address,
@@ -74,10 +80,21 @@ export default function ProfilePage() {
     }
   };
 
-  localUserToState(userInfo, dispatch);
+  const {
+    register: addressRegister,
+    handleSubmit: handleSubmit2,
+    setValue,
+  } = useForm<AddressData>();
 
+  // Daumn Popup
   const open = useDaumPostcodePopup();
-  const handleComplete = (data) => {
+
+  const addressPopup = (data: {
+    address: string;
+    bname: string;
+    buildingName: string;
+    addressType: string;
+  }) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -96,14 +113,12 @@ export default function ProfilePage() {
     setValue('address', fullAddress);
   };
 
-  const getAddress = () => {
-    open({ onComplete: handleComplete });
+  // Open address popup
+  const addressHandler = () => {
+    open({ onComplete: addressPopup });
   };
 
-  const addressHandler = (e) => {
-    e.preventDefault();
-    getAddress();
-  };
+  // Fetch user profile
   useEffect(() => {
     if (userInfo?._id) {
       const user = {
@@ -118,10 +133,10 @@ export default function ProfilePage() {
       <ParentTemplate size="s">
         <ChildTemplate position="centerLeft" size="s">
           <UserInfo
-            data={data}
-            error={error}
+            profileSuccess={profileSuccess}
+            profileError={profileError}
             userInfo={getUserData}
-            errors={errors}
+            inputErrors={inputErrors}
             register={register}
             handleSubmit={handleSubmit}
             profileSubmit={profileSubmit}
