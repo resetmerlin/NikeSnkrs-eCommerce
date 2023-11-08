@@ -9,6 +9,13 @@ interface IProps<TFieldValues extends FieldValues>
   register?: UseFormRegister<TFieldValues>;
 }
 
+/**
+ * Responsible for making Basic Atoms input
+ *
+ * - Responsible for change the type based on the props
+ * - Responsible for change the name based on the props
+ * - Responsible for getting the register(optional) on the props
+ */
 export default function AtomicInput<TFieldValues extends FieldValues>({
   className = '',
   name,

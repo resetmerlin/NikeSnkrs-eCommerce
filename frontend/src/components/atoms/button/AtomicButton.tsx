@@ -8,6 +8,14 @@ interface IProps extends TButtonElementProps {
   size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 }
 
+/**
+ * Responsible for making Basic Atoms button
+ *
+ * - Responsible for change the type based on the props
+ * - Responsible for change the color based on the props
+ * - Responsible for change the shape based on the props
+ * - Responsible for change the size based on the props
+ */
 export default function AtomicButton({
   children,
   className = '',

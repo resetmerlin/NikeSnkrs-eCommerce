@@ -7,6 +7,13 @@ interface IProps extends TNormalElementProps<HTMLImageElement> {
   path: 'short' | 'long';
   productId: string | undefined;
 }
+
+/**
+ * Responsible for making Basic Atoms image of item
+ *
+ * - Responsible for change the size based on the props
+ * - Responsible for change the src based on the props(path, productId)
+ */
 export default function AtomicItemImage({
   children,
   className = '',

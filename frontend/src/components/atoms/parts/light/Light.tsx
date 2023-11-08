@@ -1,3 +1,7 @@
+/**
+ * Responsible for making Basic Atoms light for 3d
+ *
+ */
 export default function Light({ ...props }) {
   return (
     <>
