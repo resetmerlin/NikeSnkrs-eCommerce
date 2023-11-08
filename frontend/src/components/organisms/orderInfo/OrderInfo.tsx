@@ -1,12 +1,20 @@
 import { IOrder } from '../../../types/dto';
 import { AtomicSubtitle, AtomicTitle } from '../../atoms';
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import {
+  OnApproveBraintreeActions,
+  OnApproveBraintreeData,
+  PayPalButtons,
+  PayPalScriptProvider,
+} from '@paypal/react-paypal-js';
 import './OrderInfo.scss';
 
 type IProps = {
   order: IOrder;
   clientId: string;
-  checkPaid: (paid: boolean) => void;
+  checkPaid: (
+    _data: OnApproveBraintreeData,
+    actions: OnApproveBraintreeActions
+  ) => void;
   currentDate: string;
   paypalPaid: boolean;
 };
