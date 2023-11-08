@@ -13,7 +13,10 @@ import {
 } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { addressAdded } from '../../features/address/addressSlice';
+import {
+  addressAdded,
+  selectAddress,
+} from '../../features/address/addressSlice';
 import { useNavigate } from 'react-router-dom';
 
 export type ProfileData = {
@@ -29,7 +32,7 @@ export type AddressData = {
 export default function ProfilePage() {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(selectUser);
-  const addressInfo = useAppSelector((state) => state.addresss);
+  const addressInfo = useAppSelector(selectAddress);
 
   const navigate = useNavigate();
 

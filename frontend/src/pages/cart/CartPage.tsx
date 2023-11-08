@@ -17,6 +17,7 @@ import { IAddress, ICart, ICarts, IUser } from '../../types/dto';
 import { useEffect } from 'react';
 import { goToLogin, logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
+import { selectAddress } from '../../features/address/addressSlice';
 
 function CartPage() {
   const { id } = useParams();
@@ -32,7 +33,7 @@ function CartPage() {
 
   const carts: ICarts = useAppSelector(selectCart);
   const userInfo: IUser = useAppSelector(selectUser);
-  const address: IAddress = useAppSelector((state) => state.addresss);
+  const address: IAddress = useAppSelector(selectAddress);
 
   /** Check user auth, if no auth go to login page */
   goToLogin(userInfo, navigate);
