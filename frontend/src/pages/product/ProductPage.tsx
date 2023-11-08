@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
+import {
+  AtomicItemImage,
+  ChildTemplate,
+  ParentTemplate,
+} from '../../components/atoms';
 import { ItemInfoEvents, ItemNav } from '../../components/organisms';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
@@ -8,7 +12,6 @@ import { IProduct, IUser } from '../../types/dto';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
-import { ProductImage } from '../../components/molecules';
 
 export type ItemColRef = HTMLAnchorElement;
 
@@ -101,7 +104,7 @@ export default function ProductPage() {
         </ChildTemplate>
         <ChildTemplate position="centerRight" size="full">
           {/* <Object model={id?.id} /> */}
-          <ProductImage productId={product?._id} />
+          <AtomicItemImage path="long" size="xl" productId={product?._id} />
         </ChildTemplate>
         <ChildTemplate position="right" size="full">
           <ItemNav
