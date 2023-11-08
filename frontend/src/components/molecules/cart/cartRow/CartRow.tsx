@@ -5,16 +5,22 @@ import {
   AtomicSubtitle,
   SvgX,
 } from '../../../atoms';
-import './CartColumn.scss';
+import './CartRow.scss';
 
 type IProps = {
   cartProduct: ICart;
   deletOnCart: (product: ICart['product']) => void;
 };
 
-export default function CartColumn({ cartProduct, deletOnCart }: IProps) {
+/**
+ * Responsible for making cart row molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
+export default function CartRow({ cartProduct, deletOnCart }: IProps) {
   return (
-    <div className="cartColumn">
+    <div className="cartRow">
       <div>
         <AtomicItemImage
           path="long"

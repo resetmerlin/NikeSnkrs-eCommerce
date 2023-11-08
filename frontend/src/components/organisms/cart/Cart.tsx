@@ -1,7 +1,7 @@
 import './Cart.scss';
 import { AtomicSubtitle } from '../../atoms';
-import { CartColumn } from '../../molecules';
 import { ICart, ICarts } from '../../../types/dto';
+import { CartRow } from '../../molecules';
 
 type IProps = {
   cartProducts: ICarts;
@@ -29,7 +29,7 @@ export default function Cart({ cartProducts, deletOnCart }: IProps) {
       </div>
       {cartProducts &&
         cartProducts?.map((cartProduct: ICart) => (
-          <CartColumn
+          <CartRow
             cartProduct={cartProduct}
             key={cartProduct?.product}
             deletOnCart={deletOnCart}
