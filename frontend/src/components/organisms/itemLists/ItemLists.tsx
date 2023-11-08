@@ -7,6 +7,12 @@ type IProps = {
   products: IProducts | undefined;
 };
 
+/**
+ * Responsible for making item lists organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function ItemLists({ products }: IProps) {
   return (
     <div className="item-lists">

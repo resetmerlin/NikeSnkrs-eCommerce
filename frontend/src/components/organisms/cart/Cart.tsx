@@ -7,6 +7,13 @@ type IProps = {
   cartProducts: ICarts;
   deletOnCart: (product: ICart['product']) => void;
 };
+
+/**
+ * Responsible for making cart organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function Cart({ cartProducts, deletOnCart }: IProps) {
   return (
     <div className="cart">
