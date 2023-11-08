@@ -10,6 +10,7 @@ import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../components/schema';
 import { IUser } from '../../types/dto';
+import { selectUser } from '../../features/user/userInfoSlice';
 
 export type LoginData = {
   userEmail: string;
@@ -18,7 +19,7 @@ export type LoginData = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const userInfo: IUser = useAppSelector((state) => state.userInfo);
+  const userInfo: IUser = useAppSelector(selectUser);
 
   // Login via api
   const [userAuthenticate, { error: loginError }] =
