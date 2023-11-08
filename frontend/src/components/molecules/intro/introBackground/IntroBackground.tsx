@@ -1,4 +1,5 @@
 import { AtomicTitle } from '../../../atoms';
+import './IntroBackground.scss';
 
 export default function IntroBackground() {
   return (
