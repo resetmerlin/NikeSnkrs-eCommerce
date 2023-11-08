@@ -6,7 +6,6 @@ export * from './button';
 export * from './object';
 export * from './form';
 export * from './orderColumn';
-export * from './productImage';
 export * from './cart';
 
 // export * from './button';
