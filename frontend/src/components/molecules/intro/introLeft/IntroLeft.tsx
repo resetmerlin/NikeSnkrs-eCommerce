@@ -1,6 +1,11 @@
 import { AtomicSubtitle, AtomicTitle } from '../../../atoms';
 import './IntroLeft.scss';
 
+/**
+ * Responsible for making intro left  molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ */
 export default function IntroLeft() {
   return (
     <div className="intro-left">

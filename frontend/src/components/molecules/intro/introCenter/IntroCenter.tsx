@@ -1,6 +1,11 @@
 import { AtomicItemImage } from '../../../atoms';
 import './IntroCenter.scss';
 
+/**
+ * Responsible for making intro center molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ */
 export default function IntroCenter() {
   return (
     <AtomicItemImage

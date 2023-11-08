@@ -11,7 +11,12 @@ type IProps = {
   paymentMethod: string;
   addToOrderHandler: () => void;
 };
-
+/**
+ * Responsible for making cart summary molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function CartSummary({
   taxPrice,
   shippingPrice,

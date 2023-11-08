@@ -6,6 +6,12 @@ import './Card.scss';
 type IProps = {
   product: IProduct;
 };
+/**
+ * Responsible for making card molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function Card({ product }: IProps) {
   return (
     <AtomicCard>

@@ -6,7 +6,12 @@ import { AtomicButton, AtomicSubtitle, AtomicTitle } from '../../../atoms';
 type IProps = {
   address: IAddress;
 };
-
+/**
+ * Responsible for making cart address molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function CartAddress({ address }: IProps) {
   return (
     <div className="cardAddress">
