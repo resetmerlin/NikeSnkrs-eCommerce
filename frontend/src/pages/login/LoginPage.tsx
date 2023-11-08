@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Background, UserMemberEvents } from '../../components/organisms';
+import { Background, UserForm } from '../../components/organisms';
 import { LoginForm } from '../../components/molecules';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
@@ -56,7 +56,7 @@ export default function LoginPage() {
           <Background />
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
-          <UserMemberEvents>
+          <UserForm>
             <LoginForm
               inputErrors={inputErrors}
               handleSubmit={handleSubmit}
@@ -64,7 +64,7 @@ export default function LoginPage() {
               register={register}
               loginError={loginError}
             />
-          </UserMemberEvents>
+          </UserForm>
         </ChildTemplate>
       </ParentTemplate>
     </Layout>
