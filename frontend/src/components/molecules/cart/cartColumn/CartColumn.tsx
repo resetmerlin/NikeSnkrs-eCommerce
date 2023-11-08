@@ -1,5 +1,10 @@
 import { ICart } from '../../../../types/dto';
-import { AtomicButton, AtomicSubtitle, SvgX } from '../../../atoms';
+import {
+  AtomicButton,
+  AtomicItemImage,
+  AtomicSubtitle,
+  SvgX,
+} from '../../../atoms';
 import './CartColumn.scss';
 
 type IProps = {
@@ -11,13 +16,10 @@ export default function CartColumn({ cartProduct, deletOnCart }: IProps) {
   return (
     <div className="cartColumn">
       <div>
-        <img
-          src={`./products/${cartProduct?.product}.png`}
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = `../products/${cartProduct?.product}.png`;
-          }}
-          alt="cart-product"
+        <AtomicItemImage
+          path="long"
+          size="s"
+          productId={cartProduct?.product}
         />
       </div>
       <div>

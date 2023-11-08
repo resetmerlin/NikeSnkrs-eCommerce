@@ -1,5 +1,5 @@
 import { IProduct } from '../../../types/dto';
-import { AtomicCard, AtomicSubtitle } from '../../atoms';
+import { AtomicCard, AtomicItemImage, AtomicSubtitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './Card.scss';
 
@@ -9,7 +9,7 @@ type IProps = {
 export default function Card({ product }: IProps) {
   return (
     <AtomicCard>
-      <img src={`./products/${product?._id}.png`} alt="card-jordan" />
+      <AtomicItemImage path="short" size="m" productId={product?._id} />
       <div className="card__content">
         <AtomicSubtitle size="m">{product?.name}</AtomicSubtitle>
 
