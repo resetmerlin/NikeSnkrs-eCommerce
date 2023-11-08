@@ -6,6 +6,12 @@ type IProps = {
   logOut: () => void;
 };
 
+/**
+ * Responsible for making user button molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function UserButton({ logOut }: IProps) {
   return (
     <>

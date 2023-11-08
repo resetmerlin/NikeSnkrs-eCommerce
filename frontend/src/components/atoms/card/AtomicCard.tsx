@@ -1,6 +1,12 @@
 import { TNormalElementProps } from '../../../types';
 import './AtomicCard.scss';
 
+/**
+ * Responsible for making Basic Atoms card
+ *
+ * - Responsible for work as a container of Card molecules
+ */
+
 export default function AtomicCard({
   children,
   className = '',

@@ -1,23 +1,31 @@
-import { ICart } from '../../../types/dto';
-import { AtomicButton, AtomicSubtitle, SvgX } from '../../atoms';
-import './CartColumn.scss';
+import { ICart } from '../../../../types/dto';
+import {
+  AtomicButton,
+  AtomicItemImage,
+  AtomicSubtitle,
+  SvgX,
+} from '../../../atoms';
+import './CartRow.scss';
 
 type IProps = {
   cartProduct: ICart;
   deletOnCart: (product: ICart['product']) => void;
 };
 
-export default function CartColumn({ cartProduct, deletOnCart }: IProps) {
+/**
+ * Responsible for making cart row molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
+export default function CartRow({ cartProduct, deletOnCart }: IProps) {
   return (
-    <div className="cartColumn">
+    <div className="cartRow">
       <div>
-        <img
-          src={`./products/${cartProduct?.product}.png`}
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = `../products/${cartProduct?.product}.png`;
-          }}
-          alt="cart-product"
+        <AtomicItemImage
+          path="long"
+          size="s"
+          productId={cartProduct?.product}
         />
       </div>
       <div>

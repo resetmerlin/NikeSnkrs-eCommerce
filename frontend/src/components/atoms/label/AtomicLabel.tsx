@@ -11,6 +11,12 @@ interface IProps extends TNormalElementProps<HTMLLabelElement> {
     | 'specificAddress'
     | 'referenceItem';
 }
+
+/**
+ * Responsible for making Basic Atoms label of input
+ *
+ * - Responsible for work as a label
+ */
 export default function Label({
   children,
   className = '',

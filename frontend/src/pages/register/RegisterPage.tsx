@@ -1,6 +1,6 @@
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Background, UserMemberEvents } from '../../components/organisms';
+import { Background, UserForm } from '../../components/organisms';
 import { RegisterForm } from '../../components/molecules';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -56,7 +56,7 @@ export default function RegisterPage() {
           <Background />
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
-          <UserMemberEvents>
+          <UserForm>
             <RegisterForm
               register={register}
               handleSubmit={handleSubmit}
@@ -64,7 +64,7 @@ export default function RegisterPage() {
               registerSubmit={registerSubmit}
               registerError={registerError}
             />
-          </UserMemberEvents>
+          </UserForm>
         </ChildTemplate>
       </ParentTemplate>
     </Layout>

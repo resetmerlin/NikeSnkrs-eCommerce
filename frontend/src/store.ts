@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   products: productSlice.reducer,
   carts: cartSlice.reducer,
   userInfo: userInfoSlice.reducer,
-  addresss: addressSlice.reducer,
+  address: addressSlice.reducer,
   orders: orderSlice.reducer,
 });
 
@@ -22,7 +22,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['userInfo', 'carts', 'addresss'], // Add the slice names you want to persist
+  whitelist: ['userInfo', 'carts', 'address'], // Add the slice names you want to persist
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({

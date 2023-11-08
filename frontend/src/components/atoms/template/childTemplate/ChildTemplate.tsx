@@ -18,6 +18,12 @@ interface IProps extends TNormalElementProps<HTMLDivElement> {
   size: 's' | 'm' | 'full';
 }
 
+/**
+ * Responsible for making Basic Atoms child template
+ *
+ * - Responsible for change the position based on the props
+ * - Responsible for change the size based on the props
+ */
 export default function ChildTemplate({
   children,
   className = '',

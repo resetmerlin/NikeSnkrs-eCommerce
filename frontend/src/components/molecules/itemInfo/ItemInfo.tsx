@@ -7,6 +7,12 @@ type IProps = {
   product: IProduct;
 };
 
+/**
+ * Responsible for making item info molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function ItemInfo({ product }: IProps) {
   return (
     <div className="item-info">

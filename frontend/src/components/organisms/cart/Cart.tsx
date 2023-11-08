@@ -1,12 +1,19 @@
 import './Cart.scss';
 import { AtomicSubtitle } from '../../atoms';
-import { CartColumn } from '../../molecules';
 import { ICart, ICarts } from '../../../types/dto';
+import { CartRow } from '../../molecules';
 
 type IProps = {
   cartProducts: ICarts;
   deletOnCart: (product: ICart['product']) => void;
 };
+
+/**
+ * Responsible for making cart organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function Cart({ cartProducts, deletOnCart }: IProps) {
   return (
     <div className="cart">
@@ -29,7 +36,7 @@ export default function Cart({ cartProducts, deletOnCart }: IProps) {
       </div>
       {cartProducts &&
         cartProducts?.map((cartProduct: ICart) => (
-          <CartColumn
+          <CartRow
             cartProduct={cartProduct}
             key={cartProduct?.product}
             deletOnCart={deletOnCart}

@@ -19,6 +19,13 @@ type IProps = {
   handleSubmit: UseFormReturn<LoginData>['handleSubmit'];
   inputErrors: UseFormReturn<LoginData>['formState']['errors'];
 };
+
+/**
+ * Responsible for making login form molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function LoginForm({
   inputErrors,
   loginSubmit,

@@ -5,6 +5,11 @@ interface IProps extends TNormalElementProps<HTMLDivElement> {
   size: 'xs' | 's' | 'm';
 }
 
+/**
+ * Responsible for making Basic Atoms item
+ *
+ * - Responsible for work as a container of Item molecule
+ */
 export default function AtomicItem({
   children,
   className = '',

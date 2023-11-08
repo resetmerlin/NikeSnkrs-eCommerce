@@ -6,7 +6,6 @@ import {
   AtomicLabel,
   AtomicSubtitle,
 } from '../../../atoms';
-import './RegisterForm.scss';
 import { UseFormReturn } from 'react-hook-form';
 import { RegisterData } from '../../../../pages/register/RegisterPage';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -19,6 +18,13 @@ type IProps = {
   handleSubmit: UseFormReturn<RegisterData>['handleSubmit'];
   inputErrors: UseFormReturn<RegisterData>['formState']['errors'];
 };
+
+/**
+ * Responsible for making register form molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function RegisterForm({
   register,
   handleSubmit,

@@ -18,6 +18,12 @@ type IProps = {
   addressSubmit: (data: AddressData) => void;
 };
 
+/**
+ * Responsible for making user address organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function UserAddress({
   addressHandler,
   register,

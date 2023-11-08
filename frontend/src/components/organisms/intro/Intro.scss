@@ -3,19 +3,11 @@
   justify-content: space-evenly;
   position: relative;
   .intro-left {
-    display: flex;
-    flex-direction: column;
     position: absolute;
     left: 10%;
-
-    .title {
-      font-family: 'Goldman', cursive;
-    }
   }
 
   .intro-right {
-    display: flex;
-    flex-direction: column;
     position: absolute;
     bottom: 0;
     right: 15%;
@@ -25,15 +17,10 @@
     position: fixed;
     left: 50%;
     top: 45%;
-    transform: translate(-50%, -50%);
-    z-index: -10000;
   }
   .intro-center {
     position: absolute;
     left: 55%;
     top: 50%;
-    transform: translate(-50%, -50%) rotate(0.9turn) translateX(-10rem)
-      translateY(-7rem);
-    width: 60rem;
   }
 }

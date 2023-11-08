@@ -21,6 +21,12 @@ type IProps = {
   userInfo: IUser | undefined;
 };
 
+/**
+ * Responsible for making user info organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function UserInfo({
   register,
   handleSubmit,

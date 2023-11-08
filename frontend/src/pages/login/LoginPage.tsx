@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Layout } from '../../components/layouts/layout';
 import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Background, UserMemberEvents } from '../../components/organisms';
+import { Background, UserForm } from '../../components/organisms';
 import { LoginForm } from '../../components/molecules';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
@@ -10,6 +10,7 @@ import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../components/schema';
 import { IUser } from '../../types/dto';
+import { selectUser } from '../../features/user/userInfoSlice';
 
 export type LoginData = {
   userEmail: string;
@@ -18,7 +19,7 @@ export type LoginData = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const userInfo: IUser = useAppSelector((state) => state.userInfo);
+  const userInfo: IUser = useAppSelector(selectUser);
 
   // Login via api
   const [userAuthenticate, { error: loginError }] =
@@ -55,7 +56,7 @@ export default function LoginPage() {
           <Background />
         </ChildTemplate>
         <ChildTemplate size="full" position="right">
-          <UserMemberEvents>
+          <UserForm>
             <LoginForm
               inputErrors={inputErrors}
               handleSubmit={handleSubmit}
@@ -63,7 +64,7 @@ export default function LoginPage() {
               register={register}
               loginError={loginError}
             />
-          </UserMemberEvents>
+          </UserForm>
         </ChildTemplate>
       </ParentTemplate>
     </Layout>
