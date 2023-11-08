@@ -27,10 +27,12 @@ export default function OrderPage() {
     _data: OnApproveBraintreeData,
     actions: OnApproveBraintreeActions
   ) => {
-    const details = await actions.order.capture();
-    console.log('Order successfully captured:', details);
+    if (actions && actions.order) {
+      const details = await actions.order.capture();
+      console.log('Order successfully captured:', details);
 
-    setPaypalPaid(true);
+      setPaypalPaid(true);
+    }
   };
 
   const logOutHandler = () => {
