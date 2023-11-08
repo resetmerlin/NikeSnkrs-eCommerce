@@ -1,9 +1,15 @@
 import { PropsWithChildren } from 'react';
 import { AtomicLogo, AtomicSubtitle } from '../../atoms';
-import './UserMemberEvents.scss';
+import './UserForm.scss';
 import { Link } from 'react-router-dom';
 
-export default function UserMemberEvents({ children }: PropsWithChildren) {
+/**
+ * Responsible for making user form organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
+export default function UserForm({ children }: PropsWithChildren) {
   return (
     <div className="userMemberEvents">
       <Link to="/" className="userMemberEvents__logo">
