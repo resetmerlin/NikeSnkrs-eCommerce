@@ -7,8 +7,9 @@ type IProps = {
   product: IProduct;
 };
 /**
- * Responsible for making card molecules
+ * Responsible for rendering card
  *
+ * - Responsible for the styling of the card
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

@@ -6,8 +6,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making order column molecules
+ * Responsible for rendering a order column
  *
+ * - Responsible for the styling of the order column
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

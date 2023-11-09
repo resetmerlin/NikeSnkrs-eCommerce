@@ -8,8 +8,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making item molecules
+ * Responsible for rendering a item
  *
+ * - Responsible for the styling of the item
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

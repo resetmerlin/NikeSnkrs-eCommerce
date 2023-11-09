@@ -13,8 +13,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making cart row molecules
+ * Responsible for rendering a  cart row
  *
+ * - Responsible for the styling of the cart row
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

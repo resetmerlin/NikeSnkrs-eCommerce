@@ -2,8 +2,9 @@ import { AtomicTitle } from '../../../atoms';
 import './IntroBackground.scss';
 
 /**
- * Responsible for making intro background molecules
+ * Responsible for rendering a intro background
  *
+ * - Responsible for the styling of the intro background
  * - Responsible for creating functionalities by using atoms
  */
 export default function IntroBackground() {

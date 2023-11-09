@@ -1,8 +1,9 @@
 import { AtomicButton, SvgCartAlt } from '../../../atoms';
 
 /**
- * Responsible for making cart button molecules
+ * Responsible for rendering a cart button
  *
+ * - Responsible for the styling of the cart button
  * - Responsible for creating functionalities by using atoms
  */
 export default function CartButton() {

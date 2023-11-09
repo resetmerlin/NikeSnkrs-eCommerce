@@ -1,8 +1,9 @@
 import { AtomicButton, SvgLogIn } from '../../../atoms';
 
 /**
- * Responsible for making login button molecules
+ * Responsible for rendering a login button
  *
+ * - Responsible for the styling of login button
  * - Responsible for creating functionalities by using atoms
  */
 export default function LoginButton() {
