@@ -1,13 +1,11 @@
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logOut } from '../../hooks';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { OrderInfo } from '../../components/organisms';
-import { IOrder } from '../../types/dto';
-import { selectOrder } from '../../features/order/orderSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ChildTemplate, OrderInfo, ParentTemplate } from '../../components';
+import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { selectOrder } from '../../features/order/orderSlice';
+import { selectUser } from '../../features/user/userInfoSlice';
+import { IOrder } from '../../types/dto';
 import {
   OnApproveBraintreeActions,
   OnApproveBraintreeData,

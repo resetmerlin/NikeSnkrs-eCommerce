@@ -1,14 +1,13 @@
 import {
   AtomicTitle,
   ChildTemplate,
+  ItemLists,
   ParentTemplate,
-} from '../../components/atoms';
+} from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { ItemLists } from '../../components/organisms';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { selectUser } from '../../features/user/userInfoSlice';
-import { logOut } from '../../hooks';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 export default function ProductsPage() {
   const dispatch = useAppDispatch();

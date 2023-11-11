@@ -3,15 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   AtomicItemImage,
   ChildTemplate,
+  ItemInfoEvents,
+  ItemNav,
   ParentTemplate,
-} from '../../components/atoms';
-import { ItemInfoEvents, ItemNav } from '../../components/organisms';
-import { useGetProductsQuery } from '../../features/api/apiSlice';
+} from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { IProduct, IUser } from '../../types/dto';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logOut } from '../../hooks';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { selectUser } from '../../features/user/userInfoSlice';
+import { IProduct, IUser } from '../../types/dto';
 
 export type ItemColRef = HTMLAnchorElement;
 

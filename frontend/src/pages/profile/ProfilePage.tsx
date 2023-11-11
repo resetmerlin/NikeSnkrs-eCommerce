@@ -1,12 +1,9 @@
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
 import { goToLogin, logOut } from '../../hooks';
-import { UserAddress, UserInfo } from '../../components/organisms';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from '../../components/schema';
 import {
   useGetUserMutation,
   useUserChangedMutation,
@@ -18,6 +15,13 @@ import {
   selectAddress,
 } from '../../features/address/addressSlice';
 import { useNavigate } from 'react-router-dom';
+import {
+  ChildTemplate,
+  ParentTemplate,
+  UserAddress,
+  UserInfo,
+  registerSchema,
+} from '../../components';
 
 export type ProfileData = {
   userEmail: string;
