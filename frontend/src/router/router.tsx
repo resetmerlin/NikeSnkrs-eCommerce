@@ -1,12 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import HomePage from '../pages/home/HomePage';
-import ProductsPage from '../pages/products/ProductsPage';
-import ProductPage from '../pages/product/ProductPage';
-import LoginPage from '../pages/login/LoginPage';
-import RegisterPage from '../pages/register/RegisterPage';
-import CartPage from '../pages/cart/CartPage';
-import ProfilePage from '../pages/profile/ProfilePage';
-import OrderPage from '../pages/order/OrderPage';
+import {
+  CartPage,
+  HomePage,
+  LoginPage,
+  OrderPage,
+  ProductPage,
+  ProductsPage,
+  ProfilePage,
+  RegisterPage,
+} from '../pages';
 
 const router = createBrowserRouter([
   {
