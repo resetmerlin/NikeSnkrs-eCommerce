@@ -1,1 +1,1 @@
-export { default as addressSlice } from './addressSlice';
+export * from './addressSlice';
