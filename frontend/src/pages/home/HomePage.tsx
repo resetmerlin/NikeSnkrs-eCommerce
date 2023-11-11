@@ -6,8 +6,7 @@ import {
   ParentTemplate,
 } from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { selectUser } from '../../features/user/userInfoSlice';
+import { selectUser, useGetProductsQuery } from '../../features';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
 function HomePage() {

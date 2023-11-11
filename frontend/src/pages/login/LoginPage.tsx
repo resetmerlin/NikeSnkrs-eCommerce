@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { IUser } from '../../types';
 import {
   Background,
   ChildTemplate,
@@ -7,14 +12,8 @@ import {
   UserForm,
   loginSchema,
 } from '../../components';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
-import { useNavigate } from 'react-router-dom';
-import { IUser } from '../../types/dto';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
+import { selectUser, useUserAuthenticatedMutation } from '../../features';
 
 export type LoginData = {
   userEmail: string;
