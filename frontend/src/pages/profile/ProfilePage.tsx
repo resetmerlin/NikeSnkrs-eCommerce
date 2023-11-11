@@ -11,7 +11,6 @@ import {
   UserInfo,
   registerSchema,
 } from '../../components';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import {
   addressAdded,
   selectAddress,

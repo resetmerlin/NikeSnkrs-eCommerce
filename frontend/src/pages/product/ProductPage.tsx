@@ -8,7 +8,6 @@ import {
   ItemNav,
   ParentTemplate,
 } from '../../components';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 import { selectUser, useGetProductsQuery } from '../../features';
 import { IProduct, IUser } from '../../types';

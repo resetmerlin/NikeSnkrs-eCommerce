@@ -11,7 +11,6 @@ import {
   OrderInfo,
   ParentTemplate,
 } from '../../components';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOrder, selectUser } from '../../features';
 import { IOrder } from '../../types';

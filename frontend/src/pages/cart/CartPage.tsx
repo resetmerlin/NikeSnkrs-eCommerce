@@ -1,6 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import {
   AtomicTitle,
   Cart,
