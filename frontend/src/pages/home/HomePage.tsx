@@ -1,6 +1,10 @@
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
+import {
+  CardLists,
+  ChildTemplate,
+  Intro,
+  ParentTemplate,
+} from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { CardLists, Intro } from '../../components/organisms';
 import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
