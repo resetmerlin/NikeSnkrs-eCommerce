@@ -5,9 +5,8 @@ import {
   ParentTemplate,
 } from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
+import { selectUser, useGetProductsQuery } from '../../features';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
-import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { selectUser } from '../../features/user/userInfoSlice';
 
 export default function ProductsPage() {
   const dispatch = useAppDispatch();

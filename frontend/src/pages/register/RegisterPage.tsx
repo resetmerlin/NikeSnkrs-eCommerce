@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useUserAuthorizedMutation } from '../../features/api/apiSlice';
+import { useUserAuthorizedMutation } from '../../features';
 import {
   Background,
   ChildTemplate,

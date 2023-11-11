@@ -9,9 +9,8 @@ import {
 } from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
-import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { IProduct, IUser } from '../../types/dto';
+import { selectUser, useGetProductsQuery } from '../../features';
+import { IProduct, IUser } from '../../types';
 
 export type ItemColRef = HTMLAnchorElement;
 

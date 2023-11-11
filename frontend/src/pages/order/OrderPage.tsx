@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ChildTemplate, OrderInfo, ParentTemplate } from '../../components';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
-import { selectOrder } from '../../features/order/orderSlice';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { IOrder } from '../../types/dto';
 import {
   OnApproveBraintreeActions,
   OnApproveBraintreeData,
 } from '@paypal/react-paypal-js';
+
+import { ChildTemplate, OrderInfo, ParentTemplate } from '../../components';
+import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { selectOrder, selectUser } from '../../features';
+import { IOrder } from '../../types';
 
 export default function OrderPage() {
   const dispatch = useAppDispatch();
