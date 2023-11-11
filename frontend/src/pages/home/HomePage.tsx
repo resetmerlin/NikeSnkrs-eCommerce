@@ -1,15 +1,14 @@
 import {
   CardLists,
+  CardListsSkeleton,
   ChildTemplate,
   Intro,
   ParentTemplate,
 } from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logOut } from '../../hooks';
 import { selectUser } from '../../features/user/userInfoSlice';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
 function HomePage() {
   const dispatch = useAppDispatch();

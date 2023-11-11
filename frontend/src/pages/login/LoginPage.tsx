@@ -1,16 +1,20 @@
+import {
+  Background,
+  ChildTemplate,
+  Layout,
+  LoginForm,
+  ParentTemplate,
+  UserForm,
+  loginSchema,
+} from '../../components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Layout } from '../../components/layouts/layout';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Background, UserForm } from '../../components/organisms';
-import { LoginForm } from '../../components/molecules';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
-import { loginSchema } from '../../components/schema';
 import { IUser } from '../../types/dto';
 import { selectUser } from '../../features/user/userInfoSlice';
+import { useUserAuthenticatedMutation } from '../../features/api/apiSlice';
 
 export type LoginData = {
   userEmail: string;
