@@ -2,10 +2,10 @@ import {
   CardLists,
   CardListsSkeleton,
   ChildTemplate,
+  HeaderLayout,
   Intro,
   ParentTemplate,
 } from '../../components';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { selectUser, useGetProductsQuery } from '../../features';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -23,7 +23,7 @@ function HomePage() {
   };
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="s">
           <Intro />
@@ -36,7 +36,7 @@ function HomePage() {
           )}
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }
 

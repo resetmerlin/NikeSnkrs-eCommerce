@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   AtomicItemImage,
   ChildTemplate,
+  HeaderLayout,
   ItemInfoEvents,
   ItemNav,
   ParentTemplate,
@@ -92,7 +93,7 @@ export default function ProductPage() {
   }, [goNextProductPage, isObserving]);
 
   return (
-    <LayoutHeader logOut={logOutHandler} userInfo={userInfo}>
+    <HeaderLayout logOut={logOutHandler} userInfo={userInfo}>
       <ParentTemplate size="full">
         <ChildTemplate position="left" size="full">
           <ItemInfoEvents
@@ -114,6 +115,6 @@ export default function ProductPage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }

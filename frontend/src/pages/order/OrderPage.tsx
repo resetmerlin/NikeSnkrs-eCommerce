@@ -5,7 +5,12 @@ import {
   OnApproveBraintreeData,
 } from '@paypal/react-paypal-js';
 
-import { ChildTemplate, OrderInfo, ParentTemplate } from '../../components';
+import {
+  ChildTemplate,
+  HeaderLayout,
+  OrderInfo,
+  ParentTemplate,
+} from '../../components';
 import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOrder, selectUser } from '../../features';
@@ -66,7 +71,7 @@ export default function OrderPage() {
   const currentDate = dateHandler.format(date);
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="full">
           <OrderInfo
@@ -78,6 +83,6 @@ export default function OrderPage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }

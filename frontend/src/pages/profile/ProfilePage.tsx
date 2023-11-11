@@ -5,6 +5,7 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useNavigate } from 'react-router-dom';
 import {
   ChildTemplate,
+  HeaderLayout,
   ParentTemplate,
   UserAddress,
   UserInfo,
@@ -133,7 +134,7 @@ export default function ProfilePage() {
   }, [userInfo]);
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="centerLeft" size="s">
           <UserInfo
@@ -156,6 +157,6 @@ export default function ProfilePage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }

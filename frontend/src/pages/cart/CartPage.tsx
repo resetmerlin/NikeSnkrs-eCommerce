@@ -7,6 +7,7 @@ import {
   CartAddress,
   CartSummary,
   ChildTemplate,
+  HeaderLayout,
   ParentTemplate,
 } from '../../components';
 import {
@@ -95,7 +96,7 @@ function CartPage() {
   }, [id, qty]);
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="m">
         <ChildTemplate position="topLeft" size="m">
           <AtomicTitle size="xs">Cart</AtomicTitle>
@@ -121,7 +122,7 @@ function CartPage() {
           <CartAddress address={address} />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }
 

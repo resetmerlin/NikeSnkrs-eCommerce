@@ -1,10 +1,10 @@
 import {
   AtomicTitle,
   ChildTemplate,
+  HeaderLayout,
   ItemLists,
   ParentTemplate,
 } from '../../components';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
 import { selectUser, useGetProductsQuery } from '../../features';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -18,7 +18,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="topLeft" size="s">
           <AtomicTitle size="xs">Latest Products</AtomicTitle>
@@ -27,6 +27,6 @@ export default function ProductsPage() {
           <ItemLists products={products} />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }
