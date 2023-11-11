@@ -1,1 +1,1 @@
-export { default as userInfoSlice } from './userInfoSlice';
+export * from './userInfoSlice';
