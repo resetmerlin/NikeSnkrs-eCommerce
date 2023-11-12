@@ -5,8 +5,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making down button molecules
+ * Responsible for rendering down button
  *
+ * - Responsible for the styling of the down button
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

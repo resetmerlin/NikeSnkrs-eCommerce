@@ -2,8 +2,9 @@ import { AtomicSubtitle, AtomicTitle } from '../../../atoms';
 import './IntroRight.scss';
 
 /**
- * Responsible for making intro right molecules
+ * Responsible for rendering a intro right
  *
+ * - Responsible for the styling of the intro right
  * - Responsible for creating functionalities by using atoms
  */
 export default function IntroRight() {

@@ -7,8 +7,9 @@ type IProps = {
   address: IAddress;
 };
 /**
- * Responsible for making cart address molecules
+ * Responsible for rendering a  cart address
  *
+ * - Responsible for the styling of the cart address
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

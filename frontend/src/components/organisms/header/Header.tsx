@@ -10,7 +10,7 @@ type IProps = {
 };
 
 /**
- * Responsible for making header organisms
+ * Responsible for rendering a Header
  *
  * - Responsible for components begin to have the final shape
  * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces

@@ -8,7 +8,7 @@ type IProps = {
 };
 
 /**
- * Responsible for making item lists organisms
+ * Responsible for taking a list of 'products' and rendering them as 'Item's
  *
  * - Responsible for components begin to have the final shape
  * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces

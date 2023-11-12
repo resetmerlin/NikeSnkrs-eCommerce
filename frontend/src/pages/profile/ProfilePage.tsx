@@ -1,23 +1,24 @@
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { goToLogin, logOut } from '../../hooks';
-import { UserAddress, UserInfo } from '../../components/organisms';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from '../../components/schema';
-import {
-  useGetUserMutation,
-  useUserChangedMutation,
-} from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { useNavigate } from 'react-router-dom';
+import {
+  ChildTemplate,
+  HeaderLayout,
+  ParentTemplate,
+  UserAddress,
+  UserInfo,
+  registerSchema,
+} from '../../components';
 import {
   addressAdded,
   selectAddress,
-} from '../../features/address/addressSlice';
-import { useNavigate } from 'react-router-dom';
+  selectUser,
+  useGetUserMutation,
+  useUserChangedMutation,
+} from '../../features';
+import { goToLogin, logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
 export type ProfileData = {
   userEmail: string;
@@ -132,7 +133,7 @@ export default function ProfilePage() {
   }, [userInfo]);
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="centerLeft" size="s">
           <UserInfo
@@ -155,6 +156,6 @@ export default function ProfilePage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }

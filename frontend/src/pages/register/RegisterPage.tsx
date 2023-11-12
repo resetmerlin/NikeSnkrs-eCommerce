@@ -1,13 +1,17 @@
-import { Layout } from '../../components/layouts/layout';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { Background, UserForm } from '../../components/organisms';
-import { RegisterForm } from '../../components/molecules';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useUserAuthorizedMutation } from '../../features/api/apiSlice';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerSchema } from '../../components/schema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useUserAuthorizedMutation } from '../../features';
+import {
+  Background,
+  ChildTemplate,
+  Layout,
+  ParentTemplate,
+  RegisterForm,
+  UserForm,
+  registerSchema,
+} from '../../components';
 
 export type RegisterData = {
   userEmail: string;

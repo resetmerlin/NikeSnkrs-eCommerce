@@ -1,11 +1,13 @@
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { CardLists, Intro } from '../../components/organisms';
-import CardListsSkeleton from '../../components/organisms/cardLists/CardListsSkeleton';
-import { useGetProductsQuery } from '../../features/api/apiSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logOut } from '../../hooks';
-import { selectUser } from '../../features/user/userInfoSlice';
+import {
+  CardLists,
+  CardListsSkeleton,
+  ChildTemplate,
+  HeaderLayout,
+  Intro,
+  ParentTemplate,
+} from '../../components';
+import { selectUser, useGetProductsQuery } from '../../features';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -21,7 +23,7 @@ function HomePage() {
   };
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="s">
           <Intro />
@@ -34,7 +36,7 @@ function HomePage() {
           )}
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }
 

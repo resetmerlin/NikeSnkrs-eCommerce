@@ -1,23 +1,24 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import {
   AtomicTitle,
+  Cart,
+  CartAddress,
+  CartSummary,
   ChildTemplate,
+  HeaderLayout,
   ParentTemplate,
-} from '../../components/atoms';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { CartAddress, CartSummary } from '../../components/molecules';
-import { Cart } from '../../components/organisms';
+} from '../../components';
 import {
+  cartDeleted,
+  selectAddress,
+  selectCart,
+  selectUser,
   useAddToCartMutation,
   useAddToOrderMutation,
-} from '../../features/api/apiSlice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { cartDeleted, selectCart } from '../../features/cart/cartSlice';
-import { IAddress, ICart, ICarts, IUser } from '../../types/dto';
-import { useEffect } from 'react';
-import { goToLogin, logOut } from '../../hooks';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { selectAddress } from '../../features/address/addressSlice';
+} from '../../features';
+import { goToLogin, logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { IAddress, ICart, ICarts, IUser } from '../../types';
 
 function CartPage() {
   const { id } = useParams();
@@ -94,7 +95,7 @@ function CartPage() {
   }, [id, qty]);
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="m">
         <ChildTemplate position="topLeft" size="m">
           <AtomicTitle size="xs">Cart</AtomicTitle>
@@ -120,7 +121,7 @@ function CartPage() {
           <CartAddress address={address} />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }
 

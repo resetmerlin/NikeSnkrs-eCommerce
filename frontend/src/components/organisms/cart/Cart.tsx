@@ -9,7 +9,7 @@ type IProps = {
 };
 
 /**
- * Responsible for making cart organisms
+ * Responsible for taking a list of 'cartProducts' and rendering them as 'Cart's
  *
  * - Responsible for components begin to have the final shape
  * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces

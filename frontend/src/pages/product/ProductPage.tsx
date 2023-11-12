@@ -3,15 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   AtomicItemImage,
   ChildTemplate,
+  HeaderLayout,
+  ItemInfoEvents,
+  ItemNav,
   ParentTemplate,
-} from '../../components/atoms';
-import { ItemInfoEvents, ItemNav } from '../../components/organisms';
-import { useGetProductsQuery } from '../../features/api/apiSlice';
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { IProduct, IUser } from '../../types/dto';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logOut } from '../../hooks';
-import { selectUser } from '../../features/user/userInfoSlice';
+} from '../../components';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { selectUser, useGetProductsQuery } from '../../features';
+import { IProduct, IUser } from '../../types';
 
 export type ItemColRef = HTMLAnchorElement;
 
@@ -93,7 +92,7 @@ export default function ProductPage() {
   }, [goNextProductPage, isObserving]);
 
   return (
-    <LayoutHeader logOut={logOutHandler} userInfo={userInfo}>
+    <HeaderLayout logOut={logOutHandler} userInfo={userInfo}>
       <ParentTemplate size="full">
         <ChildTemplate position="left" size="full">
           <ItemInfoEvents
@@ -115,6 +114,6 @@ export default function ProductPage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }

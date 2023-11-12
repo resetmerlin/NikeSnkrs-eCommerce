@@ -7,7 +7,7 @@ interface IProps extends PropsWithChildren {
   logOut: () => void;
 }
 
-export default function LayoutHeader({ children, userInfo, logOut }: IProps) {
+export default function HeaderLayout({ children, userInfo, logOut }: IProps) {
   return (
     <>
       <Header userInfo={userInfo} logOut={logOut} />

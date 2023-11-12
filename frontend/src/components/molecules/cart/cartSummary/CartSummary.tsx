@@ -12,8 +12,9 @@ type IProps = {
   addToOrderHandler: () => void;
 };
 /**
- * Responsible for making cart summary molecules
+ * Responsible for rendering a cart summary
  *
+ * - Responsible for the styling of the cart summary
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

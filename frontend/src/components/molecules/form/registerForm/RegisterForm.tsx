@@ -20,8 +20,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making register form molecules
+ * Responsible for rendering a register form
  *
+ * - Responsible for the styling of the rendering form
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

@@ -1,17 +1,19 @@
-import LayoutHeader from '../../components/layouts/layoutHeader/LayoutHeader';
-import { ChildTemplate, ParentTemplate } from '../../components/atoms';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { logOut } from '../../hooks';
-import { selectUser } from '../../features/user/userInfoSlice';
-import { OrderInfo } from '../../components/organisms';
-import { IOrder } from '../../types/dto';
-import { selectOrder } from '../../features/order/orderSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   OnApproveBraintreeActions,
   OnApproveBraintreeData,
 } from '@paypal/react-paypal-js';
+
+import {
+  ChildTemplate,
+  HeaderLayout,
+  OrderInfo,
+  ParentTemplate,
+} from '../../components';
+import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { selectOrder, selectUser } from '../../features';
+import { IOrder } from '../../types';
 
 export default function OrderPage() {
   const dispatch = useAppDispatch();
@@ -68,7 +70,7 @@ export default function OrderPage() {
   const currentDate = dateHandler.format(date);
 
   return (
-    <LayoutHeader userInfo={userInfo} logOut={logOutHandler}>
+    <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
       <ParentTemplate size="s">
         <ChildTemplate position="center" size="full">
           <OrderInfo
@@ -80,6 +82,6 @@ export default function OrderPage() {
           />
         </ChildTemplate>
       </ParentTemplate>
-    </LayoutHeader>
+    </HeaderLayout>
   );
 }

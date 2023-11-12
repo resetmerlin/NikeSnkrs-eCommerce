@@ -7,8 +7,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making user button molecules
+ * Responsible for rendering a user button
  *
+ * - Responsible for the styling of the user button
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */

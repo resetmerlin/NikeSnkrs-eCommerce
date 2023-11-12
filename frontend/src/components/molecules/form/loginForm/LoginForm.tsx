@@ -21,8 +21,9 @@ type IProps = {
 };
 
 /**
- * Responsible for making login form molecules
+ * Responsible for rendering a login form
  *
+ * - Responsible for the styling of the login form
  * - Responsible for creating functionalities by using atoms
  * - Responsible for creating functionalities via pure functions props
  */
