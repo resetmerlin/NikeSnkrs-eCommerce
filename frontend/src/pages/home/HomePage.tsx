@@ -6,21 +6,10 @@ import {
   Intro,
   ParentTemplate,
 } from '../../components';
-import { selectUser, useGetProductsQuery } from '../../features';
-import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { useHomePage } from './HomePage.hook';
 
 function HomePage() {
-  const dispatch = useAppDispatch();
-  const userInfo = useAppSelector(selectUser);
-
-  const { data: products, isLoading } = useGetProductsQuery();
-
-  /** 3 products */
-  const threeProducts = products && [...products]?.slice(0, 3);
-
-  const logOutHandler = () => {
-    logOut(dispatch);
-  };
+  const [userInfo, threeProducts, isLoading, logOutHandler] = useHomePage();
 
   return (
     <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
