@@ -5,17 +5,10 @@ import {
   ItemLists,
   ParentTemplate,
 } from '../../components';
-import { selectUser, useGetProductsQuery } from '../../features';
-import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
+import { useProductsPage } from './ProductsPageHook';
 
 export default function ProductsPage() {
-  const dispatch = useAppDispatch();
-  const userInfo = useAppSelector(selectUser);
-  const { data: products } = useGetProductsQuery();
-
-  const logOutHandler = () => {
-    logOut(dispatch);
-  };
+  const [userInfo, products, logOutHandler] = useProductsPage();
 
   return (
     <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>
