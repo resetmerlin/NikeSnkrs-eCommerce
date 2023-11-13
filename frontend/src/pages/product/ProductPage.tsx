@@ -6,7 +6,7 @@ import {
   ItemNav,
   ParentTemplate,
 } from '../../components';
-import { useProductPage } from './ProductPageHook';
+import { useProductPage } from './ProductPage.hook';
 
 export type ItemColRef = HTMLAnchorElement;
 
