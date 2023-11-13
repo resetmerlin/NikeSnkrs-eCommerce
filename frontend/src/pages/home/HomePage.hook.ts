@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { selectUser, useGetProductsQuery } from '../../features';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -10,9 +11,9 @@ export const useHomePage = () => {
   /** 3 products */
   const threeProducts = products && [...products]?.slice(0, 3);
 
-  const logOutHandler = () => {
+  const logOutHandler = useCallback(() => {
     logOut(dispatch);
-  };
+  }, [dispatch, logOut]);
 
   return [userInfo, threeProducts, isLoading, logOutHandler];
 };

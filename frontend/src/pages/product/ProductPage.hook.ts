@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ItemColRef } from './ProductPage';
 import { selectUser, useGetProductsQuery } from '../../features';
@@ -44,14 +50,19 @@ const useFetchProducts = (
   const { data: products } = useGetProductsQuery();
 
   /** Current product */
-  const product =
-    products &&
-    [...products].filter(
-      (product): product is IProduct => product?._id == productId
-    )[0];
+  const product = useMemo(() => {
+    return (
+      products &&
+      [...products].filter(
+        (product): product is IProduct => product?._id == productId
+      )[0]
+    );
+  }, [products, productId]);
 
   /** Current product index  */
-  const currentIndex = product ? products?.indexOf(product) : -1;
+  const currentIndex = useMemo(() => {
+    return product && products ? products?.indexOf(product) : -1;
+  }, [product, products]);
 
   return [product, products, currentIndex];
 };
@@ -75,16 +86,16 @@ export const useProductPage = (): [
   const userInfo: IUser = useAppSelector(selectUser);
   const [product, products, currentIndex] = useFetchProducts(productId);
 
-  const goPrevPage = () => {
+  const goPrevPage = useCallback(() => {
     navigate(-1);
-  };
+  }, [navigate]);
 
-  const logOutHandler = () => {
+  const logOutHandler = useCallback(() => {
     logOut(dispatch);
-  };
+  }, [dispatch, logOut]);
 
   /** Go next product page */
-  const goNextProductPage = () => {
+  const goNextProductPage = useCallback(() => {
     if (currentIndex + 1 !== products?.length && products) {
       navigate(`${products[currentIndex + 1]?._id}`);
     }
@@ -92,18 +103,22 @@ export const useProductPage = (): [
     else if (products) {
       navigate(`${products[0]?._id}`);
     }
-  };
-  /** go cart page with quantity */
-  const addToCart = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const qty = e.currentTarget?.productSelect.value;
+  }, [navigate, currentIndex, products]);
 
-    if (product?.countInStock === 0) {
-      alert('Out of Stock');
-    } else {
-      navigate(`/cart/${product?._id}?qty=${qty}`);
-    }
-  };
+  /** go cart page with quantity */
+  const addToCart = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const qty = e.currentTarget?.productSelect.value;
+
+      if (product?.countInStock === 0) {
+        alert('Out of Stock');
+      } else {
+        navigate(`/cart/${product?._id}?qty=${qty}`);
+      }
+    },
+    [navigate, product]
+  );
 
   /** Observer Product */
   useProductObserver(columnRef, goNextProductPage);
