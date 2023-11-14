@@ -14,7 +14,6 @@ type IProps = {
 export default function OrderInfo({
   order,
   clientId,
-  checkPaid,
   currentDate,
   paypalPaid,
 }: IProps) {
