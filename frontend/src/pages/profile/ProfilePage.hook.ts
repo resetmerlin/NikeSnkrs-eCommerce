@@ -11,7 +11,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../components';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { IUser } from '../../types';
 
 export type ProfileData = {
@@ -88,34 +88,37 @@ export const useProfilePage = () => {
   // Daumn Popup
   const open = useDaumPostcodePopup();
 
-  const addressPopup = (data: {
-    address: string;
-    bname: string;
-    buildingName: string;
-    addressType: string;
-  }) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
+  const addressPopup = useCallback(
+    (data: {
+      address: string;
+      bname: string;
+      buildingName: string;
+      addressType: string;
+    }) => {
+      let fullAddress = data.address;
+      let extraAddress = '';
 
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
+      if (data.addressType === 'R') {
+        if (data.bname !== '') {
+          extraAddress += data.bname;
+        }
+        if (data.buildingName !== '') {
+          extraAddress +=
+            extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+        }
+
+        fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
       }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
 
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
-
-    setValue('address', fullAddress);
-  };
+      setValue('address', fullAddress);
+    },
+    [setValue]
+  );
 
   // Open address popup
-  const addressHandler = () => {
+  const addressHandler = useCallback(() => {
     open({ onComplete: addressPopup });
-  };
+  }, [open, addressPopup]);
 
   return [
     userInfo,
@@ -135,6 +138,7 @@ export const useProfilePage = () => {
   ];
 };
 
+/** Get User hook */
 const useGetUser = (userInfo: IUser): [userInfo: IUser | undefined] => {
   const [getUser, { data: getUserData }] = useGetUserMutation();
 
