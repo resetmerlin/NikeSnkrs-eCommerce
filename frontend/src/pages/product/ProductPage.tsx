@@ -1,5 +1,3 @@
-import React, { useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import {
   AtomicItemImage,
   ChildTemplate,
@@ -8,36 +6,22 @@ import {
   ItemNav,
   ParentTemplate,
 } from '../../components';
-import {
-  useAddToCart,
-  useFetchProducts,
-  useGoNextPage,
-  useProductObserver,
-  useUserActionHandler,
-} from './ProductPageHook';
+import { useProductPage } from './ProductPage.hook';
 
 export type ItemColRef = HTMLAnchorElement;
 
 export default function ProductPage() {
-  const navigate = useNavigate();
-
-  const { id: productId } = useParams();
-  const [product, products, currentIndex] = useFetchProducts(productId);
-
-  const [userInfo, logOutHandler, goPrevPage] = useUserActionHandler();
-
-  /** Go next product page */
-  const goNextProductPage = () =>
-    useGoNextPage(navigate, currentIndex, products);
-
-  /** go cart page with quantity */
-  const addToCart = (e: React.FormEvent<HTMLFormElement>) =>
-    useAddToCart(e, navigate, product);
-
-  const columnRef = useRef<ItemColRef | null>(null);
-
-  /** Observer Product */
-  useProductObserver(columnRef, goNextProductPage);
+  const [
+    addToCart,
+    goNextProductPage,
+    columnRef,
+    logOutHandler,
+    goPrevPage,
+    userInfo,
+    product,
+    products,
+    productId,
+  ] = useProductPage();
 
   return (
     <HeaderLayout logOut={logOutHandler} userInfo={userInfo}>

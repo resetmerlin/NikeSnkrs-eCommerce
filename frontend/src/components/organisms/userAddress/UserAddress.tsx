@@ -1,5 +1,4 @@
 import { UseFormReturn } from 'react-hook-form';
-import { AddressData } from '../../../pages/profile/ProfilePage';
 import {
   AtomicButton,
   AtomicInput,
@@ -7,6 +6,7 @@ import {
   AtomicTitle,
 } from '../../atoms';
 import './UserAddress.scss';
+import { AddressData } from '../../../pages/profile/ProfilePage.hook';
 
 type IProps = {
   addressHandler: () => void;

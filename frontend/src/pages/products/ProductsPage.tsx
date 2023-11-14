@@ -5,7 +5,7 @@ import {
   ItemLists,
   ParentTemplate,
 } from '../../components';
-import { useProductsPage } from './ProductsPageHook';
+import { useProductsPage } from './ProductsPage.hook';
 
 export default function ProductsPage() {
   const [userInfo, products, logOutHandler] = useProductsPage();

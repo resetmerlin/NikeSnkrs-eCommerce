@@ -1,136 +1,29 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
-import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { useNavigate } from 'react-router-dom';
 import {
   ChildTemplate,
   HeaderLayout,
   ParentTemplate,
   UserAddress,
   UserInfo,
-  registerSchema,
 } from '../../components';
-import {
-  addressAdded,
-  selectAddress,
-  selectUser,
-  useGetUserMutation,
-  useUserChangedMutation,
-} from '../../features';
-import { goToLogin, logOut, useAppDispatch, useAppSelector } from '../../hooks';
-
-export type ProfileData = {
-  userEmail: string;
-  userPassword: string;
-  userName: string;
-  userConfirmPassword: string;
-};
-export type AddressData = {
-  address: string;
-};
+import { useProfilePage } from './ProfilePage.hook';
 
 export default function ProfilePage() {
-  const dispatch = useAppDispatch();
-  const userInfo = useAppSelector(selectUser);
-  const addressInfo = useAppSelector(selectAddress);
-
-  const navigate = useNavigate();
-
-  const logOutHandler = () => {
-    logOut(dispatch);
-  };
-
-  // Check user login else go login page
-  goToLogin(userInfo, navigate);
-
-  // Change profile via api
-  const [userChange, { error: profileError, data: profileSuccess }] =
-    useUserChangedMutation();
-
-  // Get user profile via api
-  const [getUser, { data: getUserData }] = useGetUserMutation();
-
-  // Submit profile
-  const profileSubmit: SubmitHandler<ProfileData> = (data: ProfileData) => {
-    if (userInfo._id) {
-      const user = {
-        _id: userInfo._id,
-        name: data.userName,
-        email: data.userEmail,
-        password: data.userPassword,
-        token: userInfo.token,
-      };
-      userChange(user);
-    }
-  };
-
-  const {
+  const [
+    userInfo,
+    logOutHandler,
+    profileSubmit,
+    profileError,
+    getUserData,
+    inputErrors,
     register,
     handleSubmit,
-    formState: { errors: inputErrors },
-  } = useForm<ProfileData>({
-    mode: 'onChange',
-    resolver: yupResolver(registerSchema),
-  });
-
-  // Submit address
-  const addressSubmit: SubmitHandler<AddressData> = (data: AddressData) => {
-    if (data) {
-      const address = {
-        address: data.address,
-      };
-      dispatch(addressAdded(address));
-    }
-  };
-
-  const {
-    register: addressRegister,
-    handleSubmit: handleSubmit2,
-    setValue,
-  } = useForm<AddressData>();
-
-  // Daumn Popup
-  const open = useDaumPostcodePopup();
-
-  const addressPopup = (data: {
-    address: string;
-    bname: string;
-    buildingName: string;
-    addressType: string;
-  }) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
-
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
-
-    setValue('address', fullAddress);
-  };
-
-  // Open address popup
-  const addressHandler = () => {
-    open({ onComplete: addressPopup });
-  };
-
-  // Fetch user profile
-  useEffect(() => {
-    if (userInfo?._id) {
-      const user = {
-        token: userInfo.token,
-      };
-      getUser(user);
-    }
-  }, [userInfo]);
+    profileSuccess,
+    addressInfo,
+    addressHandler,
+    addressRegister,
+    handleSubmit2,
+    addressSubmit,
+  ] = useProfilePage();
 
   return (
     <HeaderLayout userInfo={userInfo} logOut={logOutHandler}>

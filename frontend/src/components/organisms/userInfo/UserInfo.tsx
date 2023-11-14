@@ -1,5 +1,4 @@
 import { UseFormReturn } from 'react-hook-form';
-import { ProfileData } from '../../../pages/profile/ProfilePage';
 import {
   AtomicButton,
   AtomicInput,
@@ -10,6 +9,7 @@ import './UserInfo.scss';
 import { IUser } from '../../../types/dto';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { ProfileData } from '../../../pages/profile/ProfilePage.hook';
 
 type IProps = {
   profileSubmit: (data: ProfileData) => void;

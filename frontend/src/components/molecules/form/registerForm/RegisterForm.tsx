@@ -7,9 +7,9 @@ import {
   AtomicSubtitle,
 } from '../../../atoms';
 import { UseFormReturn } from 'react-hook-form';
-import { RegisterData } from '../../../../pages/register/RegisterPage';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { RegisterData } from '../../../../pages/register/RegisterPage.hook';
 
 type IProps = {
   registerSubmit: (data: RegisterData) => void;
