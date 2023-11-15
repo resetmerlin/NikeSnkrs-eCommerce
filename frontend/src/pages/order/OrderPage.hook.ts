@@ -1,9 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  OnApproveBraintreeActions,
-  OnApproveBraintreeData,
-} from '@paypal/react-paypal-js';
 import { selectOrder, selectUser } from '../../features';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 import { IOrder, IUser } from '../../types';
@@ -13,10 +9,7 @@ export const useOrderPage = (): [
   logOutHandler: () => void,
   paypalPaid: boolean,
   order: IOrder,
-  checkPaid: (
-    _data: OnApproveBraintreeData,
-    actions: OnApproveBraintreeActions
-  ) => void,
+  checkPaid: () => void,
   clientId: string,
   date: Date,
   dateHandler: Intl.DateTimeFormat,
@@ -27,16 +20,8 @@ export const useOrderPage = (): [
   const [paypalPaid, setPaypalPaid] = useState(false);
 
   // Check user paid
-  const checkPaid = async (
-    _data: OnApproveBraintreeData,
-    actions: OnApproveBraintreeActions
-  ) => {
-    if (actions && actions.order) {
-      const details = await actions.order.capture();
-      console.log('Order successfully captured:', details);
-
-      setPaypalPaid(true);
-    }
+  const checkPaid = () => {
+    setPaypalPaid(true);
   };
 
   const logOutHandler = useCallback(() => {

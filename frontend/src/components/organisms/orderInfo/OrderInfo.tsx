@@ -1,20 +1,12 @@
 import { IOrder } from '../../../types/dto';
 import { AtomicSubtitle, AtomicTitle } from '../../atoms';
-import {
-  OnApproveBraintreeActions,
-  OnApproveBraintreeData,
-  PayPalButtons,
-  PayPalScriptProvider,
-} from '@paypal/react-paypal-js';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import './OrderInfo.scss';
 
 type IProps = {
   order: IOrder;
   clientId: string;
-  checkPaid: (
-    _data: OnApproveBraintreeData,
-    actions: OnApproveBraintreeActions
-  ) => void;
+  checkPaid: () => void;
   currentDate: string;
   paypalPaid: boolean;
 };
@@ -22,7 +14,6 @@ type IProps = {
 export default function OrderInfo({
   order,
   clientId,
-  checkPaid,
   currentDate,
   paypalPaid,
 }: IProps) {
@@ -114,14 +105,13 @@ export default function OrderInfo({
                       value: order.totalPrice.toString(), // Set the price here
                     },
                     payee: {
-                      merchant_id: order?._id,
+                      merchant_id: clientId,
                       email_address: order?.email,
                     },
                   },
                 ],
               });
             }}
-            paymentCheck={checkPaid}
           />
         </PayPalScriptProvider>
       )}
