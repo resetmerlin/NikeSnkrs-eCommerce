@@ -1,15 +1,22 @@
 import { IProduct } from '../../../types/dto';
-import { AtomicCard, AtomicSubtitle } from '../../atoms';
+import { AtomicCard, AtomicItemImage, AtomicSubtitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './Card.scss';
 
 type IProps = {
   product: IProduct;
 };
+/**
+ * Responsible for rendering card
+ *
+ * - Responsible for the styling of the card
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function Card({ product }: IProps) {
   return (
     <AtomicCard>
-      <img src={`./products/${product?._id}.png`} alt="card-jordan" />
+      <AtomicItemImage path="short" size="m" productId={product?._id} />
       <div className="card__content">
         <AtomicSubtitle size="m">{product?.name}</AtomicSubtitle>
 

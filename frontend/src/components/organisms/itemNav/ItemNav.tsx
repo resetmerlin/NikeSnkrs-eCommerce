@@ -10,6 +10,12 @@ type IProps = {
   products?: IProducts;
 };
 
+/**
+ * Responsible for taking a list of 'products' and rendering them as 'ItemColumn's
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default forwardRef<ItemColRef, IProps>(function ItemNav(
   { products, productId, goNextProductPage },
   ref

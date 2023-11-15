@@ -5,6 +5,12 @@ import './AtomicLogo.scss';
 interface IProps extends TNormalElementProps<HTMLImageElement> {
   size?: 's' | 'm' | 'l' | 'xl';
 }
+
+/**
+ * Responsible for making Basic Atoms logo
+ *
+ * - Responsible for change the size based on the props
+ */
 export default function AtomicLogo({
   children,
   className = '',

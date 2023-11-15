@@ -16,6 +16,6 @@ export const addressSlice = createSlice({
 });
 
 export const { addressAdded, addressDeleted } = addressSlice.actions;
-export const selectAddress = (state) => state.address;
+export const selectAddress = (state: any) => state.address;
 
 export default addressSlice.reducer;

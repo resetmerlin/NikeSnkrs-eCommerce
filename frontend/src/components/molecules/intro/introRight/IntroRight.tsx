@@ -1,5 +1,12 @@
 import { AtomicSubtitle, AtomicTitle } from '../../../atoms';
+import './IntroRight.scss';
 
+/**
+ * Responsible for rendering a intro right
+ *
+ * - Responsible for the styling of the intro right
+ * - Responsible for creating functionalities by using atoms
+ */
 export default function IntroRight() {
   return (
     <div className="intro-right">

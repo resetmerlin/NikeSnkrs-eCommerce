@@ -1,5 +1,12 @@
 import { AtomicTitle } from '../../../atoms';
+import './IntroBackground.scss';
 
+/**
+ * Responsible for rendering a intro background
+ *
+ * - Responsible for the styling of the intro background
+ * - Responsible for creating functionalities by using atoms
+ */
 export default function IntroBackground() {
   return (
     <div className="intro-background">

@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ICart } from '../../types/dto';
 
 export const cartSlice = createSlice({
   name: 'carts',
   initialState: [],
   reducers: {
-    cartAdded(state, action) {
+    cartAdded(state: any[], action) {
       const data = action.payload;
 
       const existProductIndex = state.findIndex(
-        (x) => x.product === data.product
+        (x: ICart) => x.product === data.product
       );
 
       // Override product if already exist
@@ -20,7 +21,7 @@ export const cartSlice = createSlice({
     },
     cartDeleted(state, action) {
       const indexToDelete = state.findIndex(
-        (x) => x.product === action.payload
+        (x: ICart) => x.product === action.payload
       );
 
       // Delete product
@@ -31,7 +32,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { cartAdded, cartDeleted, cartAddressAdded } = cartSlice.actions;
-export const selectCart = (state) => state.carts;
+export const { cartAdded, cartDeleted } = cartSlice.actions;
+export const selectCart = (state: any) => state.carts;
 
 export default cartSlice.reducer;

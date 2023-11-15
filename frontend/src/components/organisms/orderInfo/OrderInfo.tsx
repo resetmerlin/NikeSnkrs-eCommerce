@@ -5,12 +5,15 @@ import './OrderInfo.scss';
 
 type IProps = {
   order: IOrder;
+  clientId: string;
+  checkPaid: () => void;
+  currentDate: string;
+  paypalPaid: boolean;
 };
 
 export default function OrderInfo({
   order,
   clientId,
-  checkPaypal,
   currentDate,
   paypalPaid,
 }: IProps) {
@@ -88,28 +91,27 @@ export default function OrderInfo({
       {clientId && !paypalPaid && (
         <PayPalScriptProvider
           options={{
-            'client-id': `${clientId}`,
+            clientId: `${clientId}`,
             components: 'buttons',
             currency: 'USD',
           }}
         >
           <PayPalButtons
-            createOrder={(data, actions) => {
+            createOrder={(_, actions) => {
               return actions.order.create({
                 purchase_units: [
                   {
                     amount: {
                       value: order.totalPrice.toString(), // Set the price here
                     },
+                    payee: {
+                      merchant_id: clientId,
+                      email_address: order?.email,
+                    },
                   },
                 ],
               });
             }}
-            currency="USD"
-            showSpinner={false}
-            totalPrice={order.totalPrice}
-            paymentCheck={checkPaypal}
-            orderId={order?._id}
           />
         </PayPalScriptProvider>
       )}

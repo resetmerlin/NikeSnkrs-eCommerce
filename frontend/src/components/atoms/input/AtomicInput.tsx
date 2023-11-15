@@ -1,35 +1,32 @@
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { TNormalElementProps } from '../../../types';
-import { UseFormRegister } from 'react-hook-form';
 import './AtomicInput.scss';
 
-type FormValues = {
-  userEmail: string;
-  userPassword: string;
-  userName?: string;
-  userConfirmPassword?: string;
-  postalCode: string;
-  address: string;
-  specificAddress: string;
-  referenceItem: string;
-};
-
-interface IProps extends TNormalElementProps<HTMLInputElement> {
+interface IProps<TFieldValues extends FieldValues>
+  extends TNormalElementProps<HTMLInputElement> {
   type: 'password' | 'email' | 'name';
-  name: keyof FormValues;
-  register?: UseFormRegister<FormValues>;
+  name: Extract<keyof TFieldValues, string>; // Ensure name is of string type
+  register?: UseFormRegister<TFieldValues>;
 }
 
-export default function AtomicInput({
+/**
+ * Responsible for making Basic Atoms input
+ *
+ * - Responsible for change the type based on the props
+ * - Responsible for change the name based on the props
+ * - Responsible for getting the register(optional) on the props
+ */
+export default function AtomicInput<TFieldValues extends FieldValues>({
   className = '',
   name,
   type,
   register,
   ...props
-}: IProps) {
+}: IProps<TFieldValues>) {
   return (
     <input
+      {...(register ? register(name as any) : {})} // Only spread if register is provided
       {...props}
-      {...(register && register(name))}
       name={name}
       type={type}
       className={`${className} input`}

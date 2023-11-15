@@ -6,23 +6,32 @@ import {
   AtomicLabel,
   AtomicSubtitle,
 } from '../../../atoms';
-import './RegisterForm.scss';
 import { UseFormReturn } from 'react-hook-form';
-import { RegisterData } from '../../../../pages/register/RegisterPage';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
+import { RegisterData } from '../../../../pages/register/RegisterPage.hook';
 
 type IProps = {
   registerSubmit: (data: RegisterData) => void;
-  errorMessage: string;
+  registerError: FetchBaseQueryError | SerializedError | undefined;
   register: UseFormReturn<RegisterData>['register'];
   handleSubmit: UseFormReturn<RegisterData>['handleSubmit'];
-  errors: UseFormReturn<RegisterData>['formState']['errors'];
+  inputErrors: UseFormReturn<RegisterData>['formState']['errors'];
 };
+
+/**
+ * Responsible for rendering a register form
+ *
+ * - Responsible for the styling of the rendering form
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default function RegisterForm({
   register,
   handleSubmit,
-  errors,
+  inputErrors,
   registerSubmit,
-  errorMessage,
+  registerError,
 }: IProps) {
   return (
     <AtomicForm onSubmit={handleSubmit(registerSubmit)}>
@@ -31,7 +40,11 @@ export default function RegisterForm({
         <AtomicSubtitle size="m" color="secondary">
           Get tremendous nike Snkrs right now!
         </AtomicSubtitle>
-        {errorMessage && <p>{errorMessage}</p>}
+        {registerError && 'data' in registerError && (
+          <p>
+            {(registerError as { data: { message: string } })?.data?.message}
+          </p>
+        )}
       </div>
       <div className="form__inputs-wrap">
         {/* Email label & input */}
@@ -44,7 +57,9 @@ export default function RegisterForm({
           name="userEmail"
           register={register}
         />
-        {errors?.['userEmail'] && <p>{errors?.['userEmail'].message}</p>}
+        {inputErrors?.['userEmail'] && (
+          <p>{inputErrors?.['userEmail'].message}</p>
+        )}
 
         {/* Name label & input */}
         <AtomicLabel htmlFor="userName">
@@ -56,7 +71,9 @@ export default function RegisterForm({
           name="userName"
           register={register}
         />
-        {errors?.['userName'] && <p>{errors?.['userName'].message}</p>}
+        {inputErrors?.['userName'] && (
+          <p>{inputErrors?.['userName'].message}</p>
+        )}
 
         {/* Password label & input */}
         <AtomicLabel htmlFor="userPassword">
@@ -68,7 +85,9 @@ export default function RegisterForm({
           name="userPassword"
           register={register}
         />
-        {errors?.['userPassword'] && <p>{errors?.['userPassword'].message}</p>}
+        {inputErrors?.['userPassword'] && (
+          <p>{inputErrors?.['userPassword'].message}</p>
+        )}
 
         {/* Confirm Password label & input */}
         <AtomicLabel htmlFor="userConfirmPassword">
@@ -81,8 +100,8 @@ export default function RegisterForm({
           register={register}
         />
 
-        {errors?.['userConfirmPassword'] && (
-          <p>{errors?.['userConfirmPassword'].message}</p>
+        {inputErrors?.['userConfirmPassword'] && (
+          <p>{inputErrors?.['userConfirmPassword'].message}</p>
         )}
       </div>
       <AtomicButton size="m" type="submit">

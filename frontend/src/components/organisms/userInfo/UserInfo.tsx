@@ -1,5 +1,4 @@
 import { UseFormReturn } from 'react-hook-form';
-import { ProfileData } from '../../../pages/profile/ProfilePage';
 import {
   AtomicButton,
   AtomicInput,
@@ -10,37 +9,45 @@ import './UserInfo.scss';
 import { IUser } from '../../../types/dto';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { ProfileData } from '../../../pages/profile/ProfilePage.hook';
 
 type IProps = {
   profileSubmit: (data: ProfileData) => void;
-  errorMessage: string;
   register: UseFormReturn<ProfileData>['register'];
   handleSubmit: UseFormReturn<ProfileData>['handleSubmit'];
-  errors: UseFormReturn<ProfileData>['formState']['errors'];
-  data: { message: string };
-  error:
-    | { data: { message: string } }
-    | undefined
-    | FetchBaseQueryError
-    | SerializedError;
+  inputErrors: UseFormReturn<ProfileData>['formState']['errors'];
+  profileSuccess: IUser | undefined;
+  profileError: undefined | FetchBaseQueryError | SerializedError;
   userInfo: IUser | undefined;
 };
 
+/**
+ * Responsible for making user info organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function UserInfo({
   register,
   handleSubmit,
   profileSubmit,
-  errors,
-  data,
-  error,
+  inputErrors,
+  profileSuccess,
+  profileError,
   userInfo,
 }: IProps) {
   return (
     <form className="userInfo" onSubmit={handleSubmit(profileSubmit)}>
       <div>
         <AtomicTitle size="xs">User Info:</AtomicTitle>
-        {data && <p className="userInfo__success">Updated Successfully!</p>}
-        {error && <p>{error?.data?.message}</p>}
+        {profileSuccess && (
+          <p className="userInfo__success">Updated Successfully!</p>
+        )}
+        {profileError && 'data' in profileError && (
+          <p>
+            {(profileError as { data: { message: string } })?.data?.message}
+          </p>
+        )}
       </div>
       <AtomicLabel htmlFor="userEmail">Enter Email</AtomicLabel>
       <AtomicInput
@@ -50,7 +57,9 @@ export default function UserInfo({
         placeholder={userInfo?.email}
       />
 
-      {errors?.['userEmail'] && <p>{errors?.['userEmail'].message}</p>}
+      {inputErrors?.['userEmail'] && (
+        <p>{inputErrors?.['userEmail'].message}</p>
+      )}
 
       <AtomicLabel htmlFor="userName">Enter name</AtomicLabel>
 
@@ -61,12 +70,14 @@ export default function UserInfo({
         placeholder={userInfo?.name}
       />
 
-      {errors?.['userName'] && <p>{errors?.['userName'].message}</p>}
+      {inputErrors?.['userName'] && <p>{inputErrors?.['userName'].message}</p>}
 
       <AtomicLabel htmlFor="userPassword">Enter password</AtomicLabel>
       <AtomicInput type="password" name="userPassword" register={register} />
 
-      {errors?.['userPassword'] && <p>{errors?.['userPassword'].message}</p>}
+      {inputErrors?.['userPassword'] && (
+        <p>{inputErrors?.['userPassword'].message}</p>
+      )}
 
       <AtomicLabel htmlFor="userConfirmPassword">Confirm password</AtomicLabel>
       <AtomicInput
@@ -74,8 +85,8 @@ export default function UserInfo({
         name="userConfirmPassword"
         register={register}
       />
-      {errors?.['userConfirmPassword'] && (
-        <p>{errors?.['userConfirmPassword'].message}</p>
+      {inputErrors?.['userConfirmPassword'] && (
+        <p>{inputErrors?.['userConfirmPassword'].message}</p>
       )}
       <AtomicButton type="submit" size="m" shape="normal">
         Update

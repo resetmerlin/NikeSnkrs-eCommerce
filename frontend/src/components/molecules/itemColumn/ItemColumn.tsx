@@ -10,6 +10,12 @@ type IProps = {
   product: IProduct;
 };
 
+/**
+ * Responsible for making item column molecules
+ *
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
 export default forwardRef<ItemColRef, IProps>(function ItemColumn(
   { product, productId },
   ref

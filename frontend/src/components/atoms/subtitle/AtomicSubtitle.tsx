@@ -8,6 +8,13 @@ interface IProps extends TNormalElementProps<HTMLSpanElement> {
   strength?: '400' | '500' | '600' | '700';
 }
 
+/**
+ * Responsible for making Basic Atoms subtitle
+ *
+ * - Responsible for change the size based on the props
+ * - Responsible for change the color based on the props
+ * - Responsible for change the strength based on the props
+ */
 export default function AtomicSubtitle({
   children,
   className = '',

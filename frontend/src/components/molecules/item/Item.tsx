@@ -1,12 +1,23 @@
 import { IProduct } from '../../../types/dto';
-import { AtomicItem, AtomicSubtitle } from '../../atoms';
+import { AtomicItem, AtomicItemImage, AtomicSubtitle } from '../../atoms';
 import SvgStar from '../../atoms/icons/SvgStar';
 import './Item.scss';
 
-export default function Item({ product }: IProduct) {
+type IProps = {
+  product: IProduct;
+};
+
+/**
+ * Responsible for rendering a item
+ *
+ * - Responsible for the styling of the item
+ * - Responsible for creating functionalities by using atoms
+ * - Responsible for creating functionalities via pure functions props
+ */
+export default function Item({ product }: IProps) {
   return (
     <AtomicItem size="m">
-      <img src={`./products/${product._id}.png`} alt="card-jordan" />
+      <AtomicItemImage path="short" size="l" productId={product._id} />
       <AtomicSubtitle size="l">{product?.name}</AtomicSubtitle>
       <div className="card__stars">
         <SvgStar color="black" />

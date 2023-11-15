@@ -4,7 +4,7 @@ export const productSlice = createSlice({
   name: 'products',
   initialState: [],
   reducers: {
-    productAdded(state, action) {
+    productAdded(state: any[], action) {
       const data = action.payload;
       state.push(data);
     },

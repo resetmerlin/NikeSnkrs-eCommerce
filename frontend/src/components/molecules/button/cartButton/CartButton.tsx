@@ -1,5 +1,11 @@
 import { AtomicButton, SvgCartAlt } from '../../../atoms';
 
+/**
+ * Responsible for rendering a cart button
+ *
+ * - Responsible for the styling of the cart button
+ * - Responsible for creating functionalities by using atoms
+ */
 export default function CartButton() {
   return (
     <AtomicButton shape="round" color="secondary" size="s">

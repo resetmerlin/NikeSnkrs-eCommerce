@@ -10,6 +10,12 @@ type IProps = {
   product: IProduct;
 };
 
+/**
+ * Responsible for making item info events organisms
+ *
+ * - Responsible for components begin to have the final shape
+ * - Responsible for combination of molecules that work together or atoms that compose more elaborate interfaces
+ */
 export default function ItemInfoEvents({
   product,
   goPrevPage,
