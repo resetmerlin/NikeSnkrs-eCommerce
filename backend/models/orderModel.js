@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: 'User',
     },
     email: { type: String, required: true },
     name: { type: String, required: true },
@@ -13,22 +13,16 @@ const orderSchema = new mongoose.Schema(
       {
         name: { type: String, required: true },
         qty: { type: Number, required: true },
-        image: { type: String, required: true },
         price: { type: Number, required: true },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: "product",
+          ref: 'product',
         },
       },
     ],
     shippingAddress: {
-      postalCode: { type: String, required: true },
-
       address: { type: String, required: true },
-      specificAddress: { type: String, required: true },
-
-      referenceItem: { type: String, required: true },
     },
 
     paymentMethod: {
@@ -84,6 +78,6 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose.model('Order', orderSchema);
 //이 mongoose.model이 db 파일 이름임
 export default Order;
