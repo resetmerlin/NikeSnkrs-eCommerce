@@ -8,6 +8,10 @@
 </div>
 <br/>
 
+
+## 🎉 Update(2023-11-15)
+- Successfully built frontend application with no type error.
+
 ## Installation
 
 To install the project and its dependencies, follow these steps:
