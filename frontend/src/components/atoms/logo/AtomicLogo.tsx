@@ -27,7 +27,7 @@ export default function AtomicLogo({
         const target = e.target as HTMLImageElement;
         target.src = '../nike-logo-black.png';
       }}
-      className={`nike-${size}  nike`}
+      className={`nike-${size}  nike ${className}`}
     />
   );
 }
