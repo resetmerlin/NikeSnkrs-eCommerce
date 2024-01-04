@@ -34,6 +34,17 @@ body {
   display: flex;
   justify-content: center;
   overflow: hidden;
+
+  @media (max-width: 37.5em) {
+    overflow: visible;
+    //600px
+    overflow-y: scroll;
+  }
+  @media (max-width: 56.25em) {
+    overflow: visible;
+    //600px
+    overflow-y: scroll;
+  }
 }
 
 #header {

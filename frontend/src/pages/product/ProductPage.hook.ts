@@ -11,62 +11,14 @@ import { selectUser, useGetProductsQuery } from '../../features';
 import { IProduct, IUser } from '../../types';
 import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 
-/** Product Observing hook */
-const useProductObserver = (
-  columnRef: React.RefObject<ItemColRef>,
-  goNextProductPage: () => void
-) => {
-  const [isObserving, setIsObserving] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && columnRef.current) {
-        setIsObserving(entry.isIntersecting);
-      }
-    });
-    if (columnRef.current) {
-      observer.observe(columnRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [goNextProductPage, isObserving]);
-
-  /** Follow the observed column */
-  useEffect(() => {
-    if (isObserving && columnRef.current) {
-      columnRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'start',
-      });
-    }
-  }, [goNextProductPage, isObserving]);
-};
-
-/** Get Products related hook */
-const useFetchProducts = (
-  productId: string | undefined
-): [IProduct | undefined, IProduct[] | undefined, number] => {
-  const { data: products } = useGetProductsQuery();
-
-  /** Current product */
-  const product = useMemo(() => {
-    return (
-      products &&
-      [...products].filter(
-        (product): product is IProduct => product?._id == productId
-      )[0]
-    );
-  }, [products, productId]);
-
-  /** Current product index  */
-  const currentIndex = useMemo(() => {
-    return product && products ? products?.indexOf(product) : -1;
-  }, [product, products]);
-
-  return [product, products, currentIndex];
-};
-
+/**
+ * ### Responsible for Conducting Business Logic of Product Page
+ *
+ * - Responsible for observe product column via hook
+ * - Responsible for handling a feature; go previous page
+ * - Responsible for handling a feature; logout
+ * - Responsible for handling a feature; go next product page
+ */
 export const useProductPage = (): [
   addToCart: (e: React.FormEvent<HTMLFormElement>) => void,
   goNextProductPage: () => void,
@@ -134,4 +86,60 @@ export const useProductPage = (): [
     products,
     productId,
   ];
+};
+
+/** Product Observing hook */
+const useProductObserver = (
+  columnRef: React.RefObject<ItemColRef>,
+  goNextProductPage: () => void
+) => {
+  const [isObserving, setIsObserving] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && columnRef.current) {
+        setIsObserving(entry.isIntersecting);
+      }
+    });
+    if (columnRef.current) {
+      observer.observe(columnRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [goNextProductPage, isObserving]);
+
+  /** Follow the observed column */
+  useEffect(() => {
+    if (isObserving && columnRef.current) {
+      columnRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'start',
+      });
+    }
+  }, [goNextProductPage, isObserving]);
+};
+
+/** Get Products related hook */
+const useFetchProducts = (
+  productId: string | undefined
+): [IProduct | undefined, IProduct[] | undefined, number] => {
+  const { data: products } = useGetProductsQuery();
+
+  /** Current product */
+  const product = useMemo(() => {
+    return (
+      products &&
+      [...products].filter(
+        (product): product is IProduct => product?._id == productId
+      )[0]
+    );
+  }, [products, productId]);
+
+  /** Current product index  */
+  const currentIndex = useMemo(() => {
+    return product && products ? products?.indexOf(product) : -1;
+  }, [product, products]);
+
+  return [product, products, currentIndex];
 };

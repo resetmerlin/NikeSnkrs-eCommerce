@@ -10,14 +10,12 @@ import { useAppSelector } from '../../hooks';
 import { LoginData } from './LoginPage';
 import { IUser } from '../../types';
 
-const useCheckAuth = (userInfo: IUser, navigate: NavigateFunction) => {
-  useEffect(() => {
-    if (userInfo.token && userInfo._id) {
-      navigate('/');
-    }
-  }, [userInfo]);
-};
-
+/**
+ * ### Responsible for Conducting Business Logic of Login Page
+ *
+ * - Responsible for authenticate via login submit handler
+ * - Responsible for go home page if authenticated
+ */
 export const useLoginPage = (): [
   inputErrors: UseFormReturn<LoginData>['formState']['errors'],
   handleSubmit: UseFormReturn<LoginData>['handleSubmit'],
@@ -32,7 +30,7 @@ export const useLoginPage = (): [
   const [userAuthenticate, { error: loginError }] =
     useUserAuthenticatedMutation();
 
-  // Submit login
+  /** Submit Handler for Login */
   const loginSubmit: SubmitHandler<LoginData> = (data: LoginData) => {
     userAuthenticate({
       email: data.userEmail,
@@ -53,4 +51,13 @@ export const useLoginPage = (): [
   useCheckAuth(userInfo, navigate);
 
   return [inputErrors, handleSubmit, loginSubmit, register, loginError];
+};
+
+/** Checking authentication hooks */
+const useCheckAuth = (userInfo: IUser, navigate: NavigateFunction) => {
+  useEffect(() => {
+    if (userInfo.token && userInfo._id) {
+      navigate('/');
+    }
+  }, [userInfo]);
 };

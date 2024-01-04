@@ -5,12 +5,28 @@
   .intro-left {
     position: absolute;
     left: 10%;
+    @media (max-width: 56.25em) {
+      //900px
+
+      left: 2%;
+    }
+
+    @media (max-width: 37.5em) {
+      //600px
+
+      left: -15%;
+    }
   }
 
   .intro-right {
     position: absolute;
     bottom: 0;
     right: 15%;
+    @media (max-width: 37.5em) {
+      //600px
+
+      right: 0;
+    }
   }
 
   .intro-background {
@@ -22,5 +38,30 @@
     position: absolute;
     left: 55%;
     top: 50%;
+
+    @media (max-width: 56.25em) {
+      //900px
+
+      left: 50%;
+      top: 45%;
+    }
+  }
+
+  @media (max-width: 56.25em) {
+    //900px
+
+    transform: scale(0.8);
+  }
+
+  @media (max-width: 37.5em) {
+    //600px
+
+    transform: scale(0.6);
+  }
+
+  @media (max-width: 30em) {
+    //480px
+
+    transform: scale(0.5);
   }
 }
