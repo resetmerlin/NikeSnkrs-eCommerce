@@ -16,6 +16,16 @@ import {
   useAddToOrderMutation,
 } from '../../features';
 
+/**
+ * ### Responsible for Conducting Business Logic of Cart Page
+ *
+ * - Responsible for checking user authentication; if user didn't authenticated, go login page
+ * - Responsible for fetching a product that user chose; a product in cart
+ * - Responsible for go Order page if ordered
+ * - Responsible for handling a feature; delete item on cart
+ * - Responsible for handling a feature; logout
+ * - Responsible for handling a feature; adding a order info via api
+ */
 export const useCartPage = (): [
   userInfo: IUser,
   logOutHandler: () => void,
@@ -42,7 +52,7 @@ export const useCartPage = (): [
   const userInfo: IUser = useAppSelector(selectUser);
   const address: IAddress = useAppSelector(selectAddress);
 
-  /** Check user auth, if no auth go to login page */
+  // Check user auth, if no auth go to login page
   goToLogin(userInfo, navigate);
 
   /** Delete product on cart */
@@ -78,7 +88,7 @@ export const useCartPage = (): [
     [productPrice, taxPrice, shippingPrice]
   );
 
-  // Add to Order
+  /** Add to the order info via api call */
   const addToOrderHandler = useCallback(() => {
     const order = {
       email: userInfo?.email,
@@ -98,10 +108,10 @@ export const useCartPage = (): [
     addToOrder(order);
   }, [userInfo, address, addToOrder, productPrice, totalPrice]);
 
-  /** If Ordered, go order page */
+  // If Ordered, go order page
   useGoOrderPage(orderData, navigate);
 
-  /** Fetch Product if id, qty exists */
+  // Fetch Product if qty exists
   useFetchProduct(qty);
 
   return [
@@ -126,7 +136,7 @@ const useGoOrderPage = (
   orderData: IOrder | undefined,
   navigate: NavigateFunction
 ) => {
-  /** If Ordered, go order page */
+  // If Ordered, go order page
   useEffect(() => {
     if (orderData) {
       navigate(`/order/${orderData._id}`);
@@ -137,7 +147,7 @@ const useGoOrderPage = (
 /** Fetch Product hook */
 const useFetchProduct = (qty: number) => {
   const { id } = useParams();
-  /** fetch chosen product */
+  // fetch chosen product
   const [addToCart] = useAddToCartMutation();
 
   useEffect(() => {
