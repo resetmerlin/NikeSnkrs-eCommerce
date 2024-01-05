@@ -1,5 +1,4 @@
 export * from './card';
-export * from './subtitle';
 export * from './title';
 export * from './button';
 export * from './logo';
@@ -13,3 +12,4 @@ export * from './form';
 export * from './input';
 export * from './label';
 export * from './itemImage';
+export * from './subtitle';

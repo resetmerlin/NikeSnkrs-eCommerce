@@ -13,4 +13,10 @@
 .item-m {
   width: 23rem;
   height: 31rem;
+
+  @media (max-width: 75em) {
+    //1200px
+    width: 15rem;
+    height: 26rem;
+  }
 }

@@ -48,7 +48,7 @@ export type IOrder = {
     address: string;
   };
   _id: string;
-  user: IUser;
+  user: string;
   email: string;
   name: string;
   orderItems: ICart;

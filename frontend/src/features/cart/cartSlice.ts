@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ICart } from '../../types/dto';
+import { ICart, ICarts } from '../../types/dto';
 
+const initialState: ICarts = [];
 export const cartSlice = createSlice({
   name: 'carts',
-  initialState: [],
+  initialState: initialState,
   reducers: {
-    cartAdded(state: any[], action) {
+    cartAdded(state, action) {
       const data = action.payload;
 
       const existProductIndex = state.findIndex(

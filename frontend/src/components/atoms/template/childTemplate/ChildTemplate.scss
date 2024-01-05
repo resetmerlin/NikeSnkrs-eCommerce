@@ -3,10 +3,36 @@
   grid-area: 2 / 2 / 8 / 7;
   display: grid;
   position: relative;
+
+  @media (max-width: 75em) {
+    //1200px
+
+    grid-area: 2/1/8/10;
+  }
 }
 .child-template-w-s-bottomRight {
   grid-area: 9 / 4 / 10 / 8;
   display: flex;
+
+  @media (max-width: 75em) {
+    //1200px
+    grid-area: 9/3/9/6;
+  }
+
+  @media (max-width: 56.25em) {
+    //900px
+    grid-area: 9/2/9/6;
+  }
+  @media (max-width: 37.5em) {
+    //600px
+    grid-area: 9/1/9/6;
+  }
+
+  @media (max-width: 30em) {
+    //600px
+    grid-area: 9/1/9/6;
+    position: relative;
+  }
 }
 .child-template-w-s-topLeft {
   grid-area: 2 / 2 / 3 / 5;
