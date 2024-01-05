@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5328',
+        target: 'https://nikesnkrs-ecommerce-backend.onrender.com/',
         changeOrigin: true,
       },
     },
