@@ -1,12 +1,13 @@
-import express from 'express';
-import colors from 'colors';
-import dotenv from 'dotenv';
-import connectDatabase from './config/database.js';
-import productRoutes from './routes/productRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import orderRoutes from './routes/orderRoutes.js';
-import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-import path from 'path';
+import express from "express";
+import colors from "colors";
+import dotenv from "dotenv";
+import connectDatabase from "./config/database.js";
+import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import path from "path";
+import cors from "cors"; // Import cors
 
 dotenv.config();
 
@@ -15,28 +16,34 @@ connectDatabase();
 
 const app = express();
 
+const corsOptions = {
+  origin: "*", // This will allow requests from all origins
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 // products용 API(GET ALL, GET by ID)
-app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/orders', orderRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
-app.get('/api/config/paypal', (req, res) => {
+app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/frontend/dist')));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
   );
 } else {
-  app.get('/', (req, res) => {
-    res.send('Api is running...');
+  app.get("/", (req, res) => {
+    res.send("Api is running...");
   });
 }
 
