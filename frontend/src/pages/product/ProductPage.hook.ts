@@ -14,10 +14,11 @@ import { logOut, useAppDispatch, useAppSelector } from '../../hooks';
 /**
  * ### Responsible for Conducting Business Logic of Product Page
  *
- * - Responsible for observe product column via hook
- * - Responsible for handling a feature; go previous page
- * - Responsible for handling a feature; logout
- * - Responsible for handling a feature; go next product page
+ * - Manages navigation between products.
+ * - Handles user actions like adding to cart and logging out.
+ * - Observes the product column for UI updates.
+ *
+ *  @returns A tuple containing handlers and stateful values for the product page.
  */
 export const useProductPage = (): [
   addToCart: (e: React.FormEvent<HTMLFormElement>) => void,
@@ -72,7 +73,7 @@ export const useProductPage = (): [
     [navigate, product]
   );
 
-  /** Observer Product */
+  // Observer Product
   useProductObserver(columnRef, goNextProductPage);
 
   return [
@@ -88,7 +89,12 @@ export const useProductPage = (): [
   ];
 };
 
-/** Product Observing hook */
+/**
+ * Hook to observe a product column and trigger navigation to the next product page.
+ *
+ * @param columnRef - Ref object pointing to the item column.
+ * @param goNextProductPage - Function to navigate to the next product page.
+ */
 const useProductObserver = (
   columnRef: React.RefObject<ItemColRef>,
   goNextProductPage: () => void
@@ -108,7 +114,7 @@ const useProductObserver = (
     return () => observer.disconnect();
   }, [goNextProductPage, isObserving]);
 
-  /** Follow the observed column */
+  // Follow the observed column
   useEffect(() => {
     if (isObserving && columnRef.current) {
       columnRef.current.scrollIntoView({
@@ -120,7 +126,12 @@ const useProductObserver = (
   }, [goNextProductPage, isObserving]);
 };
 
-/** Get Products related hook */
+/**
+ * Custom hook to fetch products and determine the current product and its index.
+ *
+ * @param productId - The ID of the current product.
+ * @returns A tuple containing the current product, all products, and the index of the current product.
+ */
 const useFetchProducts = (
   productId: string | undefined
 ): [IProduct | undefined, IProduct[] | undefined, number] => {
