@@ -13,7 +13,7 @@ import { orderAdded } from '../order/orderSlice';
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
+    baseUrl: 'https://nikesnkrs-ecommerce-backend.onrender.com/api',
   }),
 
   endpoints: (build) => ({
